@@ -84,7 +84,7 @@
      у направлений проигрывается рисунок (.is-open), у остальных — то же, что при наведении (.is-mid).
      Ушла из середины — возвращается в покой, при возврате проиграется снова. */
   var mids = Array.prototype.slice.call(document.querySelectorAll(
-    '.dir, .card, .price, .audience__list li, .partner__facts li, .gets li'));
+    '.dir, .card, .price'));
   if (mids.length && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     var midTicking = false;
     var updateMids = function () {
@@ -156,11 +156,22 @@
       return t * t * (3 - 2 * t);                                  // плавный старт и доводка
     };
 
-    var updateAsm = function () {
-      asmTicking = false;
+    // Сцена не прыгает за каждым движением пальца, а плавно догоняет прокрутку:
+    // каждый кадр проходит часть оставшегося пути (cur → target), пока не доедет
+    var cur = -1;
+    var target = 0;
+    var measure = function () {
       var rect = asm.getBoundingClientRect();
       var total = asm.offsetHeight - asmVh;
-      var p = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 1;
+      target = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 1;
+    };
+    var updateAsm = function () {
+      asmTicking = false;
+      measure();
+      cur = cur < 0 ? target : cur + (target - cur) * 0.14;
+      if (Math.abs(target - cur) < 0.0005) cur = target;
+      else { asmTicking = true; requestAnimationFrame(updateAsm); }
+      var p = cur;
       asm.style.setProperty('--p', p.toFixed(4));
       asm.style.setProperty('--m1', seg(p, 0.10, 0.30).toFixed(4));
       asm.style.setProperty('--m2', seg(p, 0.32, 0.52).toFixed(4));
@@ -186,7 +197,7 @@
     var asmVw = window.innerWidth;
     window.addEventListener('resize', function () {
       if (window.innerWidth !== asmVw) { asmVw = window.innerWidth; asmVh = window.innerHeight; }
-      updateAsm();
+      if (!asmTicking) { asmTicking = true; requestAnimationFrame(updateAsm); }
     });
     updateAsm();
   }

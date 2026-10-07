@@ -384,7 +384,7 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 .card:hover:where(.can-hover *) .card__more svg{transform:translateX(4px)}
 
 /* ---------- Обратная связь ---------- */
-.tab__s,.contact__call{display:none}
+.tab__s{display:none}
 /* Без коробки и без контактов: слева заголовок и пояснение, справа форма */
 .contact__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px clamp(48px,8vw,128px);align-items:start}
 .contact__text .lead{margin-top:24px;max-width:26em}
@@ -914,7 +914,6 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 .price.is-mid .price__btn{color:#fff}
 .price.is-mid .price__btn::before{background:var(--ink)}
 .price.is-mid .price__btn::after{opacity:1}
-:is(.audience__list,.partner__facts,.gets) li.is-mid > *{transform:translateX(8px)}
 
 @media (max-width:760px){
   :root{
@@ -977,9 +976,7 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
   .tabs{flex-wrap:wrap;gap:0 20px;overflow:visible}
   .tab{font-size:15px}
 
-  /* Обсудим задачу: варианты — сеткой два на два, поля компактнее, рядом — звонок одним касанием */
-  .contact__call{display:block;margin-top:16px;color:var(--muted)}
-  .contact__call a{color:var(--ink);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+  /* Обсудим задачу: варианты — сеткой два на два, поля компактнее */
   .chips{display:grid;grid-template-columns:1fr 1fr}
   .chip span{min-height:48px;padding:0 14px;font-size:15px}
   .field textarea{min-height:88px}
@@ -1020,8 +1017,16 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 
   /* О нас: сторителлинг */
   .asm__title,.asm__slide h2{font-size:clamp(26px,7.6vw,30px)}
-  .asm__scene .scene{width:100%;max-width:none;max-height:none}
-  .asm__grid{gap:20px}
+  /* Весь блок — крошки, рисунок и текст — помещается в экран даже на небольших телефонах,
+     поэтому закреплённая сцена не обрезается и не подпрыгивает */
+  .asm.is-scrub{height:340vh}
+  .asm__scene .scene{width:100%;height:min(38svh,340px);max-width:none;max-height:none}
+  .asm__grid{gap:16px}
+  .asm.is-scrub .asm__slides{min-height:180px;margin-top:4px}
+  /* Главы не накладываются: старая быстро гаснет, новая проявляется следом */
+  .asm.is-scrub .asm__slide{transform:translateY(12px);transition:opacity .18s ease,transform .18s ease}
+  .asm.is-scrub .asm__slide.is-past{transform:translateY(-12px)}
+  .asm.is-scrub .asm__slide.is-active{transform:none;transition:opacity .35s ease .18s,transform .5s cubic-bezier(.2,.8,.2,1) .18s}
 
   /* Всплывающая форма — шторка снизу во всю ширину, как привычно на телефоне */
   .modal{width:100%;max-width:none;max-height:92dvh;margin:auto 0 0;padding-bottom:env(safe-area-inset-bottom)}
