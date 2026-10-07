@@ -63,6 +63,8 @@ h2{font-size:var(--fs-h2);line-height:1.1;max-width:18ch}
 h3{font-size:var(--fs-h3);line-height:1.3;letter-spacing:-.015em}
 
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* На телефоне касание не подсвечивается серым прямоугольником — состояние показывают сами элементы */
+a,button,summary,label{-webkit-tap-highlight-color:transparent}
 
 .nowrap{white-space:nowrap}  /* не переносить по дефису: «бизнес-|консультант» */
 .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -477,6 +479,7 @@ a.info__item:hover{color:var(--accent-ink)}
   .modal[open]::backdrop{animation:fade-in .22s ease-out}
 }
 @keyframes modal-in{from{opacity:0;transform:translateY(12px)}}
+@keyframes sheet-in{from{transform:translateY(100%)}}
 @keyframes fade-in{from{opacity:0}}
 
 /* ==========================================================================
@@ -849,4 +852,121 @@ a.info__item:hover{color:var(--accent-ink)}
 }
 @media (prefers-reduced-motion:reduce){
   .asm__hint span::after{animation:none}
+}
+
+/* ==========================================================================
+   Мобильная версия — сводные правила (идут последними и уточняют всё выше)
+   ========================================================================== */
+
+/* Планшеты и телефоны: шапка всегда на месте, меню — на весь экран под шапкой */
+@media (max-width:1080px){
+  /* Размытие фона у шапки делает её «экраном» для вложенного fixed-меню —
+     из-за этого меню сжималось до высоты шапки. Здесь фон сплошной. */
+  .header{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none;transform:none!important}
+  .nav{position:fixed;top:var(--header-h);left:0;right:0;bottom:auto;z-index:49;display:flex;flex-direction:column;
+    height:calc(100dvh - var(--header-h));padding:8px var(--gutter) calc(24px + env(safe-area-inset-bottom));
+    background:var(--bg);overflow-y:auto;overscroll-behavior:contain;
+    visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .25s ease,transform .3s ease,visibility 0s .3s}
+  .nav.is-open{display:flex;visibility:visible;opacity:1;transform:none;transition:opacity .25s ease,transform .3s ease}
+  .nav__list a{padding:14px 0;font-size:28px;line-height:1.2;letter-spacing:-.02em}
+  .nav__list a[aria-current="page"]{color:var(--accent-ink);border-bottom:1px solid var(--line)}
+  .nav__phone{margin-top:auto;padding-top:32px;font-size:20px;font-variant-numeric:tabular-nums}
+  .nav__cta{width:100%;justify-content:flex-start;margin-top:16px}
+}
+
+@media (max-width:760px){
+  :root{
+    --gutter:20px;
+    --section:64px;
+    --head-gap:32px;
+    --fs-lead:17px;
+    --fs-h2:30px;
+    --fs-h3:19px;
+  }
+  body{font-size:16px}
+  h2{max-width:none}
+  .lead,.section-head__text{font-size:var(--fs-lead)}
+  .section-head{gap:12px}
+
+  /* Первый экран главной: без пустых полей вокруг текста */
+  .hero{min-height:0;padding-block:48px 56px}
+  .hero__title{font-size:clamp(30px,9vw,38px);line-height:1.06}
+  .hero__lead{margin-top:20px}
+  .hero__actions{margin-top:32px}
+
+  /* Заголовок внутренних страниц: длинные слова («Бизнес-планирование») целиком в строку */
+  .page-head{padding-top:24px}
+  .page-head h1{margin-top:20px;font-size:clamp(26px,7.6vw,34px);line-height:1.08}
+  .page-head__lead{margin-top:16px;font-size:var(--fs-lead)}
+  .page-head__actions{margin-top:28px}
+  .page-head__visual{margin-top:8px}
+
+  /* Кнопки на телефоне стоят у левого края или во всю ширину — срез у всех справа, по ходу чтения.
+     На компьютере контурная кнопка срезана слева, чтобы рядом с основной складываться в параллелограмм;
+     здесь кнопки идут столбиком, поэтому разворачиваем срез и у контурных, и у «срезанных слева» */
+  .btn--cut-left,.btn--outline{padding:0 calc(28px + var(--h) * var(--slant) / 2) 0 28px}
+  .btn--cut-left::before{clip-path:polygon(0 0,100% 0,calc(100% - var(--h) * var(--slant)) 100%,0 100%)}
+  .btn--outline::before{clip-path:polygon(evenodd,
+    0 0,100% 0,calc(100% - var(--h) * var(--slant)) 100%,0 100%,0 0,
+    1px 1px,calc(100% - 1.51px) 1px,calc(100% - var(--h) * var(--slant) - .67px) calc(100% - 1px),1px calc(100% - 1px),1px 1px)}
+  .btn--outline::after{clip-path:polygon(0 0,100% 0,calc(100% - var(--h) * var(--slant)) 100%,0 100%)}
+  .page-head__actions,.hero__actions{gap:8px}
+
+  /* Кнопки на первых экранах и в призывах — во всю ширину, текст слева, как на главной */
+  .hero__actions .btn,.page-head__actions .btn,.combo__text .btn,.about__intro .btn,.faq__btn{width:100%;justify-content:flex-start}
+  .page-head__actions,.hero__actions{flex-direction:column;align-items:stretch}
+
+  /* Карточки направлений: меньше пустоты между рисунком, текстом и соседней карточкой */
+  .dir-grid{gap:32px}
+  .dir .scene{margin-bottom:16px}
+  .dir__desc{margin-top:12px}
+  .dir__more{margin-top:20px}
+
+  /* «Что входит в работу»: иконка слева, текст справа — компактный список вместо высоких карточек */
+  .features{grid-template-columns:1fr;row-gap:0;border-top:1px solid var(--line)}
+  .feature{display:grid;grid-template-columns:88px minmax(0,1fr);column-gap:16px;align-items:start;padding:20px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .feature .scene{grid-row:1 / span 2;width:88px;height:70px;margin:0}
+  .feature h3{font-size:18px;line-height:1.3}
+  .feature p{margin-top:6px;font-size:15px}
+
+  /* Цены */
+  .prices{row-gap:40px}
+  .price{padding-inline:20px 0}
+  .price h3{font-size:22px}
+
+  /* Карточки проектов и статей */
+  .card__meta{margin-top:20px}
+
+  /* Обсудим задачу, вопросы */
+  .contact__grid,.faq__grid{gap:32px}
+  .qa summary{padding-block:20px;font-size:17px}
+
+  /* Подвал: колонки по две, без лишней высоты */
+  .footer{padding-block:56px 28px}
+  .footer__top{gap:40px}
+  .footer__cols{grid-template-columns:1fr 1fr;gap:32px 20px}
+
+  /* О нас: сторителлинг */
+  .asm__title,.asm__slide h2{font-size:clamp(26px,7.6vw,30px)}
+  .asm__scene .scene{width:100%;max-width:none;max-height:none}
+  .asm__grid{gap:20px}
+
+  /* Всплывающая форма — шторка снизу во всю ширину, как привычно на телефоне */
+  .modal{width:100%;max-width:none;max-height:92dvh;margin:auto 0 0;padding-bottom:env(safe-area-inset-bottom)}
+  .modal__inner{padding:28px var(--gutter) 24px}
+  .modal h2{font-size:26px}
+  .modal .btn{width:100%;justify-content:flex-start}
+  @media (prefers-reduced-motion:no-preference){ .modal[open]{animation:sheet-in .3s cubic-bezier(.2,.8,.2,1)} }
+
+  /* Вкладки и фильтр листаются вбок — край растворяется, чтобы было видно, что дальше есть ещё */
+  .tabs{-webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
+
+  /* Крупные рисунки — на всю ширину экрана, от края до края */
+  .combo__visual .scene,.partner__visual .scene,.page-head__visual .scene{width:calc(100% + 2 * var(--gutter));max-width:none;margin-inline:calc(var(--gutter) * -1)}
+}
+
+@media (max-width:360px){
+  :root{--gutter:16px}
+  .nav__list a{font-size:24px;padding-block:12px}
+  .footer__cols{grid-template-columns:1fr}
 }
