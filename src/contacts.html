@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты — ИнАссист</title>
+<meta name="description" content="Контакты ИнАссист: телефоны, почта и адрес офиса в Минске — ул. Короля, 2. Позвоните или оставьте заявку.">
+<!-- @include head-assets -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+<script src="assets/js/contacts-map.js" defer></script>
+</head>
+<body>
+<!-- @include header active="contacts.html" -->
+
+<main id="main">
+
+  <!-- Заголовок страницы -->
+  <section class="page-head">
+    <div class="container">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <ol>
+          <li><a href="index.html">Главная</a></li>
+          <li><span aria-current="page">Контакты</span></li>
+        </ol>
+      </nav>
+      <h1 data-reveal>Контакты</h1>
+    </div>
+  </section>
+
+  <!-- Контактная информация -->
+  <section aria-label="Как с нами связаться">
+    <div class="container">
+      <div class="info">
+        <div class="info__cell" data-reveal style="--rd:0.1s">
+          <h2 class="info__label">Номера телефонов</h2>
+          <div class="info__list">
+            <a class="info__item" href="tel:+375447285016">+375 44 728-50-16</a>
+            <a class="info__item" href="tel:+375293675458">+375 29 367-54-58</a>
+          </div>
+        </div>
+        <div class="info__cell" data-reveal style="--rd:0.22s">
+          <h2 class="info__label">Наш адрес</h2>
+          <div class="info__list">
+            <a class="info__item" href="#map">г. Минск, ул. Короля, 2</a>
+          </div>
+        </div>
+        <div class="info__cell" data-reveal style="--rd:0.34s">
+          <h2 class="info__label">Наша почта</h2>
+          <div class="info__list">
+            <a class="info__item" href="mailto:info@inassist.by">info@inassist.by</a>
+          </div>
+        </div>
+        <div class="info__cell" data-reveal style="--rd:0.46s">
+          <h2 class="info__label">Соцсети</h2>
+          <div class="info__list">
+            <a class="info__item" href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">inassist_by</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Карта (assets/js/contacts-map.js). Пока скрипт не загрузился — ссылка на карту -->
+  <div class="map" id="map" role="region" aria-label="Офис на карте: г. Минск, ул. Короля, 2">
+    <a class="map__fallback" href="https://yandex.by/maps/?text=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9A%D0%BE%D1%80%D0%BE%D0%BB%D1%8F%2C%202" target="_blank" rel="noopener">Открыть адрес на Яндекс Картах</a>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section faq" aria-labelledby="faq-title">
+    <div class="container faq__grid">
+      <div class="faq__head">
+        <h2 id="faq-title" data-reveal>Вы часто спрашиваете</h2>
+        <p class="faq__text" data-reveal style="--rd:.12s">Собрали для вас самые частые вопросы о наших услугах и процессе работы.</p>
+        <button class="btn btn--outline btn--cut-right faq__btn" type="button" data-open-contact data-reveal style="--rd:.24s">Задать свой вопрос</button>
+      </div>
+      <div class="faq__list">
+        <details class="qa" data-reveal style="--rd:0.08s">
+          <summary><span>Сколько времени занимает процесс привлечения финансирования?</span></summary>
+          <div class="qa__answer"><p>Бизнес-план и финансовую модель готовим обычно за 2–4 недели. Дальше срок зависит от того, куда вы подаёте документы: банк, инвестор или программа господдержки рассматривают заявки по-разному. На этом этапе помогаем с ответами на вопросы и доработками.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.16s">
+          <summary><span>Можно ли заказать только одну услугу, а не полный комплекс?</span></summary>
+          <div class="qa__answer"><p>Да. Каждое направление работает отдельно. Если задача требует нескольких, предложим общий план и единые сроки.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.24s">
+          <summary><span>Предоставляете ли вы поддержку после запуска проекта?</span></summary>
+          <div class="qa__answer"><p>Да. После передачи результата остаёмся на связи: отвечаем на вопросы, вносим правки, при необходимости ведём рекламу и поддерживаем сайт. Формат поддержки обсуждаем отдельно.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.32s">
+          <summary><span>Сколько времени занимает запуск проекта?</span></summary>
+          <div class="qa__answer"><p>Запуск рекламы — от недели, сайт — от месяца, бизнес-план — 2–4 недели. Точные сроки прописываем в договоре.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.4s">
+          <summary><span>Как строится процесс работы с вашей командой?</span></summary>
+          <div class="qa__answer"><p>В пять этапов: заявка, договор, сбор данных, разработка решения и передача готового результата. Подробнее — в разделе <a href="index.html#process">«Как мы работаем»</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- @include footer -->
+</body>
+</html>

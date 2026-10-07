@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Портфолио — ИнАссист</title>
+<meta name="description" content="Проекты ИнАссист: бизнес-планы, реклама, сайты и автоматизация.">
+<!-- @include head-assets -->
+</head>
+<body>
+<!-- @include header active="portfolio.html" -->
+
+<main id="main">
+<!-- @include defs -->
+  <section class="page-head">
+    <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки"><ol><li><a href="index.html">Главная</a></li><li><span aria-current="page">Портфолио</span></li></ol></nav>
+        <h1 data-reveal>Портфолио</h1>
+        <p class="page-head__lead" data-reveal style="--rd:0.1s">Проекты по бизнес-планированию, рекламе и разработке. Выберите направление, чтобы посмотреть только его.</p>
+    </div>
+  </section>
+  <section class="section portfolio-list" aria-label="Проекты">
+    <div class="container">
+      <div class="tabs filter" role="group" aria-label="Направление проектов" data-filter-group data-reveal style="--rd:0.1s"><button class="tab" type="button" data-filter="all" aria-pressed="true">Все</button><button class="tab" type="button" data-filter="bp" aria-pressed="false">Бизнес-планирование</button><button class="tab" type="button" data-filter="ad" aria-pressed="false">Рекламное продвижение</button><button class="tab" type="button" data-filter="it" aria-pressed="false">Разработка и IT</button></div>
+      <!-- Кейсы — примеры для макета, заменить реальными -->
+      <ul class="cards cards--grid" data-filter-list>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:50%"></div>
+          <p class="card__meta"><span>Бизнес-планирование</span>Производство мебели</p>
+          <h3>Бизнес-план для кредита на новую линию</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:50%"></div>
+          <p class="card__meta"><span>Рекламное продвижение</span>Интернет-магазин</p>
+          <h3>Реклама в поиске для интернет-магазина</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:20%"></div>
+          <p class="card__meta"><span>Разработка и IT</span>Логистическая компания</p>
+          <h3>Сайт и интеграция с CRM</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:30%"></div>
+          <p class="card__meta"><span>Бизнес-планирование</span>IT-стартап</p>
+          <h3>Финансовая модель для резидентства в технопарке</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:10%"></div>
+          <p class="card__meta"><span>Рекламное продвижение</span>Стоматология</p>
+          <h3>Реклама в соцсетях для клиники</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:60%"></div>
+          <p class="card__meta"><span>Разработка и IT</span>Образовательный центр</p>
+          <h3>Лендинг с онлайн-записью</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:70%"></div>
+          <p class="card__meta"><span>Бизнес-планирование</span>Кофейня</p>
+          <h3>Бизнес-план открытия второй точки</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:90%"></div>
+          <p class="card__meta"><span>Рекламное продвижение</span>Строительная компания</p>
+          <h3>Исследование рынка и запуск рекламы</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:80%"></div>
+          <p class="card__meta"><span>Разработка и IT</span>Оптовая компания</p>
+          <h3>Автоматизация учёта заказов</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+  <!-- @include contact -->
+
+
+</main>
+
+<!-- @include footer -->
+</body>
+</html>

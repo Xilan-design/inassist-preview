@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Портфолио — ИнАссист</title>
+<meta name="description" content="Проекты ИнАссист: бизнес-планы, реклама, сайты и автоматизация.">
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  // Прячем элементы для анимации появления до первой отрисовки, чтобы не было мигания.
+  // Если main.js по какой-то причине не загрузится, через 3 с всё просто покажется.
+  (function (d) {
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    d.classList.add('js-reveal');
+    setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'); }, 3000);
+  })(document.documentElement);
+</script>
+<script src="assets/js/main.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__logo" href="index.html" aria-label="ИнАссист — на главную">
+      <img src="assets/img/logo.svg" width="139" height="40" alt="">
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li><a href="services.html">Наши услуги</a></li>
+        <li><a href="portfolio.html" aria-current="page">Портфолио</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li><a href="blog.html">Блог</a></li>
+      </ul>
+      <a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+      <button class="btn nav__cta" type="button" data-open-contact>Связаться с нами</button>
+    </nav>
+    <div class="header__actions">
+      <a class="header__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+      <button class="btn btn--small btn--cut-left" type="button" data-open-contact>Связаться с нами</button>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="burger__lines" aria-hidden="true"></span>
+        <span class="visually-hidden">Меню</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<svg class="sr-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><pattern id="scene-dots" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#FBFAF6"/><circle cx="1" cy="1" r=".6" fill="#B5AFA1"/></pattern></defs></svg>
+  <section class="page-head">
+    <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки"><ol><li><a href="index.html">Главная</a></li><li><span aria-current="page">Портфолио</span></li></ol></nav>
+        <h1 data-reveal>Портфолио</h1>
+        <p class="page-head__lead" data-reveal style="--rd:0.1s">Проекты по бизнес-планированию, рекламе и разработке. Выберите направление, чтобы посмотреть только его.</p>
+    </div>
+  </section>
+  <section class="section portfolio-list" aria-label="Проекты">
+    <div class="container">
+      <div class="tabs filter" role="group" aria-label="Направление проектов" data-filter-group data-reveal style="--rd:0.1s"><button class="tab" type="button" data-filter="all" aria-pressed="true">Все</button><button class="tab" type="button" data-filter="bp" aria-pressed="false">Бизнес-планирование</button><button class="tab" type="button" data-filter="ad" aria-pressed="false">Рекламное продвижение</button><button class="tab" type="button" data-filter="it" aria-pressed="false">Разработка и IT</button></div>
+      <!-- Кейсы — примеры для макета, заменить реальными -->
+      <ul class="cards cards--grid" data-filter-list>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:50%"></div>
+          <p class="card__meta"><span>Бизнес-планирование</span>Производство мебели</p>
+          <h3>Бизнес-план для кредита на новую линию</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:50%"></div>
+          <p class="card__meta"><span>Рекламное продвижение</span>Интернет-магазин</p>
+          <h3>Реклама в поиске для интернет-магазина</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:20%"></div>
+          <p class="card__meta"><span>Разработка и IT</span>Логистическая компания</p>
+          <h3>Сайт и интеграция с CRM</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:30%"></div>
+          <p class="card__meta"><span>Бизнес-планирование</span>IT-стартап</p>
+          <h3>Финансовая модель для резидентства в технопарке</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:10%"></div>
+          <p class="card__meta"><span>Рекламное продвижение</span>Стоматология</p>
+          <h3>Реклама в соцсетях для клиники</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:60%"></div>
+          <p class="card__meta"><span>Разработка и IT</span>Образовательный центр</p>
+          <h3>Лендинг с онлайн-записью</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:70%"></div>
+          <p class="card__meta"><span>Бизнес-планирование</span>Кофейня</p>
+          <h3>Бизнес-план открытия второй точки</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:90%"></div>
+          <p class="card__meta"><span>Рекламное продвижение</span>Строительная компания</p>
+          <h3>Исследование рынка и запуск рекламы</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card" href="portfolio.html">
+          <div class="card__cover" style="--pos:80%"></div>
+          <p class="card__meta"><span>Разработка и IT</span>Оптовая компания</p>
+          <h3>Автоматизация учёта заказов</h3>
+          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+  <!-- Обратная связь -->
+  <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <div class="container contact__grid">
+      <div class="contact__text">
+        <h2 id="contact-title" data-reveal>Обсудим вашу задачу</h2>
+        <p class="lead" data-reveal style="--rd:.12s">Нужны только имя и телефон. Остальное — по желанию, чтобы мы подготовились к разговору.</p>
+      </div>
+
+      <div class="contact__form" data-reveal style="--rd:.15s">
+        <form class="form" data-form novalidate>
+          <fieldset class="field">
+            <legend>Что нужно сделать?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="topic" value="Бизнес-планирование"><span>Бизнес-план</span></label>
+              <label class="chip"><input type="radio" name="topic" value="Реклама"><span>Реклама</span></label>
+              <label class="chip"><input type="radio" name="topic" value="Разработка и IT"><span>Сайт или IT</span></label>
+              <label class="chip"><input type="radio" name="topic" value="Пока не знаю" checked><span>Пока не знаю</span></label>
+            </div>
+          </fieldset>
+          <div class="form__row">
+            <div class="field">
+              <label for="cf-name">Имя</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" required>
+              <p class="field__error" id="cf-name-err"></p>
+            </div>
+            <div class="field">
+              <label for="cf-phone">Телефон</label>
+              <input id="cf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 000-00-00" required>
+              <p class="field__error" id="cf-phone-err"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cf-msg">Коротко о задаче <span class="field__opt">необязательно</span></label>
+            <textarea id="cf-msg" name="message" rows="3" placeholder="Например: нужен бизнес-план для кредита на оборудование"></textarea>
+          </div>
+          <div class="form__foot">
+            <div class="field field--check">
+              <input id="cf-consent" name="consent" type="checkbox" required>
+              <label for="cf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+              <p class="field__error" id="cf-consent-err"></p>
+            </div>
+            <button class="btn btn--cut-left" type="submit">Отправить заявку</button>
+          </div>
+        </form>
+        <div class="form-done" hidden tabindex="-1">
+          <h3>Заявка отправлена</h3>
+          <p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a class="footer__logo" href="index.html" aria-label="ИнАссист — на главную"><img src="assets/img/logo.svg" width="174" height="50" alt=""></a>
+      <nav class="footer__cols" aria-label="Меню в подвале">
+        <div class="footer__col">
+          <h3>Компания</h3>
+          <a href="index.html#process">Этапы работы</a>
+          <a href="portfolio.html">Портфолио</a>
+          <a href="services.html">Услуги</a>
+          <a href="blog.html">Блог</a>
+          <a href="about.html">О нас</a>
+        </div>
+        <div class="footer__col">
+          <h3>Услуги</h3>
+          <a href="service-business-planning.html">Бизнес-планирование</a>
+          <a href="service-advertising.html">Рекламное продвижение</a>
+          <a href="service-development.html">Разработка и IT</a>
+        </div>
+        <div class="footer__col">
+          <h3>Контакты</h3>
+          <a href="contacts.html#map">г. Минск, ул. Короля, 2</a>
+          <a href="tel:+375447285016">+375 44 728-50-16</a>
+          <a href="tel:+375293675458">+375 29 367-54-58</a>
+          <a href="mailto:info@inassist.by">info@inassist.by</a>
+        </div>
+        <div class="footer__col">
+          <h3>Соцсети</h3>
+          <a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__legal">
+      <div>
+        <p class="footer__company">ООО «ИнАссист», УНП: 692272725 © 2026</p>
+        <p class="footer__note">Информация на сайте не является офертой и носит ознакомительный характер.*</p>
+      </div>
+      <div class="footer__links">
+        <a class="footer__privacy" href="privacy.html">Политика конфиденциальности</a>
+        <a class="footer__credit" href="https://www.behance.net/xilandesign" target="_blank" rel="noopener">Design by .Xilan.</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<dialog class="modal" id="contact-dialog" aria-labelledby="modal-title">
+  <div class="modal__inner">
+    <button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
+    <h2 id="modal-title">Обсудим вашу задачу</h2>
+    <p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
+    <form class="form" data-form novalidate>
+      <div class="field">
+        <label for="mf-name">Имя</label>
+        <input id="mf-name" name="name" type="text" autocomplete="name" required>
+        <p class="field__error" id="mf-name-err"></p>
+      </div>
+      <div class="field">
+        <label for="mf-phone">Телефон</label>
+        <input id="mf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375" required>
+        <p class="field__error" id="mf-phone-err"></p>
+      </div>
+      <div class="field field--check">
+        <input id="mf-consent" name="consent" type="checkbox" required>
+        <label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+        <p class="field__error" id="mf-consent-err"></p>
+      </div>
+      <button class="btn" type="submit">Отправить заявку</button>
+    </form>
+    <div class="form-done" hidden tabindex="-1">
+      <h3>Заявка отправлена</h3>
+      <p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

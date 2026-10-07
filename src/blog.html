@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Блог — ИнАссист</title>
+<meta name="description" content="Статьи о бизнес-планировании, рекламе и разработке сайтов для малого бизнеса.">
+<!-- @include head-assets -->
+</head>
+<body>
+<!-- @include header active="blog.html" -->
+
+<main id="main">
+<!-- @include defs -->
+  <section class="page-head">
+    <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки"><ol><li><a href="index.html">Главная</a></li><li><span aria-current="page">Блог</span></li></ol></nav>
+        <h1 data-reveal>Блог</h1>
+        <p class="page-head__lead" data-reveal style="--rd:0.1s">Пишем о бизнес-планах, рекламе и сайтах простым языком — с цифрами и примерами.</p>
+    </div>
+  </section>
+  <section class="section blog-list" aria-label="Статьи">
+    <div class="container">
+      <div class="tabs filter" role="group" aria-label="Рубрика" data-filter-group data-reveal style="--rd:0.1s"><button class="tab" type="button" data-filter="all" aria-pressed="true">Все</button><button class="tab" type="button" data-filter="bp" aria-pressed="false">Бизнес-планирование</button><button class="tab" type="button" data-filter="ad" aria-pressed="false">Реклама</button><button class="tab" type="button" data-filter="it" aria-pressed="false">Разработка</button></div>
+      <!-- Пока готова одна статья-шаблон: все карточки ведут на неё -->
+      <ul class="cards cards--grid" data-filter-list>
+        <li data-cat="ad" data-reveal style="--rd:0.05s"><a class="card card--text" href="blog-lead-cost.html">
+          <p class="card__meta"><span>Реклама</span></p>
+          <h3>Сколько стоит заявка из рекламы и как её посчитать</h3>
+          <p class="card__text">Простая формула и три ошибки, из-за которых цифры врут.</p>
+          <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="bp" data-reveal style="--rd:0.17s"><a class="card card--text" href="blog-lead-cost.html">
+          <p class="card__meta"><span>Бизнес-планирование</span></p>
+          <h3>Как подготовить бизнес-план для резидентства в технопарке</h3>
+          <p class="card__text">Какие разделы проверяют в первую очередь и где чаще всего ошибаются.</p>
+          <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card card--text" href="blog-lead-cost.html">
+          <p class="card__meta"><span>Разработка</span></p>
+          <h3>Сайт или лендинг: что нужно бизнесу на старте</h3>
+          <p class="card__text">Сравниваем по срокам, стоимости и задачам, которые они решают.</p>
+          <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="bp" data-reveal style="--rd:0.05s"><a class="card card--text" href="blog-lead-cost.html">
+          <p class="card__meta"><span>Бизнес-планирование</span></p>
+          <h3>Финансовая модель: с чего начать, если нет цифр</h3>
+          <p class="card__text">Что взять за основу прогноза, когда бизнес ещё не работает.</p>
+          <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="ad" data-reveal style="--rd:0.17s"><a class="card card--text" href="blog-lead-cost.html">
+          <p class="card__meta"><span>Реклама</span></p>
+          <h3>Почему реклама кликает, но не продаёт</h3>
+          <p class="card__text">Где теряются заявки между объявлением и звонком.</p>
+          <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+        <li data-cat="it" data-reveal style="--rd:0.29s"><a class="card card--text" href="blog-lead-cost.html">
+          <p class="card__meta"><span>Разработка</span></p>
+          <h3>Зачем малому бизнесу CRM</h3>
+          <p class="card__text">Как понять, что заявки пора перестать вести в блокноте и мессенджерах.</p>
+          <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- @include footer -->
+</body>
+</html>

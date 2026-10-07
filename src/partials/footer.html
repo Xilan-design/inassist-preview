@@ -1,0 +1,74 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a class="footer__logo" href="index.html" aria-label="ИнАссист — на главную"><img src="assets/img/logo.svg" width="174" height="50" alt=""></a>
+      <nav class="footer__cols" aria-label="Меню в подвале">
+        <div class="footer__col">
+          <h3>Компания</h3>
+          <a href="index.html#process">Этапы работы</a>
+          <a href="portfolio.html">Портфолио</a>
+          <a href="services.html">Услуги</a>
+          <a href="blog.html">Блог</a>
+          <a href="about.html">О нас</a>
+        </div>
+        <div class="footer__col">
+          <h3>Услуги</h3>
+          <a href="service-business-planning.html">Бизнес-планирование</a>
+          <a href="service-advertising.html">Рекламное продвижение</a>
+          <a href="service-development.html">Разработка и IT</a>
+        </div>
+        <div class="footer__col">
+          <h3>Контакты</h3>
+          <a href="contacts.html#map">г. Минск, ул. Короля, 2</a>
+          <a href="tel:+375447285016">+375 44 728-50-16</a>
+          <a href="tel:+375293675458">+375 29 367-54-58</a>
+          <a href="mailto:info@inassist.by">info@inassist.by</a>
+        </div>
+        <div class="footer__col">
+          <h3>Соцсети</h3>
+          <a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__legal">
+      <div>
+        <p class="footer__company">ООО «ИнАссист», УНП: 692272725 © 2026</p>
+        <p class="footer__note">Информация на сайте не является офертой и носит ознакомительный характер.*</p>
+      </div>
+      <div class="footer__links">
+        <a class="footer__privacy" href="privacy.html">Политика конфиденциальности</a>
+        <a class="footer__credit" href="https://www.behance.net/xilandesign" target="_blank" rel="noopener">Design by .Xilan.</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<dialog class="modal" id="contact-dialog" aria-labelledby="modal-title">
+  <div class="modal__inner">
+    <button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
+    <h2 id="modal-title">Обсудим вашу задачу</h2>
+    <p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
+    <form class="form" data-form novalidate>
+      <div class="field">
+        <label for="mf-name">Имя</label>
+        <input id="mf-name" name="name" type="text" autocomplete="name" required>
+        <p class="field__error" id="mf-name-err"></p>
+      </div>
+      <div class="field">
+        <label for="mf-phone">Телефон</label>
+        <input id="mf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375" required>
+        <p class="field__error" id="mf-phone-err"></p>
+      </div>
+      <div class="field field--check">
+        <input id="mf-consent" name="consent" type="checkbox" required>
+        <label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+        <p class="field__error" id="mf-consent-err"></p>
+      </div>
+      <button class="btn" type="submit">Отправить заявку</button>
+    </form>
+    <div class="form-done" hidden tabindex="-1">
+      <h3>Заявка отправлена</h3>
+      <p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+    </div>
+  </div>
+</dialog>

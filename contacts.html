@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты — ИнАссист</title>
+<meta name="description" content="Контакты ИнАссист: телефоны, почта и адрес офиса в Минске — ул. Короля, 2. Позвоните или оставьте заявку.">
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  // Прячем элементы для анимации появления до первой отрисовки, чтобы не было мигания.
+  // Если main.js по какой-то причине не загрузится, через 3 с всё просто покажется.
+  (function (d) {
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    d.classList.add('js-reveal');
+    setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'); }, 3000);
+  })(document.documentElement);
+</script>
+<script src="assets/js/main.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+<script src="assets/js/contacts-map.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="header__logo" href="index.html" aria-label="ИнАссист — на главную">
+      <img src="assets/img/logo.svg" width="139" height="40" alt="">
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Основное меню">
+      <ul class="nav__list">
+        <li><a href="services.html">Наши услуги</a></li>
+        <li><a href="portfolio.html">Портфолио</a></li>
+        <li><a href="contacts.html" aria-current="page">Контакты</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li><a href="blog.html">Блог</a></li>
+      </ul>
+      <a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+      <button class="btn nav__cta" type="button" data-open-contact>Связаться с нами</button>
+    </nav>
+    <div class="header__actions">
+      <a class="header__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+      <button class="btn btn--small btn--cut-left" type="button" data-open-contact>Связаться с нами</button>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="burger__lines" aria-hidden="true"></span>
+        <span class="visually-hidden">Меню</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Заголовок страницы -->
+  <section class="page-head">
+    <div class="container">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <ol>
+          <li><a href="index.html">Главная</a></li>
+          <li><span aria-current="page">Контакты</span></li>
+        </ol>
+      </nav>
+      <h1 data-reveal>Контакты</h1>
+    </div>
+  </section>
+
+  <!-- Контактная информация -->
+  <section aria-label="Как с нами связаться">
+    <div class="container">
+      <div class="info">
+        <div class="info__cell" data-reveal style="--rd:0.1s">
+          <h2 class="info__label">Номера телефонов</h2>
+          <div class="info__list">
+            <a class="info__item" href="tel:+375447285016">+375 44 728-50-16</a>
+            <a class="info__item" href="tel:+375293675458">+375 29 367-54-58</a>
+          </div>
+        </div>
+        <div class="info__cell" data-reveal style="--rd:0.22s">
+          <h2 class="info__label">Наш адрес</h2>
+          <div class="info__list">
+            <a class="info__item" href="#map">г. Минск, ул. Короля, 2</a>
+          </div>
+        </div>
+        <div class="info__cell" data-reveal style="--rd:0.34s">
+          <h2 class="info__label">Наша почта</h2>
+          <div class="info__list">
+            <a class="info__item" href="mailto:info@inassist.by">info@inassist.by</a>
+          </div>
+        </div>
+        <div class="info__cell" data-reveal style="--rd:0.46s">
+          <h2 class="info__label">Соцсети</h2>
+          <div class="info__list">
+            <a class="info__item" href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">inassist_by</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Карта (assets/js/contacts-map.js). Пока скрипт не загрузился — ссылка на карту -->
+  <div class="map" id="map" role="region" aria-label="Офис на карте: г. Минск, ул. Короля, 2">
+    <a class="map__fallback" href="https://yandex.by/maps/?text=%D0%9C%D0%B8%D0%BD%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9A%D0%BE%D1%80%D0%BE%D0%BB%D1%8F%2C%202" target="_blank" rel="noopener">Открыть адрес на Яндекс Картах</a>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section faq" aria-labelledby="faq-title">
+    <div class="container faq__grid">
+      <div class="faq__head">
+        <h2 id="faq-title" data-reveal>Вы часто спрашиваете</h2>
+        <p class="faq__text" data-reveal style="--rd:.12s">Собрали для вас самые частые вопросы о наших услугах и процессе работы.</p>
+        <button class="btn btn--outline btn--cut-right faq__btn" type="button" data-open-contact data-reveal style="--rd:.24s">Задать свой вопрос</button>
+      </div>
+      <div class="faq__list">
+        <details class="qa" data-reveal style="--rd:0.08s">
+          <summary><span>Сколько времени занимает процесс привлечения финансирования?</span></summary>
+          <div class="qa__answer"><p>Бизнес-план и финансовую модель готовим обычно за 2–4 недели. Дальше срок зависит от того, куда вы подаёте документы: банк, инвестор или программа господдержки рассматривают заявки по-разному. На этом этапе помогаем с ответами на вопросы и доработками.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.16s">
+          <summary><span>Можно ли заказать только одну услугу, а не полный комплекс?</span></summary>
+          <div class="qa__answer"><p>Да. Каждое направление работает отдельно. Если задача требует нескольких, предложим общий план и единые сроки.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.24s">
+          <summary><span>Предоставляете ли вы поддержку после запуска проекта?</span></summary>
+          <div class="qa__answer"><p>Да. После передачи результата остаёмся на связи: отвечаем на вопросы, вносим правки, при необходимости ведём рекламу и поддерживаем сайт. Формат поддержки обсуждаем отдельно.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.32s">
+          <summary><span>Сколько времени занимает запуск проекта?</span></summary>
+          <div class="qa__answer"><p>Запуск рекламы — от недели, сайт — от месяца, бизнес-план — 2–4 недели. Точные сроки прописываем в договоре.</p></div>
+        </details>
+        <details class="qa" data-reveal style="--rd:0.4s">
+          <summary><span>Как строится процесс работы с вашей командой?</span></summary>
+          <div class="qa__answer"><p>В пять этапов: заявка, договор, сбор данных, разработка решения и передача готового результата. Подробнее — в разделе <a href="index.html#process">«Как мы работаем»</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a class="footer__logo" href="index.html" aria-label="ИнАссист — на главную"><img src="assets/img/logo.svg" width="174" height="50" alt=""></a>
+      <nav class="footer__cols" aria-label="Меню в подвале">
+        <div class="footer__col">
+          <h3>Компания</h3>
+          <a href="index.html#process">Этапы работы</a>
+          <a href="portfolio.html">Портфолио</a>
+          <a href="services.html">Услуги</a>
+          <a href="blog.html">Блог</a>
+          <a href="about.html">О нас</a>
+        </div>
+        <div class="footer__col">
+          <h3>Услуги</h3>
+          <a href="service-business-planning.html">Бизнес-планирование</a>
+          <a href="service-advertising.html">Рекламное продвижение</a>
+          <a href="service-development.html">Разработка и IT</a>
+        </div>
+        <div class="footer__col">
+          <h3>Контакты</h3>
+          <a href="contacts.html#map">г. Минск, ул. Короля, 2</a>
+          <a href="tel:+375447285016">+375 44 728-50-16</a>
+          <a href="tel:+375293675458">+375 29 367-54-58</a>
+          <a href="mailto:info@inassist.by">info@inassist.by</a>
+        </div>
+        <div class="footer__col">
+          <h3>Соцсети</h3>
+          <a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer__legal">
+      <div>
+        <p class="footer__company">ООО «ИнАссист», УНП: 692272725 © 2026</p>
+        <p class="footer__note">Информация на сайте не является офертой и носит ознакомительный характер.*</p>
+      </div>
+      <div class="footer__links">
+        <a class="footer__privacy" href="privacy.html">Политика конфиденциальности</a>
+        <a class="footer__credit" href="https://www.behance.net/xilandesign" target="_blank" rel="noopener">Design by .Xilan.</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<dialog class="modal" id="contact-dialog" aria-labelledby="modal-title">
+  <div class="modal__inner">
+    <button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
+    <h2 id="modal-title">Обсудим вашу задачу</h2>
+    <p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
+    <form class="form" data-form novalidate>
+      <div class="field">
+        <label for="mf-name">Имя</label>
+        <input id="mf-name" name="name" type="text" autocomplete="name" required>
+        <p class="field__error" id="mf-name-err"></p>
+      </div>
+      <div class="field">
+        <label for="mf-phone">Телефон</label>
+        <input id="mf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375" required>
+        <p class="field__error" id="mf-phone-err"></p>
+      </div>
+      <div class="field field--check">
+        <input id="mf-consent" name="consent" type="checkbox" required>
+        <label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+        <p class="field__error" id="mf-consent-err"></p>
+      </div>
+      <button class="btn" type="submit">Отправить заявку</button>
+    </form>
+    <div class="form-done" hidden tabindex="-1">
+      <h3>Заявка отправлена</h3>
+      <p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>
