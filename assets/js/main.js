@@ -79,25 +79,29 @@
     header.addEventListener('focusin', function () { header.classList.remove('is-hidden'); });
   }
 
-  /* ---------- Иллюстрации направлений на тач-экранах ----------
-     Наведения нет, поэтому оживает та карточка, через которую проходит середина экрана.
-     Ушла из середины — рисунок возвращается в покой, и при возврате проиграется снова. */
-  var dirs = Array.prototype.slice.call(document.querySelectorAll('.dir'));
-  if (dirs.length && window.matchMedia('(hover: none)').matches) {
-    var dirTicking = false;
-    var updateDirs = function () {
-      dirTicking = false;
+  /* ---------- Карточки на тач-экранах ----------
+     Наведения нет, поэтому «наведённой» становится карточка, через которую проходит середина экрана:
+     у направлений проигрывается рисунок (.is-open), у остальных — то же, что при наведении (.is-mid).
+     Ушла из середины — возвращается в покой, при возврате проиграется снова. */
+  var mids = Array.prototype.slice.call(document.querySelectorAll(
+    '.dir, .card, .price, .audience__list li, .partner__facts li, .gets li'));
+  if (mids.length && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var midTicking = false;
+    var updateMids = function () {
+      midTicking = false;
       var mid = window.innerHeight / 2;
-      dirs.forEach(function (dir) {
-        var r = dir.getBoundingClientRect();
-        dir.classList.toggle('is-open', r.top < mid && r.bottom > mid);
+      mids.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        var on = r.height > 0 && r.top < mid && r.bottom > mid;
+        el.classList.toggle('is-mid', on);
+        if (el.classList.contains('dir')) el.classList.toggle('is-open', on);
       });
     };
     window.addEventListener('scroll', function () {
-      if (!dirTicking) { dirTicking = true; requestAnimationFrame(updateDirs); }
+      if (!midTicking) { midTicking = true; requestAnimationFrame(updateMids); }
     }, { passive: true });
-    window.addEventListener('resize', updateDirs);
-    updateDirs();
+    window.addEventListener('resize', updateMids);
+    updateMids();
   }
 
   /* ---------- Появление при прокрутке ----------
