@@ -80,17 +80,24 @@
   }
 
   /* ---------- Иллюстрации направлений на тач-экранах ----------
-     Наведения нет, поэтому сцена раскрывается один раз, когда карточка видна почти целиком. */
-  var dirs = document.querySelectorAll('.dir');
-  if (dirs.length && window.matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
-    var dirObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-open');
-        dirObserver.unobserve(entry.target);
+     Наведения нет, поэтому оживает та карточка, через которую проходит середина экрана.
+     Ушла из середины — рисунок возвращается в покой, и при возврате проиграется снова. */
+  var dirs = Array.prototype.slice.call(document.querySelectorAll('.dir'));
+  if (dirs.length && window.matchMedia('(hover: none)').matches) {
+    var dirTicking = false;
+    var updateDirs = function () {
+      dirTicking = false;
+      var mid = window.innerHeight / 2;
+      dirs.forEach(function (dir) {
+        var r = dir.getBoundingClientRect();
+        dir.classList.toggle('is-open', r.top < mid && r.bottom > mid);
       });
-    }, { threshold: 0.6 });
-    dirs.forEach(function (dir) { dirObserver.observe(dir); });
+    };
+    window.addEventListener('scroll', function () {
+      if (!dirTicking) { dirTicking = true; requestAnimationFrame(updateDirs); }
+    }, { passive: true });
+    window.addEventListener('resize', updateDirs);
+    updateDirs();
   }
 
   /* ---------- Появление при прокрутке ----------
@@ -148,7 +155,7 @@
     var updateAsm = function () {
       asmTicking = false;
       var rect = asm.getBoundingClientRect();
-      var total = asm.offsetHeight - window.innerHeight;
+      var total = asm.offsetHeight - asmVh;
       var p = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 1;
       asm.style.setProperty('--p', p.toFixed(4));
       asm.style.setProperty('--m1', seg(p, 0.10, 0.30).toFixed(4));
@@ -169,7 +176,14 @@
     window.addEventListener('scroll', function () {
       if (!asmTicking) { asmTicking = true; requestAnimationFrame(updateAsm); }
     }, { passive: true });
-    window.addEventListener('resize', updateAsm);
+    // Высоту экрана запоминаем и меняем только при повороте или смене ширины: на телефоне адресная строка
+    // прячется и появляется при каждом свайпе, и без этого сцена подпрыгивала бы вместе с ней
+    var asmVh = window.innerHeight;
+    var asmVw = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth !== asmVw) { asmVw = window.innerWidth; asmVh = window.innerHeight; }
+      updateAsm();
+    });
     updateAsm();
   }
 

@@ -382,6 +382,7 @@ a.info__item:hover{color:var(--accent-ink)}
 .card:hover .card__more svg{transform:translateX(4px)}
 
 /* ---------- Обратная связь ---------- */
+.tab__s,.contact__call{display:none}
 /* Без коробки и без контактов: слева заголовок и пояснение, справа форма */
 .contact__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px clamp(48px,8vw,128px);align-items:start}
 .contact__text .lead{margin-top:24px;max-width:26em}
@@ -537,7 +538,6 @@ a.info__item:hover{color:var(--accent-ink)}
   .cards{gap:40px}
   .cards > li .card{border-right:0!important}
   .form__foot{grid-template-columns:1fr}
-  .tabs{overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter)}
   .form__row{grid-template-columns:1fr}
   .footer__cols{grid-template-columns:1fr 1fr}
   .qa summary{font-size:18px}
@@ -547,7 +547,6 @@ a.info__item:hover{color:var(--accent-ink)}
   .header__actions > .btn{display:none}
   .header__logo img{width:120px}
   .btn{white-space:normal;text-align:left}
-  .hero__actions .btn,.form .btn{width:100%;justify-content:flex-start}
   .footer__cols{grid-template-columns:1fr}
   .info{grid-template-columns:1fr}
   .info__cell{border-right:0!important}
@@ -863,15 +862,57 @@ a.info__item:hover{color:var(--accent-ink)}
   /* Размытие фона у шапки делает её «экраном» для вложенного fixed-меню —
      из-за этого меню сжималось до высоты шапки. Здесь фон сплошной. */
   .header{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none;transform:none!important}
+  /* Шапка закреплена «намертво» (fixed, а не sticky): при свайпе и пружинящей прокрутке
+     она больше не уезжает вместе со страницей. Место под неё держит отступ у body. */
+  .header{position:fixed;top:0;left:0;right:0}
+  body{padding-top:calc(var(--header-h) + 1px)}
+  html{scroll-padding-top:calc(var(--header-h) + 16px)}
   .nav{position:fixed;top:var(--header-h);left:0;right:0;bottom:auto;z-index:49;display:flex;flex-direction:column;
     height:calc(100dvh - var(--header-h));padding:8px var(--gutter) calc(24px + env(safe-area-inset-bottom));
     background:var(--bg);overflow-y:auto;overscroll-behavior:contain;
     visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .25s ease,transform .3s ease,visibility 0s .3s}
   .nav.is-open{display:flex;visibility:visible;opacity:1;transform:none;transition:opacity .25s ease,transform .3s ease}
-  .nav__list a{padding:14px 0;font-size:28px;line-height:1.2;letter-spacing:-.02em}
+  /* Пункты меню — спокойный список: строки на тонких линиях, справа шеврон, текущая страница — бирюзовая */
+  .nav__list{border-top:1px solid var(--line)}
+  .nav__list a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;font-size:20px;line-height:1.3;letter-spacing:-.01em;border-bottom:1px solid var(--line)}
+  .nav__list a::after{content:"";flex:none;width:7px;height:7px;margin-right:4px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);opacity:.35}
   .nav__list a[aria-current="page"]{color:var(--accent-ink);border-bottom:1px solid var(--line)}
+  .nav__list a[aria-current="page"]::after{opacity:1}
   .nav__phone{margin-top:auto;padding-top:32px;font-size:20px;font-variant-numeric:tabular-nums}
-  .nav__cta{width:100%;justify-content:flex-start;margin-top:16px}
+  .nav__cta{align-self:flex-start;justify-content:flex-start;margin-top:16px}
+  /* Пункты появляются по очереди, сверху вниз */
+  @media (prefers-reduced-motion:no-preference){
+    .nav.is-open .nav__list li,.nav.is-open .nav__phone,.nav.is-open .nav__cta{animation:nav-in .45s cubic-bezier(.2,.8,.2,1) both}
+    .nav.is-open .nav__list li:nth-child(2){animation-delay:.04s}
+    .nav.is-open .nav__list li:nth-child(3){animation-delay:.08s}
+    .nav.is-open .nav__list li:nth-child(4){animation-delay:.12s}
+    .nav.is-open .nav__list li:nth-child(5){animation-delay:.16s}
+    .nav.is-open .nav__phone,.nav.is-open .nav__cta{animation-delay:.2s}
+  }
+
+  /* О нас: хлебные крошки, под ними рисунок, затем текст */
+  .asm__text{display:contents}
+  .asm .crumbs{order:-2}
+  /* Шапка теперь fixed, место под ней уже держит body — сцена прилипает сразу под шапкой */
+  .asm.is-scrub .asm__stage{top:calc(var(--header-h) + 1px);min-height:calc(100svh - var(--header-h) - 1px);padding-top:16px}
+
+  /* Карточки направлений идут столбиком: вместо боковых линий — линия сверху.
+     Наведения на телефоне нет: карточка оживает, когда оказывается посередине экрана (main.js) */
+  .dir,.dir:last-child{--pl:0px;--pr:0px;padding:24px 0 0;border-left:0;border-right:0;border-top:1px solid var(--line)}
+  .dir.is-open{border-top-color:var(--ink)}
+  .dir.is-open .dir__title{color:var(--accent)}
+  .dir.is-open .dir__more{color:var(--accent-ink)}
+  .dir.is-open .dir__more svg{transform:translateX(4px)}
+}
+
+@keyframes nav-in{from{opacity:0;transform:translateY(12px)}}
+
+/* Касание на тач-экране «залипает» как наведение — отключаем ховеры карточек направлений */
+@media (hover:none){
+  .dir:hover,.dir:hover + .dir{border-left-color:var(--line)}
+  .dir:hover:not(.is-open){border-top-color:var(--line)}
+  .dir:hover:not(.is-open) .dir__title,.dir:hover:not(.is-open) .dir__more{color:var(--ink)}
+  .dir:hover:not(.is-open) .dir__more svg{transform:none}
 }
 
 @media (max-width:760px){
@@ -910,14 +951,41 @@ a.info__item:hover{color:var(--accent-ink)}
     0 0,100% 0,calc(100% - var(--h) * var(--slant)) 100%,0 100%,0 0,
     1px 1px,calc(100% - 1.51px) 1px,calc(100% - var(--h) * var(--slant) - .67px) calc(100% - 1px),1px calc(100% - 1px),1px 1px)}
   .btn--outline::after{clip-path:polygon(0 0,100% 0,calc(100% - var(--h) * var(--slant)) 100%,0 100%)}
-  .page-head__actions,.hero__actions{gap:8px}
 
-  /* Кнопки на первых экранах и в призывах — во всю ширину, текст слева, как на главной */
-  .hero__actions .btn,.page-head__actions .btn,.combo__text .btn,.about__intro .btn,.faq__btn{width:100%;justify-content:flex-start}
-  .page-head__actions,.hero__actions{flex-direction:column;align-items:stretch}
+
+  /* Кнопки — по ширине текста. Две кнопки первого экрана стоят друг под другом, и срез нижней
+     продолжает срез верхней одной диагональю: нижняя короче ровно на сдвиг среза (высота + зазор) × наклон */
+  .hero__actions,.page-head__actions{display:grid;justify-content:start;gap:8px}
+  .hero__actions .btn,.page-head__actions .btn{justify-content:flex-start}
+  .hero__actions .btn + .btn,.page-head__actions .btn + .btn{margin-right:calc((var(--h) + 8px) * var(--slant))}
+
+  /* «Все проекты», «Все статьи», «Задать свой вопрос» — в конце блока, после содержимого */
+  .portfolio > .container,.blog > .container,.related > .container{display:flex;flex-direction:column}
+  .portfolio .section-head,.blog .section-head,.related .section-head{display:contents}
+  .portfolio .section-head h2,.blog .section-head h2,.related .section-head h2{margin-bottom:var(--head-gap)}
+  .section-head > .btn{order:1;align-self:flex-start;margin-top:40px}
+  .faq__grid{row-gap:0}
+  .faq__head{display:contents}
+  .faq__list{margin-top:32px}
+  .faq__btn{order:1;justify-self:start;margin-top:40px}
+
+  /* Вкладки и фильтр — короткие подписи, все помещаются в строку, ничего не листается */
+  .tab__l{display:none}
+  .tab__s{display:inline}
+  .tabs{flex-wrap:wrap;gap:0 20px;overflow:visible}
+  .tab{font-size:15px}
+
+  /* Обсудим задачу: варианты — сеткой два на два, поля компактнее, рядом — звонок одним касанием */
+  .contact__call{display:block;margin-top:16px;color:var(--muted)}
+  .contact__call a{color:var(--ink);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .chips{display:grid;grid-template-columns:1fr 1fr}
+  .chip span{min-height:48px;padding:0 14px;font-size:15px}
+  .field textarea{min-height:88px}
+  .form{gap:20px}
+  .form__foot .btn{justify-self:start}
 
   /* Карточки направлений: меньше пустоты между рисунком, текстом и соседней карточкой */
-  .dir-grid{gap:32px}
+  .dir-grid{gap:40px}
   .dir .scene{margin-bottom:16px}
   .dir__desc{margin-top:12px}
   .dir__more{margin-top:20px}
@@ -934,11 +1002,14 @@ a.info__item:hover{color:var(--accent-ink)}
   .price{padding-inline:20px 0}
   .price h3{font-size:22px}
 
-  /* Карточки проектов и статей */
+  /* Карточки проектов и статей — как направления: без боковых линий, линия сверху */
+  .cards > li .card,.cards--grid .card{--pl:0px;--pr:0px;padding:20px 0 0;border-left:0;border-right:0;box-shadow:none;border-top:1px solid var(--line)}
+  .cards > li:hover + li .card{border-left-color:transparent}
   .card__meta{margin-top:20px}
 
   /* Обсудим задачу, вопросы */
-  .contact__grid,.faq__grid{gap:32px}
+  .contact__grid{gap:32px}
+  .faq__text{margin-top:16px}
   .qa summary{padding-block:20px;font-size:17px}
 
   /* Подвал: колонки по две, без лишней высоты */
@@ -955,11 +1026,8 @@ a.info__item:hover{color:var(--accent-ink)}
   .modal{width:100%;max-width:none;max-height:92dvh;margin:auto 0 0;padding-bottom:env(safe-area-inset-bottom)}
   .modal__inner{padding:28px var(--gutter) 24px}
   .modal h2{font-size:26px}
-  .modal .btn{width:100%;justify-content:flex-start}
   @media (prefers-reduced-motion:no-preference){ .modal[open]{animation:sheet-in .3s cubic-bezier(.2,.8,.2,1)} }
 
-  /* Вкладки и фильтр листаются вбок — край растворяется, чтобы было видно, что дальше есть ещё */
-  .tabs{-webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
 
   /* Крупные рисунки — на всю ширину экрана, от края до края */
   .combo__visual .scene,.partner__visual .scene,.page-head__visual .scene{width:calc(100% + 2 * var(--gutter));max-width:none;margin-inline:calc(var(--gutter) * -1)}
