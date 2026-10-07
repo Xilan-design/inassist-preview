@@ -10,7 +10,12 @@
    Запуск:  node build.js           — собрать один раз
             node build.js --watch   — пересобирать при каждом сохранении файлов в src/
 
-   Готовые .html в корне — результат сборки: правьте src/, иначе изменения затрутся. */
+   Готовые .html в корне — результат сборки: правьте src/, иначе изменения затрутся.
+
+   Стили и скрипты правятся в assets/css/style.css и assets/js/*.js. Сборка сжимает их (esbuild)
+   в соседние *.min.css / *.min.js и подставляет в страницы с меткой версии ?v=…: метка меняется
+   вместе с содержимым, поэтому браузер сразу берёт свежий файл, а не старый из кэша.
+   Сами страницы тоже ужимаются: без комментариев и отступов. Перед первым запуском: npm install */
 'use strict';
 
 const fs = require('fs');
@@ -20,6 +25,35 @@ const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
 const PARTIALS = path.join(SRC, 'partials');
 const INCLUDE = /<!-- @include ([\w-]+)((?:\s+[\w-]+="[^"]*")*) -->/g;
+const crypto = require('crypto');
+const esbuild = require('esbuild');
+
+// Исходник → сжатый файл. Цели — браузеры не старше 2021 года: синтаксис не переписывается
+const ASSETS = ['assets/css/style.css', 'assets/js/main.js', 'assets/js/hero-pattern.js', 'assets/js/contacts-map.js'];
+const TARGET = ['chrome100', 'edge100', 'firefox100', 'safari15'];
+
+function buildAssets() {
+  const map = {};
+  for (const file of ASSETS) {
+    const code = fs.readFileSync(path.join(ROOT, file), 'utf8');
+    const loader = file.endsWith('.css') ? 'css' : 'js';
+    const min = esbuild.transformSync(code, { loader, minify: true, target: TARGET, charset: 'utf8', legalComments: 'none' }).code;
+    const out = file.replace(/\.(css|js)$/, '.min.$1');
+    fs.writeFileSync(path.join(ROOT, out), min);
+    const v = crypto.createHash('sha1').update(min).digest('hex').slice(0, 8);
+    map[file] = `${out}?v=${v}`;
+  }
+  return map;
+}
+
+// Комментарии и отступы строк не нужны браузеру. Перевод строки остаётся — он работает как пробел
+function compactHtml(html, assets) {
+  for (const [src, out] of Object.entries(assets)) html = html.split(`"${src}"`).join(`"${out}"`);
+  return html
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/\r?\n[ \t]+/g, '\n')
+    .replace(/\n{2,}/g, '\n');
+}
 
 // Параметры, которые меняют общий блок под конкретную страницу
 const modifiers = {
@@ -56,6 +90,7 @@ function loadPartials() {
 function build() {
   const started = Date.now();
   const parts = loadPartials();
+  const assets = buildAssets();
   const pages = fs.readdirSync(SRC).filter((f) => f.endsWith('.html'));
 
   for (const page of pages) {
@@ -71,7 +106,7 @@ function build() {
         throw new Error(`${page}: ${err.message}`);
       }
     });
-    fs.writeFileSync(path.join(ROOT, page), html);
+    fs.writeFileSync(path.join(ROOT, page), compactHtml(html, assets));
   }
   console.log(`Собрано страниц: ${pages.length} за ${Date.now() - started} мс`);
 }
@@ -89,9 +124,13 @@ safeBuild();
 
 if (process.argv.includes('--watch')) {
   let timer = null;
-  fs.watch(SRC, { recursive: true }, () => {
+  const rebuild = (_, file) => {
+    if (file && file.includes('.min.')) return;   // свои же сжатые файлы не пересобираем
     clearTimeout(timer);
     timer = setTimeout(safeBuild, 100);   // редактор часто сохраняет файл в несколько приёмов
-  });
-  console.log('Слежу за src/ — сохраните файл, и страницы пересоберутся. Остановить: Ctrl+C');
+  };
+  fs.watch(SRC, { recursive: true }, rebuild);
+  fs.watch(path.join(ROOT, 'assets', 'css'), rebuild);
+  fs.watch(path.join(ROOT, 'assets', 'js'), rebuild);
+  console.log('Слежу за src/ и assets/ — сохраните файл, и страницы пересоберутся. Остановить: Ctrl+C');
 }

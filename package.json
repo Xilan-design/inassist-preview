@@ -1,0 +1,16 @@
+{
+  "name": "inassist-site",
+  "private": true,
+  "description": "Сайт ИнАссист: сборка страниц из src/ и сжатие стилей и скриптов",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "shots": "node tools/shots.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^25.12.0"
+  }
+}

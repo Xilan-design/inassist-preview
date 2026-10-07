@@ -7,465 +7,428 @@
 <meta name="description" content="Консалтинговая компания ИнАссист. Бизнес-планы и финансовые модели, реклама в поиске и соцсетях, сайты и IT-решения для стартапов и действующего бизнеса.">
 <link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.min.css?v=87fbb6cd">
 <script>
-  // Наведение включаем только там, где есть мышь или тачпад (см. :where(.can-hover *) в style.css)
-  (function (d) {
-    var mq = matchMedia('(hover: hover) and (pointer: fine)');
-    var set = function () { d.classList.toggle('can-hover', mq.matches); };
-    set();
-    if (mq.addEventListener) mq.addEventListener('change', set);
-  })(document.documentElement);
-
-  // Прячем элементы для анимации появления до первой отрисовки, чтобы не было мигания.
-  // Если main.js по какой-то причине не загрузится, через 3 с всё просто покажется.
-  (function (d) {
-    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    d.classList.add('js-reveal');
-    setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'); }, 3000);
-  })(document.documentElement);
+// Наведение включаем только там, где есть мышь или тачпад (см. :where(.can-hover *) в style.css)
+(function (d) {
+var mq = matchMedia('(hover: hover) and (pointer: fine)');
+var set = function () { d.classList.toggle('can-hover', mq.matches); };
+set();
+if (mq.addEventListener) mq.addEventListener('change', set);
+})(document.documentElement);
+// Прячем элементы для анимации появления до первой отрисовки, чтобы не было мигания.
+// Если main.js по какой-то причине не загрузится, через 3 с всё просто покажется.
+(function (d) {
+if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+d.classList.add('js-reveal');
+setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'); }, 3000);
+})(document.documentElement);
 </script>
-<script src="assets/js/main.js" defer></script>
-<script src="assets/js/hero-pattern.js" defer></script>
+<script src="assets/js/main.min.js?v=08d618f6" defer></script>
+<script src="assets/js/hero-pattern.min.js?v=b77c1b56" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Перейти к содержанию</a>
-
 <header class="header">
-  <div class="container header__inner">
-    <a class="header__logo" href="index.html" aria-label="ИнАссист — на главную">
-      <img src="assets/img/logo.svg" width="139" height="40" alt="">
-    </a>
-    <nav class="nav" id="site-nav" aria-label="Основное меню">
-      <ul class="nav__list">
-        <li><a href="services.html">Наши услуги</a></li>
-        <li><a href="portfolio.html">Портфолио</a></li>
-        <li><a href="contacts.html">Контакты</a></li>
-        <li><a href="about.html">О нас</a></li>
-        <li><a href="blog.html">Блог</a></li>
-      </ul>
-      <a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
-      <button class="btn nav__cta" type="button" data-open-contact>Связаться с нами</button>
-    </nav>
-    <div class="header__actions">
-      <a class="header__phone" href="tel:+375447285016">+375 44 728-50-16</a>
-      <button class="btn btn--small btn--cut-left" type="button" data-open-contact>Связаться с нами</button>
-      <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="burger__lines" aria-hidden="true"></span>
-        <span class="visually-hidden">Меню</span>
-      </button>
-    </div>
-  </div>
+<div class="container header__inner">
+<a class="header__logo" href="index.html" aria-label="ИнАссист — на главную">
+<img src="assets/img/logo.svg" width="139" height="40" alt="">
+</a>
+<nav class="nav" id="site-nav" aria-label="Основное меню">
+<ul class="nav__list">
+<li><a href="services.html">Наши услуги</a></li>
+<li><a href="portfolio.html">Портфолио</a></li>
+<li><a href="contacts.html">Контакты</a></li>
+<li><a href="about.html">О нас</a></li>
+<li><a href="blog.html">Блог</a></li>
+</ul>
+<a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+<button class="btn nav__cta" type="button" data-open-contact>Связаться с нами</button>
+</nav>
+<div class="header__actions">
+<a class="header__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+<button class="btn btn--small btn--cut-left" type="button" data-open-contact>Связаться с нами</button>
+<button class="burger" type="button" aria-expanded="false" aria-controls="site-nav">
+<span class="burger__lines" aria-hidden="true"></span>
+<span class="visually-hidden">Меню</span>
+</button>
+</div>
+</div>
 </header>
-
 <main id="main">
-
-  <!-- Главный экран -->
-  <section class="hero">
-    <!-- Фирменный паттерн: медленно дрейфует и реагирует на курсор (assets/js/hero-pattern.js) -->
-    <canvas class="hero__pattern" aria-hidden="true" data-reveal="fade" style="--rd:.3s"></canvas>
-    <div class="container hero__inner">
-      <div class="hero__text">
-        <h1 class="hero__title" data-reveal>Команда, <br> которой не хватает <br> вашему бизнесу</h1>
-        <p class="hero__lead" data-reveal style="--rd:.15s">Берём на себя то, для чего небольшой компании нужен отдельный штат: бизнес-планы, рекламу, сайты и автоматизацию.</p>
-        <div class="hero__actions" data-reveal style="--rd:.3s">
-          <button class="btn" type="button" data-open-contact>Оставить заявку</button>
-          <a class="btn btn--outline" href="#directions">Смотреть услуги</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- О компании -->
-  <section class="section about" aria-labelledby="about-title">
-    <div class="container about__grid">
-      <div class="about__intro">
-        <h2 id="about-title" data-reveal>Консалтинг, доступный не только крупным компаниям</h2>
-        <p class="lead" data-reveal style="--rd:.12s">Помогаем принимать решения на основе расчётов, а не догадок, и доводим их до результата: заявок, продаж, работающих сервисов.</p>
-        <a class="btn btn--outline btn--cut-right" href="about.html" data-reveal style="--rd:.24s">Подробнее о компании</a>
-      </div>
-
-      <div class="audience">
-        <h3 class="audience__title" data-reveal style="--rd:.1s">С кем работаем</h3>
-        <ul class="audience__list">
-          <li data-reveal style="--rd:0.27s">
-            <h4>Стартапы</h4>
-            <p>Посчитаем идею, подготовим бизнес-план и документы для инвестора или банка.</p>
-          </li>
-          <li data-reveal style="--rd:0.39s">
-            <h4>Малый и средний бизнес</h4>
-            <p>Настроим рекламу, сайт и автоматизацию: больше заявок, меньше ручной работы.</p>
-          </li>
-          <li data-reveal style="--rd:0.51s">
-            <h4>Резиденты технопарков</h4>
-            <p>Помогаем развивать и продвигать проекты. Сами резиденты технопарка «ИнКата» с 2024 года.</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Направления -->
-  <section class="section directions" id="directions" aria-labelledby="directions-title">
-    <div class="container">
-      <div class="section-head">
-        <h2 id="directions-title" data-reveal>Направления</h2>
-        <p class="section-head__text" data-reveal style="--rd:.12s">Направления можно заказать по отдельности или объединить в один проект.</p>
-      </div>
-
-      <!-- Фактура граней для иллюстраций направлений -->
-      <svg class="sr-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><pattern id="scene-dots" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#FBFAF6"/><circle cx="1" cy="1" r=".6" fill="#B5AFA1"/></pattern></defs></svg>
-      <div class="dir-grid">
-        <a class="dir" href="service-business-planning.html" data-reveal style="--rd:0.1s">
-          <svg class="dir__art" viewBox="0 0 260 200" aria-hidden="true"><g style="--d:0.3"><g><polygon class="t1" points="8,154.8 24,148 24,189.2 8,196"/></g></g><g style="--d:1.58"><g><polygon class="t1" points="42,154.8 58,148 58,189.2 42,196"/></g></g><g style="--d:2.87"><g><polygon class="t2" points="76,154.8 92,148 92,189.2 76,196"/></g></g><g style="--d:2.87"><g><polygon class="t2" points="76,90.8 92,84 92,125.2 76,132"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,154.8 126,148 126,189.2 110,196"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,90.8 126,84 126,125.2 110,132"/></g></g><g style="--d:5.43"><g><polygon class="t3" points="144,154.8 160,148 160,189.2 144,196"/></g></g><g style="--d:5.43"><g><polygon class="t3" points="144,90.8 160,84 160,125.2 144,132"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,154.8 194,148 194,189.2 178,196"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,90.8 194,84 194,125.2 178,132"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,26.8 194,20 194,61.2 178,68"/></g></g><g style="--d:8.0"><g><polygon class="t4" points="212,154.8 228,148 228,189.2 212,196"/></g></g><g style="--d:8.0"><g><polygon class="t4" points="212,90.8 228,84 228,125.2 212,132"/></g></g><g style="--d:8.0"><g><polygon class="t4" points="212,26.8 228,20 228,61.2 212,68"/></g></g></svg>
-          <svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><path class="gd" d="M-59.3 14.4L419.3 217.6"/><path class="gd" d="M419.3 14.4L-59.3 217.6"/><polygon class="f" points="161.6,75.4 275.7,123.8 198.4,156.6 84.3,108.2"/><polygon class="fd" points="84.3,116.2 198.4,164.6 198.4,156.6 84.3,108.2"/><polygon class="f" points="275.7,131.8 198.4,164.6 198.4,156.6 275.7,123.8"/><polygon class="ft" points="142.3,66.9 158.8,74 142.3,81 125.7,74"/><polygon class="fd" points="125.7,100 142.3,107 142.3,81 125.7,74"/><polygon class="f" points="158.8,100 142.3,107 142.3,81 158.8,74"/><polygon class="ft" points="166.2,59.1 182.8,66.1 166.2,73.2 149.6,66.1"/><polygon class="fd" points="149.6,110.1 166.2,117.2 166.2,73.2 149.6,66.1"/><polygon class="f" points="182.8,110.1 166.2,117.2 166.2,73.2 182.8,66.1"/><polygon class="ft" points="190.1,49.3 206.7,56.3 190.1,63.3 173.6,56.3"/><polygon class="fd" points="173.6,120.3 190.1,127.3 190.1,63.3 173.6,56.3"/><polygon class="f" points="206.7,120.3 190.1,127.3 190.1,63.3 206.7,56.3"/><g class="rise ac" style="--d:.15s"><polygon class="ft" points="214.1,31.4 230.6,38.5 214.1,45.5 197.5,38.5"/><polygon class="fd" points="197.5,130.5 214.1,137.5 214.1,45.5 197.5,38.5"/><polygon class="f" points="230.6,130.5 214.1,137.5 214.1,45.5 230.6,38.5"/></g><path class="draw ac" pathLength="1" style="--d:0.35s" d="M111.9 57.1 L142.3 58 L166.2 50.1 L190.1 40.3 L214.1 22.5 L235.2 3.4"/><g class="pop ac" style="--d:.8s"><path class="ln" d="M226.5 5.5L235.2 3.4L232.2 11.9"/><circle class="dot" cx="142.3" cy="58" r="2.5"/><circle class="dot" cx="166.2" cy="50.1" r="2.5"/><circle class="dot" cx="190.1" cy="40.3" r="2.5"/><circle class="dot" cx="214.1" cy="22.5" r="2.5"/></g></svg>
-          <h3 class="dir__title">Бизнес-планирование</h3>
-          <p class="dir__desc">Бизнес-планы и финансовые модели для привлечения инвестиций, кредитов и господдержки.</p>
-          <span class="dir__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-        </a>
-        <a class="dir" href="service-advertising.html" data-reveal style="--rd:0.25s">
-          <svg class="dir__art" viewBox="0 0 260 200" aria-hidden="true"><g style="--d:0.3"><g><polygon class="t1" points="8,156.8 24,150 24,191.2 8,198"/></g></g><g style="--d:0.3"><g><polygon class="t1" points="8,220.8 24,214 24,255.2 8,262"/></g></g><g style="--d:1.58"><g><polygon class="t1" points="42,144.8 58,138 58,179.2 42,186"/></g></g><g style="--d:1.58"><g><polygon class="t1" points="42,208.8 58,202 58,243.2 42,250"/></g></g><g style="--d:2.87"><g><polygon class="t2" points="76,128.8 92,122 92,163.2 76,170"/></g></g><g style="--d:2.87"><g><polygon class="t1" points="76,192.8 92,186 92,227.2 76,234"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,108.8 126,102 126,143.2 110,150"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,172.8 126,166 126,207.2 110,214"/></g></g><g style="--d:5.43"><g><polygon class="t3" points="144,86.8 160,80 160,121.2 144,128"/></g></g><g style="--d:5.43"><g><polygon class="t2" points="144,150.8 160,144 160,185.2 144,192"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,64.8 194,58 194,99.2 178,106"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,128.8 194,122 194,163.2 178,170"/></g></g><g style="--d:8.0"><g><polygon class="t4" points="212,46.8 228,40 228,81.2 212,88"/></g></g><g style="--d:8.0"><g><polygon class="t3" points="212,110.8 228,104 228,145.2 212,152"/></g></g></svg>
-          <svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><ellipse class="ring ac" style="--d:0.1s" cx="180" cy="124" rx="104.1" ry="44.2"/><ellipse class="ring ac" style="--d:0.22s" cx="180" cy="124" rx="135.4" ry="57.5"/><ellipse class="ring ac" style="--d:0.34s" cx="180" cy="124" rx="169.2" ry="71.8"/><path class="gd" d="M-59.3 22.4L419.3 225.6"/><path class="gd" d="M419.3 22.4L-59.3 225.6"/><path class="f" d="M96.7 116V124A83.3 35.4 0 0 0 263.3 124V116"/><ellipse class="f" cx="180" cy="116" rx="83.3" ry="35.4"/><g class="drop ac" style="--d:.6s"><polygon class="ft" points="229.7,106.9 243.5,112.7 229.7,118.6 215.9,112.7"/><polygon class="f" points="215.9,127.7 229.7,133.6 229.7,118.6 215.9,112.7"/><polygon class="f" points="243.5,127.7 229.7,133.6 229.7,118.6 243.5,112.7"/></g><polygon class="f" points="151.5,17.5 214.1,44.1 208.5,46.5 145.9,19.9"/><polygon class="f" points="145.9,103.9 208.5,130.5 208.5,46.5 145.9,19.9"/><polygon class="f" points="214.1,128.1 208.5,130.5 208.5,46.5 214.1,44.1"/><path class="ln" d="M153.3 37L184.6 50.3"/><path class="ln" d="M153.3 44L171.7 51.8"/><polygon class="fd" points="153.3,83 201.2,103.3 201.2,73.3 153.3,53"/><polygon class="ft cta" points="153.3,97 173.6,105.6 173.6,98.6 153.3,90"/><g class="drop ac" style="--d:.45s"><polygon class="ft" points="130.3,106.9 144.1,112.7 130.3,118.6 116.5,112.7"/><polygon class="f" points="116.5,127.7 130.3,133.6 130.3,118.6 116.5,112.7"/><polygon class="f" points="144.1,127.7 130.3,133.6 130.3,118.6 144.1,112.7"/></g><g class="drop ac" style="--d:.75s"><polygon class="ft" points="180,119.4 193.8,125.2 180,131.1 166.2,125.2"/><polygon class="f" points="166.2,140.2 180,146.1 180,131.1 166.2,125.2"/><polygon class="f" points="193.8,140.2 180,146.1 180,131.1 193.8,125.2"/></g></svg>
-          <h3 class="dir__title">Рекламное продвижение</h3>
-          <p class="dir__desc">Реклама в поиске и соцсетях, которая приводит заявки, и отчёт о том, сколько стоила каждая.</p>
-          <span class="dir__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-        </a>
-        <a class="dir" href="service-development.html" data-reveal style="--rd:0.4s">
-          <svg class="dir__art" viewBox="0 0 260 200" aria-hidden="true"><g style="--d:0.3"><g><polygon class="t1" points="8,146.8 24,140 24,181.2 8,188"/></g></g><g style="--d:1.58"><g><polygon class="t1" points="42,114.8 58,108 58,149.2 42,156"/></g></g><g style="--d:1.58"><g><polygon class="t1" points="42,178.8 58,172 58,213.2 42,220"/></g></g><g style="--d:2.87"><g><polygon class="t2" points="76,82.8 92,76 92,117.2 76,124"/></g></g><g style="--d:2.87"><g><polygon class="t2" points="76,146.8 92,140 92,181.2 76,188"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,50.8 126,44 126,85.2 110,92"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,114.8 126,108 126,149.2 110,156"/></g></g><g style="--d:4.15"><g><polygon class="t2" points="110,178.8 126,172 126,213.2 110,220"/></g></g><g style="--d:5.43"><g><polygon class="t3" points="144,18.8 160,12 160,53.2 144,60"/></g></g><g style="--d:5.43"><g><polygon class="t3" points="144,82.8 160,76 160,117.2 144,124"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,50.8 194,44 194,85.2 178,92"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,114.8 194,108 194,149.2 178,156"/></g></g><g style="--d:6.72"><g><polygon class="t3" points="178,178.8 194,172 194,213.2 178,220"/></g></g><g style="--d:8.0"><g><polygon class="t4" points="212,18.8 228,12 228,53.2 212,60"/></g></g><g style="--d:8.0"><g><polygon class="t4" points="212,82.8 228,76 228,117.2 212,124"/></g></g></svg>
-          <svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><path class="gd" d="M-59.3 14.4L419.3 217.6"/><path class="gd" d="M419.3 14.4L-59.3 217.6"/><g class="slide ac" style="--from:translate(-42.3px,18px);--d:.3s"><polygon class="ft" points="277.6,43.2 301.5,53.4 277.6,63.5 253.6,53.4"/><polygon class="f" points="253.6,75.4 277.6,85.5 277.6,63.5 253.6,53.4"/><polygon class="f" points="301.5,75.4 277.6,85.5 277.6,63.5 301.5,53.4"/></g><g class="slide ac" style="--from:translate(42.3px,18px);--d:.2s"><polygon class="ft" points="82.4,43.2 106.4,53.4 82.4,63.5 58.5,53.4"/><polygon class="f" points="58.5,75.4 82.4,85.5 82.4,63.5 58.5,53.4"/><polygon class="f" points="106.4,75.4 82.4,85.5 82.4,63.5 106.4,53.4"/></g><path class="draw ac" pathLength="1" style="--d:0.6s" d="M94.4 72.4L142.3 92.8"/><path class="draw ac" pathLength="1" style="--d:0.7s" d="M265.6 72.4L217.7 92.8"/><polygon class="f" points="180,73.8 279.4,116 180,158.2 80.6,116"/><polygon class="fd" points="80.6,122 180,164.2 180,158.2 80.6,116"/><polygon class="f" points="279.4,122 180,164.2 180,158.2 279.4,116"/><g class="base"><polygon class="f" points="180,73.9 246.3,102 180,130.1 113.7,102"/><polygon class="fd" points="113.7,116 180,144.1 180,130.1 113.7,102"/><polygon class="f" points="246.3,116 180,144.1 180,130.1 246.3,102"/><circle class="ln" cx="194.7" cy="130.9" r="1.6"/><circle class="ln" cx="188.3" cy="133.6" r="1.6"/></g><g class="lift" style="--lift:-14px;--d:0.05s"><polygon class="f" points="180,59.9 246.3,88 180,116.1 113.7,88"/><polygon class="fd" points="113.7,102 180,130.1 180,116.1 113.7,88"/><polygon class="f" points="246.3,102 180,130.1 180,116.1 246.3,88"/></g><g class="lift" style="--lift:-28px;--d:0.1s"><polygon class="f" points="180,45.9 246.3,74 180,102.1 113.7,74"/><polygon class="fd" points="113.7,88 180,116.1 180,102.1 113.7,74"/><polygon class="f" points="246.3,88 180,116.1 180,102.1 246.3,74"/><polygon class="ft" points="180,55.2 224.2,74 180,92.8 135.8,74"/><path class="ln" d="M172.6 66.2L194.7 75.6"/><path class="ln" d="M163.4 70.1L176.3 75.6"/></g><path class="draw ac" pathLength="1" style="--d:0.8s" d="M212.2 122.5L263.8 144.3"/><g class="slide ac" style="--from:translate(-42.3px,-18px);--d:.4s"><polygon class="ft" points="275.7,125.3 299.7,135.4 275.7,145.6 251.8,135.4"/><polygon class="f" points="251.8,157.4 275.7,167.6 275.7,145.6 251.8,135.4"/><polygon class="f" points="299.7,157.4 275.7,167.6 275.7,145.6 299.7,135.4"/></g></svg>
-          <h3 class="dir__title">Разработка и&nbsp;IT</h3>
-          <p class="dir__desc">Сайты, интеграции с CRM и автоматизация: от проектирования до запуска и поддержки.</p>
-          <span class="dir__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Как мы работаем -->
-  <section class="section process" id="process" aria-labelledby="process-title">
-    <div class="container">
-      <div class="section-head">
-        <h2 id="process-title" data-reveal>Как мы работаем</h2>
-        <p class="section-head__text" data-reveal style="--rd:.12s">Пять этапов от первого звонка до готового результата.</p>
-      </div>
-
-      <ol class="steps">
-        <li class="step" style="--i:0">
-          <svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="ft" points="52,39.2 96.2,58 52,76.8 7.8,58"/></g></svg>
-          <span class="step__dot" aria-hidden="true"></span>
-          <span class="step__num">Этап 1</span>
-          <h3>Оформление заявки</h3>
-          <p>Обсуждаем задачу, предлагаем формат работы и сроки.</p>
-        </li>
-        <li class="step" style="--i:1">
-          <svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="ft" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g></svg>
-          <span class="step__dot" aria-hidden="true"></span>
-          <span class="step__num">Этап 2</span>
-          <h3>Подписание договора</h3>
-          <p>Фиксируем этапы, стоимость и ожидаемый результат.</p>
-        </li>
-        <li class="step" style="--i:2">
-          <svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="f" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g><g class="bd" style="--k:1"><polygon class="ft" points="52,26.4 88.8,42 52,57.6 15.2,42"/><polygon class="f" points="15.2,53 52,68.6 52,57.6 15.2,42"/><polygon class="f" points="88.8,53 52,68.6 52,57.6 88.8,42"/></g></svg>
-          <span class="step__dot" aria-hidden="true"></span>
-          <span class="step__num">Этап 3</span>
-          <h3>Сбор данных</h3>
-          <p>Изучаем бизнес, рынок и конкурентов.</p>
-        </li>
-        <li class="step" style="--i:3">
-          <svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="f" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g><g class="bd" style="--k:1"><polygon class="f" points="52,26.4 88.8,42 52,57.6 15.2,42"/><polygon class="f" points="15.2,53 52,68.6 52,57.6 15.2,42"/><polygon class="f" points="88.8,53 52,68.6 52,57.6 88.8,42"/></g><g class="bd" style="--k:2"><polygon class="ft" points="52,15.4 88.8,31 52,46.6 15.2,31"/><polygon class="f" points="15.2,42 52,57.6 52,46.6 15.2,31"/><polygon class="f" points="88.8,42 52,57.6 52,46.6 88.8,31"/></g></svg>
-          <span class="step__dot" aria-hidden="true"></span>
-          <span class="step__num">Этап 4</span>
-          <h3>Разработка решения</h3>
-          <p>Готовим расчёты, запускаем рекламу или разрабатываем продукт.</p>
-        </li>
-        <li class="step" style="--i:4">
-          <svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="f" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g><g class="bd" style="--k:1"><polygon class="f" points="52,26.4 88.8,42 52,57.6 15.2,42"/><polygon class="f" points="15.2,53 52,68.6 52,57.6 15.2,42"/><polygon class="f" points="88.8,53 52,68.6 52,57.6 88.8,42"/></g><g class="bd" style="--k:2"><polygon class="f" points="52,15.4 88.8,31 52,46.6 15.2,31"/><polygon class="f" points="15.2,42 52,57.6 52,46.6 15.2,31"/><polygon class="f" points="88.8,42 52,57.6 52,46.6 88.8,31"/></g><g class="bd ac" style="--k:3"><polygon class="ft" points="52,4.4 88.8,20 52,35.6 15.2,20"/><polygon class="f" points="15.2,31 52,46.6 52,35.6 15.2,20"/><polygon class="f" points="88.8,31 52,46.6 52,35.6 88.8,20"/></g></svg>
-          <span class="step__dot" aria-hidden="true"></span>
-          <span class="step__num">Этап 5</span>
-          <h3>Готовое решение</h3>
-          <p>Передаём результат, помогаем внедрить и остаёмся на связи.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Портфолио -->
-  <section class="section portfolio" aria-labelledby="portfolio-title">
-    <div class="container">
-      <div class="section-head">
-        <h2 id="portfolio-title" data-reveal>Реализованные проекты</h2>
-        <a class="btn btn--outline" href="portfolio.html" data-reveal style="--rd:.12s">Все проекты</a>
-      </div>
-
-      <div class="tabs" data-reveal style="--rd:.2s" role="tablist" aria-label="Направления проектов">
-        <button class="tab" role="tab" id="tab-bp" aria-controls="panel-bp" aria-selected="true"><span class="tab__l">Бизнес-планирование</span><span class="tab__s" aria-hidden="true">Бизнес-планы</span></button>
-        <button class="tab" role="tab" id="tab-ad" aria-controls="panel-ad" aria-selected="false" tabindex="-1"><span class="tab__l">Рекламное продвижение</span><span class="tab__s" aria-hidden="true">Реклама</span></button>
-        <button class="tab" role="tab" id="tab-it" aria-controls="panel-it" aria-selected="false" tabindex="-1"><span class="tab__l">Разработка и IT</span><span class="tab__s" aria-hidden="true">Разработка</span></button>
-      </div>
-
-      <!-- Кейсы ниже — примеры для макета, заменить реальными -->
-      <div class="tab-panel" role="tabpanel" id="panel-bp" aria-labelledby="tab-bp">
-        <ul class="cards">
-          <li data-reveal style="--rd:0.1s"><a class="card" href="portfolio.html">
-            <div class="card__cover"></div>
-            <p class="card__meta">Производство мебели</p>
-            <h3>Бизнес-план для кредита на новую линию</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-          <li data-reveal style="--rd:0.25s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:30%"></div>
-            <p class="card__meta">IT-стартап</p>
-            <h3>Финансовая модель для резидентства в технопарке</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-          <li data-reveal style="--rd:0.4s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:70%"></div>
-            <p class="card__meta">Кофейня</p>
-            <h3>Бизнес-план открытия второй точки</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-        </ul>
-      </div>
-
-      <div class="tab-panel" role="tabpanel" id="panel-ad" aria-labelledby="tab-ad" hidden>
-        <ul class="cards">
-          <li data-reveal style="--rd:0.1s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:50%"></div>
-            <p class="card__meta">Интернет-магазин</p>
-            <h3>Реклама в поиске для интернет-магазина</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-          <li data-reveal style="--rd:0.25s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:10%"></div>
-            <p class="card__meta">Стоматология</p>
-            <h3>Реклама в соцсетях для клиники</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-          <li data-reveal style="--rd:0.4s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:90%"></div>
-            <p class="card__meta">Строительная компания</p>
-            <h3>Исследование рынка и запуск рекламы</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-        </ul>
-      </div>
-
-      <div class="tab-panel" role="tabpanel" id="panel-it" aria-labelledby="tab-it" hidden>
-        <ul class="cards">
-          <li data-reveal style="--rd:0.1s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:20%"></div>
-            <p class="card__meta">Логистическая компания</p>
-            <h3>Сайт и интеграция с CRM</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-          <li data-reveal style="--rd:0.25s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:60%"></div>
-            <p class="card__meta">Образовательный центр</p>
-            <h3>Лендинг с онлайн-записью</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-          <li data-reveal style="--rd:0.4s"><a class="card" href="portfolio.html">
-            <div class="card__cover" style="--pos:80%"></div>
-            <p class="card__meta">Оптовая компания</p>
-            <h3>Автоматизация учёта заказов</h3>
-          <span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-          </a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Блог -->
-  <section class="section blog" aria-labelledby="blog-title">
-    <div class="container">
-      <div class="section-head">
-        <h2 id="blog-title" data-reveal>Полезные материалы</h2>
-        <a class="btn btn--outline" href="blog.html" data-reveal style="--rd:.12s">Все статьи</a>
-      </div>
-
-      <ul class="cards">
-        <li data-reveal style="--rd:0.1s"><a class="card" href="blog-lead-cost.html">
-          <p class="card__meta"><span>Бизнес-планирование</span></p>
-          <h3>Как подготовить бизнес-план для резидентства в технопарке</h3>
-          <p class="card__text">Какие разделы проверяют в первую очередь и где чаще всего ошибаются.</p>
-        <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-        </a></li>
-        <li data-reveal style="--rd:0.25s"><a class="card" href="blog-lead-cost.html">
-          <p class="card__meta"><span>Реклама</span></p>
-          <h3>Сколько стоит заявка из рекламы и как её посчитать</h3>
-          <p class="card__text">Простая формула и три ошибки, из-за которых цифры врут.</p>
-        <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-        </a></li>
-        <li data-reveal style="--rd:0.4s"><a class="card" href="blog-lead-cost.html">
-          <p class="card__meta"><span>Разработка</span></p>
-          <h3>Сайт или лендинг: что нужно бизнесу на старте</h3>
-          <p class="card__text">Сравниваем по срокам, стоимости и задачам, которые они решают.</p>
-        <span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-        </a></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Обратная связь -->
-  <section class="section contact" id="contact" aria-labelledby="contact-title">
-    <div class="container contact__grid">
-      <div class="contact__text">
-        <h2 id="contact-title" data-reveal>Обсудим вашу задачу</h2>
-        <p class="lead" data-reveal style="--rd:.12s">Нужны только имя и телефон. Остальное — по желанию, чтобы мы подготовились к разговору.</p>
-      </div>
-
-      <div class="contact__form" data-reveal style="--rd:.15s">
-        <form class="form" data-form novalidate>
-          <fieldset class="field">
-            <legend>Что нужно сделать?</legend>
-            <div class="chips">
-              <label class="chip"><input type="radio" name="topic" value="Бизнес-планирование"><span>Бизнес-план</span></label>
-              <label class="chip"><input type="radio" name="topic" value="Реклама"><span>Реклама</span></label>
-              <label class="chip"><input type="radio" name="topic" value="Разработка и IT"><span>Сайт или IT</span></label>
-              <label class="chip"><input type="radio" name="topic" value="Пока не знаю" checked><span>Пока не знаю</span></label>
-            </div>
-          </fieldset>
-          <div class="form__row">
-            <div class="field">
-              <label for="cf-name">Имя</label>
-              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" required>
-              <p class="field__error" id="cf-name-err"></p>
-            </div>
-            <div class="field">
-              <label for="cf-phone">Телефон</label>
-              <input id="cf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 000-00-00" required>
-              <p class="field__error" id="cf-phone-err"></p>
-            </div>
-          </div>
-          <div class="field">
-            <label for="cf-msg">Коротко о задаче <span class="field__opt">необязательно</span></label>
-            <textarea id="cf-msg" name="message" rows="3" placeholder="Например: нужен бизнес-план для кредита на оборудование"></textarea>
-          </div>
-          <div class="form__foot">
-            <div class="field field--check">
-              <input id="cf-consent" name="consent" type="checkbox" required>
-              <label for="cf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
-              <p class="field__error" id="cf-consent-err"></p>
-            </div>
-            <button class="btn btn--cut-left" type="submit">Отправить заявку</button>
-          </div>
-        </form>
-        <div class="form-done" hidden tabindex="-1">
-          <h3>Заявка отправлена</h3>
-          <p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section faq" aria-labelledby="faq-title">
-    <div class="container faq__grid">
-      <div class="faq__head">
-        <h2 id="faq-title" data-reveal>Вы часто спрашиваете</h2>
-        <p class="faq__text" data-reveal style="--rd:.12s">Собрали для вас самые частые вопросы о наших услугах и процессе работы.</p>
-        <button class="btn btn--outline btn--cut-right faq__btn" type="button" data-open-contact data-reveal style="--rd:.24s">Задать свой вопрос</button>
-      </div>
-      <div class="faq__list">
-        <details class="qa" data-reveal style="--rd:0.08s">
-          <summary><span>Сколько стоят ваши услуги?</span></summary>
-          <div class="qa__answer"><p>Стоимость зависит от объёма задачи. После первого разговора называем точную сумму и фиксируем её в договоре.</p></div>
-        </details>
-        <details class="qa" data-reveal style="--rd:0.16s">
-          <summary><span>Сколько времени занимает работа?</span></summary>
-          <div class="qa__answer"><p>Бизнес-план — обычно 2–4 недели, запуск рекламы — от недели, сайт — от месяца. Точные сроки прописываем в договоре.</p></div>
-        </details>
-        <details class="qa" data-reveal style="--rd:0.24s">
-          <summary><span>Вы работаете со стартапами без выручки?</span></summary>
-          <div class="qa__answer"><p>Да. Поможем посчитать модель и подготовить документы для инвестора, банка или технопарка.</p></div>
-        </details>
-        <details class="qa" data-reveal style="--rd:0.32s">
-          <summary><span>Можно заказать только одну услугу?</span></summary>
-          <div class="qa__answer"><p>Да. Каждое направление работает отдельно. Если задача требует нескольких, предложим общий план и единые сроки.</p></div>
-        </details>
-        <details class="qa" data-reveal style="--rd:0.4s">
-          <summary><span>Что подготовить к первому разговору?</span></summary>
-          <div class="qa__answer"><p>Достаточно описать задачу своими словами. Цифры и документы запросим позже, на этапе сбора данных.</p></div>
-        </details>
-      </div>
-    </div>
-  </section>
-
+<section class="hero">
+<canvas class="hero__pattern" aria-hidden="true" data-reveal="fade" style="--rd:.3s"></canvas>
+<div class="container hero__inner">
+<div class="hero__text">
+<h1 class="hero__title" data-reveal>Команда, <br> которой не хватает <br> вашему бизнесу</h1>
+<p class="hero__lead" data-reveal style="--rd:.15s">Берём на себя то, для чего небольшой компании нужен отдельный штат: бизнес-планы, рекламу, сайты и автоматизацию.</p>
+<div class="hero__actions" data-reveal style="--rd:.3s">
+<button class="btn" type="button" data-open-contact>Оставить заявку</button>
+<a class="btn btn--outline" href="#directions">Смотреть услуги</a>
+</div>
+</div>
+</div>
+</section>
+<section class="section about" aria-labelledby="about-title">
+<div class="container about__grid">
+<div class="about__intro">
+<h2 id="about-title" data-reveal>Консалтинг, доступный не только крупным компаниям</h2>
+<p class="lead" data-reveal style="--rd:.12s">Помогаем принимать решения на основе расчётов, а не догадок, и доводим их до результата: заявок, продаж, работающих сервисов.</p>
+<a class="btn btn--outline btn--cut-right" href="about.html" data-reveal style="--rd:.24s">Подробнее о компании</a>
+</div>
+<div class="audience">
+<h3 class="audience__title" data-reveal style="--rd:.1s">С кем работаем</h3>
+<ul class="audience__list">
+<li data-reveal style="--rd:0.27s">
+<h4>Стартапы</h4>
+<p>Посчитаем идею, подготовим бизнес-план и документы для инвестора или банка.</p>
+</li>
+<li data-reveal style="--rd:0.39s">
+<h4>Малый и средний бизнес</h4>
+<p>Настроим рекламу, сайт и автоматизацию: больше заявок, меньше ручной работы.</p>
+</li>
+<li data-reveal style="--rd:0.51s">
+<h4>Резиденты технопарков</h4>
+<p>Помогаем развивать и продвигать проекты. Сами резиденты технопарка «ИнКата» с 2024 года.</p>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="section directions" id="directions" aria-labelledby="directions-title">
+<div class="container">
+<div class="section-head">
+<h2 id="directions-title" data-reveal>Направления</h2>
+<p class="section-head__text" data-reveal style="--rd:.12s">Направления можно заказать по отдельности или объединить в один проект.</p>
+</div>
+<svg class="sr-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><pattern id="scene-dots" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#FBFAF6"/><circle cx="1" cy="1" r=".6" fill="#B5AFA1"/></pattern></defs></svg>
+<div class="dir-grid">
+<a class="dir" href="service-business-planning.html" data-reveal style="--rd:0.1s">
+<svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><path class="gd" d="M-59.3 14.4L419.3 217.6"/><path class="gd" d="M419.3 14.4L-59.3 217.6"/><polygon class="f" points="161.6,75.4 275.7,123.8 198.4,156.6 84.3,108.2"/><polygon class="fd" points="84.3,116.2 198.4,164.6 198.4,156.6 84.3,108.2"/><polygon class="f" points="275.7,131.8 198.4,164.6 198.4,156.6 275.7,123.8"/><polygon class="ft" points="142.3,66.9 158.8,74 142.3,81 125.7,74"/><polygon class="fd" points="125.7,100 142.3,107 142.3,81 125.7,74"/><polygon class="f" points="158.8,100 142.3,107 142.3,81 158.8,74"/><polygon class="ft" points="166.2,59.1 182.8,66.1 166.2,73.2 149.6,66.1"/><polygon class="fd" points="149.6,110.1 166.2,117.2 166.2,73.2 149.6,66.1"/><polygon class="f" points="182.8,110.1 166.2,117.2 166.2,73.2 182.8,66.1"/><polygon class="ft" points="190.1,49.3 206.7,56.3 190.1,63.3 173.6,56.3"/><polygon class="fd" points="173.6,120.3 190.1,127.3 190.1,63.3 173.6,56.3"/><polygon class="f" points="206.7,120.3 190.1,127.3 190.1,63.3 206.7,56.3"/><g class="rise ac" style="--d:.15s"><polygon class="ft" points="214.1,31.4 230.6,38.5 214.1,45.5 197.5,38.5"/><polygon class="fd" points="197.5,130.5 214.1,137.5 214.1,45.5 197.5,38.5"/><polygon class="f" points="230.6,130.5 214.1,137.5 214.1,45.5 230.6,38.5"/></g><path class="draw ac" pathLength="1" style="--d:0.35s" d="M111.9 57.1 L142.3 58 L166.2 50.1 L190.1 40.3 L214.1 22.5 L235.2 3.4"/><g class="pop ac" style="--d:.8s"><path class="ln" d="M226.5 5.5L235.2 3.4L232.2 11.9"/><circle class="dot" cx="142.3" cy="58" r="2.5"/><circle class="dot" cx="166.2" cy="50.1" r="2.5"/><circle class="dot" cx="190.1" cy="40.3" r="2.5"/><circle class="dot" cx="214.1" cy="22.5" r="2.5"/></g></svg>
+<h3 class="dir__title">Бизнес-планирование</h3>
+<p class="dir__desc">Бизнес-планы и финансовые модели для привлечения инвестиций, кредитов и господдержки.</p>
+<span class="dir__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a>
+<a class="dir" href="service-advertising.html" data-reveal style="--rd:0.25s">
+<svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><ellipse class="ring ac" style="--d:0.1s" cx="180" cy="124" rx="104.1" ry="44.2"/><ellipse class="ring ac" style="--d:0.22s" cx="180" cy="124" rx="135.4" ry="57.5"/><ellipse class="ring ac" style="--d:0.34s" cx="180" cy="124" rx="169.2" ry="71.8"/><path class="gd" d="M-59.3 22.4L419.3 225.6"/><path class="gd" d="M419.3 22.4L-59.3 225.6"/><path class="f" d="M96.7 116V124A83.3 35.4 0 0 0 263.3 124V116"/><ellipse class="f" cx="180" cy="116" rx="83.3" ry="35.4"/><g class="drop ac" style="--d:.6s"><polygon class="ft" points="229.7,106.9 243.5,112.7 229.7,118.6 215.9,112.7"/><polygon class="f" points="215.9,127.7 229.7,133.6 229.7,118.6 215.9,112.7"/><polygon class="f" points="243.5,127.7 229.7,133.6 229.7,118.6 243.5,112.7"/></g><polygon class="f" points="151.5,17.5 214.1,44.1 208.5,46.5 145.9,19.9"/><polygon class="f" points="145.9,103.9 208.5,130.5 208.5,46.5 145.9,19.9"/><polygon class="f" points="214.1,128.1 208.5,130.5 208.5,46.5 214.1,44.1"/><path class="ln" d="M153.3 37L184.6 50.3"/><path class="ln" d="M153.3 44L171.7 51.8"/><polygon class="fd" points="153.3,83 201.2,103.3 201.2,73.3 153.3,53"/><polygon class="ft cta" points="153.3,97 173.6,105.6 173.6,98.6 153.3,90"/><g class="drop ac" style="--d:.45s"><polygon class="ft" points="130.3,106.9 144.1,112.7 130.3,118.6 116.5,112.7"/><polygon class="f" points="116.5,127.7 130.3,133.6 130.3,118.6 116.5,112.7"/><polygon class="f" points="144.1,127.7 130.3,133.6 130.3,118.6 144.1,112.7"/></g><g class="drop ac" style="--d:.75s"><polygon class="ft" points="180,119.4 193.8,125.2 180,131.1 166.2,125.2"/><polygon class="f" points="166.2,140.2 180,146.1 180,131.1 166.2,125.2"/><polygon class="f" points="193.8,140.2 180,146.1 180,131.1 193.8,125.2"/></g></svg>
+<h3 class="dir__title">Рекламное продвижение</h3>
+<p class="dir__desc">Реклама в поиске и соцсетях, которая приводит заявки, и отчёт о том, сколько стоила каждая.</p>
+<span class="dir__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a>
+<a class="dir" href="service-development.html" data-reveal style="--rd:0.4s">
+<svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><path class="gd" d="M-59.3 14.4L419.3 217.6"/><path class="gd" d="M419.3 14.4L-59.3 217.6"/><g class="slide ac" style="--from:translate(-42.3px,18px);--d:.3s"><polygon class="ft" points="277.6,43.2 301.5,53.4 277.6,63.5 253.6,53.4"/><polygon class="f" points="253.6,75.4 277.6,85.5 277.6,63.5 253.6,53.4"/><polygon class="f" points="301.5,75.4 277.6,85.5 277.6,63.5 301.5,53.4"/></g><g class="slide ac" style="--from:translate(42.3px,18px);--d:.2s"><polygon class="ft" points="82.4,43.2 106.4,53.4 82.4,63.5 58.5,53.4"/><polygon class="f" points="58.5,75.4 82.4,85.5 82.4,63.5 58.5,53.4"/><polygon class="f" points="106.4,75.4 82.4,85.5 82.4,63.5 106.4,53.4"/></g><path class="draw ac" pathLength="1" style="--d:0.6s" d="M94.4 72.4L142.3 92.8"/><path class="draw ac" pathLength="1" style="--d:0.7s" d="M265.6 72.4L217.7 92.8"/><polygon class="f" points="180,73.8 279.4,116 180,158.2 80.6,116"/><polygon class="fd" points="80.6,122 180,164.2 180,158.2 80.6,116"/><polygon class="f" points="279.4,122 180,164.2 180,158.2 279.4,116"/><g class="base"><polygon class="f" points="180,73.9 246.3,102 180,130.1 113.7,102"/><polygon class="fd" points="113.7,116 180,144.1 180,130.1 113.7,102"/><polygon class="f" points="246.3,116 180,144.1 180,130.1 246.3,102"/><circle class="ln" cx="194.7" cy="130.9" r="1.6"/><circle class="ln" cx="188.3" cy="133.6" r="1.6"/></g><g class="lift" style="--lift:-14px;--d:0.05s"><polygon class="f" points="180,59.9 246.3,88 180,116.1 113.7,88"/><polygon class="fd" points="113.7,102 180,130.1 180,116.1 113.7,88"/><polygon class="f" points="246.3,102 180,130.1 180,116.1 246.3,88"/></g><g class="lift" style="--lift:-28px;--d:0.1s"><polygon class="f" points="180,45.9 246.3,74 180,102.1 113.7,74"/><polygon class="fd" points="113.7,88 180,116.1 180,102.1 113.7,74"/><polygon class="f" points="246.3,88 180,116.1 180,102.1 246.3,74"/><polygon class="ft" points="180,55.2 224.2,74 180,92.8 135.8,74"/><path class="ln" d="M172.6 66.2L194.7 75.6"/><path class="ln" d="M163.4 70.1L176.3 75.6"/></g><path class="draw ac" pathLength="1" style="--d:0.8s" d="M212.2 122.5L263.8 144.3"/><g class="slide ac" style="--from:translate(-42.3px,-18px);--d:.4s"><polygon class="ft" points="275.7,125.3 299.7,135.4 275.7,145.6 251.8,135.4"/><polygon class="f" points="251.8,157.4 275.7,167.6 275.7,145.6 251.8,135.4"/><polygon class="f" points="299.7,157.4 275.7,167.6 275.7,145.6 299.7,135.4"/></g></svg>
+<h3 class="dir__title">Разработка и&nbsp;IT</h3>
+<p class="dir__desc">Сайты, интеграции с CRM и автоматизация: от проектирования до запуска и поддержки.</p>
+<span class="dir__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a>
+</div>
+</div>
+</section>
+<section class="section process" id="process" aria-labelledby="process-title">
+<div class="container">
+<div class="section-head">
+<h2 id="process-title" data-reveal>Как мы работаем</h2>
+<p class="section-head__text" data-reveal style="--rd:.12s">Пять этапов от первого звонка до готового результата.</p>
+</div>
+<ol class="steps">
+<li class="step" style="--i:0">
+<svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="ft" points="52,39.2 96.2,58 52,76.8 7.8,58"/></g></svg>
+<span class="step__dot" aria-hidden="true"></span>
+<span class="step__num">Этап 1</span>
+<h3>Оформление заявки</h3>
+<p>Обсуждаем задачу, предлагаем формат работы и сроки.</p>
+</li>
+<li class="step" style="--i:1">
+<svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="ft" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g></svg>
+<span class="step__dot" aria-hidden="true"></span>
+<span class="step__num">Этап 2</span>
+<h3>Подписание договора</h3>
+<p>Фиксируем этапы, стоимость и ожидаемый результат.</p>
+</li>
+<li class="step" style="--i:2">
+<svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="f" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g><g class="bd" style="--k:1"><polygon class="ft" points="52,26.4 88.8,42 52,57.6 15.2,42"/><polygon class="f" points="15.2,53 52,68.6 52,57.6 15.2,42"/><polygon class="f" points="88.8,53 52,68.6 52,57.6 88.8,42"/></g></svg>
+<span class="step__dot" aria-hidden="true"></span>
+<span class="step__num">Этап 3</span>
+<h3>Сбор данных</h3>
+<p>Изучаем бизнес, рынок и конкурентов.</p>
+</li>
+<li class="step" style="--i:3">
+<svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="f" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g><g class="bd" style="--k:1"><polygon class="f" points="52,26.4 88.8,42 52,57.6 15.2,42"/><polygon class="f" points="15.2,53 52,68.6 52,57.6 15.2,42"/><polygon class="f" points="88.8,53 52,68.6 52,57.6 88.8,42"/></g><g class="bd" style="--k:2"><polygon class="ft" points="52,15.4 88.8,31 52,46.6 15.2,31"/><polygon class="f" points="15.2,42 52,57.6 52,46.6 15.2,31"/><polygon class="f" points="88.8,42 52,57.6 52,46.6 88.8,31"/></g></svg>
+<span class="step__dot" aria-hidden="true"></span>
+<span class="step__num">Этап 4</span>
+<h3>Разработка решения</h3>
+<p>Готовим расчёты, запускаем рекламу или разрабатываем продукт.</p>
+</li>
+<li class="step" style="--i:4">
+<svg class="step__art" viewBox="0 0 104 84" aria-hidden="true"><g class="gh"><polygon class="ln" points="52,1.2 96.2,20 52,38.8 7.8,20"/><polygon class="ln" points="7.8,58 52,76.8 52,38.8 7.8,20"/><polygon class="ln" points="96.2,58 52,76.8 52,38.8 96.2,20"/></g><g class="bd" style="--k:0"><polygon class="f" points="52,34.2 96.2,53 52,71.8 7.8,53"/><polygon class="f" points="7.8,58 52,76.8 52,71.8 7.8,53"/><polygon class="f" points="96.2,58 52,76.8 52,71.8 96.2,53"/></g><g class="bd" style="--k:1"><polygon class="f" points="52,26.4 88.8,42 52,57.6 15.2,42"/><polygon class="f" points="15.2,53 52,68.6 52,57.6 15.2,42"/><polygon class="f" points="88.8,53 52,68.6 52,57.6 88.8,42"/></g><g class="bd" style="--k:2"><polygon class="f" points="52,15.4 88.8,31 52,46.6 15.2,31"/><polygon class="f" points="15.2,42 52,57.6 52,46.6 15.2,31"/><polygon class="f" points="88.8,42 52,57.6 52,46.6 88.8,31"/></g><g class="bd ac" style="--k:3"><polygon class="ft" points="52,4.4 88.8,20 52,35.6 15.2,20"/><polygon class="f" points="15.2,31 52,46.6 52,35.6 15.2,20"/><polygon class="f" points="88.8,31 52,46.6 52,35.6 88.8,20"/></g></svg>
+<span class="step__dot" aria-hidden="true"></span>
+<span class="step__num">Этап 5</span>
+<h3>Готовое решение</h3>
+<p>Передаём результат, помогаем внедрить и остаёмся на связи.</p>
+</li>
+</ol>
+</div>
+</section>
+<section class="section portfolio" aria-labelledby="portfolio-title">
+<div class="container">
+<div class="section-head">
+<h2 id="portfolio-title" data-reveal>Реализованные проекты</h2>
+<a class="btn btn--outline" href="portfolio.html" data-reveal style="--rd:.12s">Все проекты</a>
+</div>
+<div class="tabs" data-reveal style="--rd:.2s" role="tablist" aria-label="Направления проектов">
+<button class="tab" role="tab" id="tab-bp" aria-controls="panel-bp" aria-selected="true"><span class="tab__l">Бизнес-планирование</span><span class="tab__s">Бизнес-планы</span></button>
+<button class="tab" role="tab" id="tab-ad" aria-controls="panel-ad" aria-selected="false" tabindex="-1"><span class="tab__l">Рекламное продвижение</span><span class="tab__s">Реклама</span></button>
+<button class="tab" role="tab" id="tab-it" aria-controls="panel-it" aria-selected="false" tabindex="-1"><span class="tab__l">Разработка и IT</span><span class="tab__s">Разработка</span></button>
+</div>
+<div class="tab-panel" role="tabpanel" id="panel-bp" aria-labelledby="tab-bp">
+<ul class="cards">
+<li data-reveal style="--rd:0.1s"><a class="card" href="portfolio.html">
+<div class="card__cover"></div>
+<p class="card__meta">Производство мебели</p>
+<h3>Бизнес-план для кредита на новую линию</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.25s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:30%"></div>
+<p class="card__meta">IT-стартап</p>
+<h3>Финансовая модель для резидентства в технопарке</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.4s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:70%"></div>
+<p class="card__meta">Кофейня</p>
+<h3>Бизнес-план открытия второй точки</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+</ul>
+</div>
+<div class="tab-panel" role="tabpanel" id="panel-ad" aria-labelledby="tab-ad" hidden>
+<ul class="cards">
+<li data-reveal style="--rd:0.1s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:50%"></div>
+<p class="card__meta">Интернет-магазин</p>
+<h3>Реклама в поиске для интернет-магазина</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.25s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:10%"></div>
+<p class="card__meta">Стоматология</p>
+<h3>Реклама в соцсетях для клиники</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.4s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:90%"></div>
+<p class="card__meta">Строительная компания</p>
+<h3>Исследование рынка и запуск рекламы</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+</ul>
+</div>
+<div class="tab-panel" role="tabpanel" id="panel-it" aria-labelledby="tab-it" hidden>
+<ul class="cards">
+<li data-reveal style="--rd:0.1s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:20%"></div>
+<p class="card__meta">Логистическая компания</p>
+<h3>Сайт и интеграция с CRM</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.25s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:60%"></div>
+<p class="card__meta">Образовательный центр</p>
+<h3>Лендинг с онлайн-записью</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.4s"><a class="card" href="portfolio.html">
+<div class="card__cover" style="--pos:80%"></div>
+<p class="card__meta">Оптовая компания</p>
+<h3>Автоматизация учёта заказов</h3>
+<span class="card__more">Смотреть проект<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="section blog" aria-labelledby="blog-title">
+<div class="container">
+<div class="section-head">
+<h2 id="blog-title" data-reveal>Полезные материалы</h2>
+<a class="btn btn--outline" href="blog.html" data-reveal style="--rd:.12s">Все статьи</a>
+</div>
+<ul class="cards">
+<li data-reveal style="--rd:0.1s"><a class="card" href="blog-lead-cost.html">
+<p class="card__meta"><span>Бизнес-планирование</span></p>
+<h3>Как подготовить бизнес-план для резидентства в технопарке</h3>
+<p class="card__text">Какие разделы проверяют в первую очередь и где чаще всего ошибаются.</p>
+<span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.25s"><a class="card" href="blog-lead-cost.html">
+<p class="card__meta"><span>Реклама</span></p>
+<h3>Сколько стоит заявка из рекламы и как её посчитать</h3>
+<p class="card__text">Простая формула и три ошибки, из-за которых цифры врут.</p>
+<span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+<li data-reveal style="--rd:0.4s"><a class="card" href="blog-lead-cost.html">
+<p class="card__meta"><span>Разработка</span></p>
+<h3>Сайт или лендинг: что нужно бизнесу на старте</h3>
+<p class="card__text">Сравниваем по срокам, стоимости и задачам, которые они решают.</p>
+<span class="card__more">Читать статью<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
+</a></li>
+</ul>
+</div>
+</section>
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+<div class="container contact__grid">
+<div class="contact__text">
+<h2 id="contact-title" data-reveal>Обсудим вашу задачу</h2>
+<p class="lead" data-reveal style="--rd:.12s">Нужны только имя и телефон. Остальное — по желанию, чтобы мы подготовились к разговору.</p>
+</div>
+<div class="contact__form" data-reveal style="--rd:.15s">
+<form class="form" data-form novalidate>
+<fieldset class="field">
+<legend>Что нужно сделать?</legend>
+<div class="chips">
+<label class="chip"><input type="radio" name="topic" value="Бизнес-планирование"><span>Бизнес-план</span></label>
+<label class="chip"><input type="radio" name="topic" value="Реклама"><span>Реклама</span></label>
+<label class="chip"><input type="radio" name="topic" value="Разработка и IT"><span>Сайт или IT</span></label>
+<label class="chip"><input type="radio" name="topic" value="Пока не знаю" checked><span>Пока не знаю</span></label>
+</div>
+</fieldset>
+<div class="form__row">
+<div class="field">
+<label for="cf-name">Имя</label>
+<input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" required>
+<p class="field__error" id="cf-name-err"></p>
+</div>
+<div class="field">
+<label for="cf-phone">Телефон</label>
+<input id="cf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 29 000-00-00" required>
+<p class="field__error" id="cf-phone-err"></p>
+</div>
+</div>
+<div class="field">
+<label for="cf-msg">Коротко о задаче <span class="field__opt">необязательно</span></label>
+<textarea id="cf-msg" name="message" rows="3" placeholder="Например: нужен бизнес-план для кредита на оборудование"></textarea>
+</div>
+<div class="form__foot">
+<div class="field field--check">
+<input id="cf-consent" name="consent" type="checkbox" required>
+<label for="cf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+<p class="field__error" id="cf-consent-err"></p>
+</div>
+<button class="btn btn--cut-left" type="submit">Отправить заявку</button>
+</div>
+</form>
+<div class="form-done" hidden tabindex="-1">
+<h3>Заявка отправлена</h3>
+<p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section faq" aria-labelledby="faq-title">
+<div class="container faq__grid">
+<div class="faq__head">
+<h2 id="faq-title" data-reveal>Вы часто спрашиваете</h2>
+<p class="faq__text" data-reveal style="--rd:.12s">Собрали для вас самые частые вопросы о наших услугах и процессе работы.</p>
+<button class="btn btn--outline btn--cut-right faq__btn" type="button" data-open-contact data-reveal style="--rd:.24s">Задать свой вопрос</button>
+</div>
+<div class="faq__list">
+<details class="qa" data-reveal style="--rd:0.08s">
+<summary><span>Сколько стоят ваши услуги?</span></summary>
+<div class="qa__answer"><p>Стоимость зависит от объёма задачи. После первого разговора называем точную сумму и фиксируем её в договоре.</p></div>
+</details>
+<details class="qa" data-reveal style="--rd:0.16s">
+<summary><span>Сколько времени занимает работа?</span></summary>
+<div class="qa__answer"><p>Бизнес-план — обычно 2–4 недели, запуск рекламы — от недели, сайт — от месяца. Точные сроки прописываем в договоре.</p></div>
+</details>
+<details class="qa" data-reveal style="--rd:0.24s">
+<summary><span>Вы работаете со стартапами без выручки?</span></summary>
+<div class="qa__answer"><p>Да. Поможем посчитать модель и подготовить документы для инвестора, банка или технопарка.</p></div>
+</details>
+<details class="qa" data-reveal style="--rd:0.32s">
+<summary><span>Можно заказать только одну услугу?</span></summary>
+<div class="qa__answer"><p>Да. Каждое направление работает отдельно. Если задача требует нескольких, предложим общий план и единые сроки.</p></div>
+</details>
+<details class="qa" data-reveal style="--rd:0.4s">
+<summary><span>Что подготовить к первому разговору?</span></summary>
+<div class="qa__answer"><p>Достаточно описать задачу своими словами. Цифры и документы запросим позже, на этапе сбора данных.</p></div>
+</details>
+</div>
+</div>
+</section>
 </main>
-
 <footer class="footer">
-  <div class="container">
-    <div class="footer__top">
-      <a class="footer__logo" href="index.html" aria-label="ИнАссист — на главную"><img src="assets/img/logo.svg" width="174" height="50" alt=""></a>
-      <nav class="footer__cols" aria-label="Меню в подвале">
-        <div class="footer__col">
-          <h3>Компания</h3>
-          <a href="index.html#process">Этапы работы</a>
-          <a href="portfolio.html">Портфолио</a>
-          <a href="services.html">Услуги</a>
-          <a href="blog.html">Блог</a>
-          <a href="about.html">О нас</a>
-        </div>
-        <div class="footer__col">
-          <h3>Услуги</h3>
-          <a href="service-business-planning.html">Бизнес-планирование</a>
-          <a href="service-advertising.html">Рекламное продвижение</a>
-          <a href="service-development.html">Разработка и IT</a>
-        </div>
-        <div class="footer__col">
-          <h3>Контакты</h3>
-          <a href="contacts.html#map">г. Минск, ул. Короля, 2</a>
-          <a href="tel:+375447285016">+375 44 728-50-16</a>
-          <a href="tel:+375293675458">+375 29 367-54-58</a>
-          <a href="mailto:info@inassist.by">info@inassist.by</a>
-        </div>
-        <div class="footer__col">
-          <h3>Соцсети</h3>
-          <a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">Instagram</a>
-        </div>
-      </nav>
-    </div>
-    <div class="footer__legal">
-      <div>
-        <p class="footer__company">ООО «ИнАссист», УНП: 692272725 © 2026</p>
-        <p class="footer__note">Информация на сайте не является офертой и носит ознакомительный характер.*</p>
-      </div>
-      <div class="footer__links">
-        <a class="footer__privacy" href="privacy.html">Политика конфиденциальности</a>
-        <a class="footer__credit" href="https://www.behance.net/xilandesign" target="_blank" rel="noopener">Design by .Xilan.</a>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="footer__top">
+<a class="footer__logo" href="index.html" aria-label="ИнАссист — на главную"><img src="assets/img/logo.svg" width="174" height="50" alt=""></a>
+<nav class="footer__cols" aria-label="Меню в подвале">
+<div class="footer__col">
+<h3>Компания</h3>
+<a href="index.html#process">Этапы работы</a>
+<a href="portfolio.html">Портфолио</a>
+<a href="services.html">Услуги</a>
+<a href="blog.html">Блог</a>
+<a href="about.html">О нас</a>
+</div>
+<div class="footer__col">
+<h3>Услуги</h3>
+<a href="service-business-planning.html">Бизнес-планирование</a>
+<a href="service-advertising.html">Рекламное продвижение</a>
+<a href="service-development.html">Разработка и IT</a>
+</div>
+<div class="footer__col">
+<h3>Контакты</h3>
+<a href="contacts.html#map">г. Минск, ул. Короля, 2</a>
+<a href="tel:+375447285016">+375 44 728-50-16</a>
+<a href="tel:+375293675458">+375 29 367-54-58</a>
+<a href="mailto:info@inassist.by">info@inassist.by</a>
+</div>
+<div class="footer__col">
+<h3>Соцсети</h3>
+<a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">Instagram</a>
+</div>
+</nav>
+</div>
+<div class="footer__legal">
+<div>
+<p class="footer__company">ООО «ИнАссист», УНП: 692272725 © 2026</p>
+<p class="footer__note">Информация на сайте не является офертой и носит ознакомительный характер.*</p>
+</div>
+<div class="footer__links">
+<a class="footer__privacy" href="privacy.html">Политика конфиденциальности</a>
+<a class="footer__credit" href="https://www.behance.net/xilandesign" target="_blank" rel="noopener">Design by .Xilan.</a>
+</div>
+</div>
+</div>
 </footer>
-
 <dialog class="modal" id="contact-dialog" aria-labelledby="modal-title">
-  <div class="modal__inner">
-    <button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
-    <h2 id="modal-title">Обсудим вашу задачу</h2>
-    <p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
-    <form class="form" data-form novalidate>
-      <div class="field">
-        <label for="mf-name">Имя</label>
-        <input id="mf-name" name="name" type="text" autocomplete="name" required>
-        <p class="field__error" id="mf-name-err"></p>
-      </div>
-      <div class="field">
-        <label for="mf-phone">Телефон</label>
-        <input id="mf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375" required>
-        <p class="field__error" id="mf-phone-err"></p>
-      </div>
-      <div class="field field--check">
-        <input id="mf-consent" name="consent" type="checkbox" required>
-        <label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
-        <p class="field__error" id="mf-consent-err"></p>
-      </div>
-      <button class="btn" type="submit">Отправить заявку</button>
-    </form>
-    <div class="form-done" hidden tabindex="-1">
-      <h3>Заявка отправлена</h3>
-      <p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
-    </div>
-  </div>
+<div class="modal__inner">
+<button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
+<h2 id="modal-title">Обсудим вашу задачу</h2>
+<p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
+<form class="form" data-form novalidate>
+<div class="field">
+<label for="mf-name">Имя</label>
+<input id="mf-name" name="name" type="text" autocomplete="name" required>
+<p class="field__error" id="mf-name-err"></p>
+</div>
+<div class="field">
+<label for="mf-phone">Телефон</label>
+<input id="mf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375" required>
+<p class="field__error" id="mf-phone-err"></p>
+</div>
+<div class="field field--check">
+<input id="mf-consent" name="consent" type="checkbox" required>
+<label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+<p class="field__error" id="mf-consent-err"></p>
+</div>
+<button class="btn" type="submit">Отправить заявку</button>
+</form>
+<div class="form-done" hidden tabindex="-1">
+<h3>Заявка отправлена</h3>
+<p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+</div>
+</div>
 </dialog>
 </body>
 </html>
