@@ -256,7 +256,7 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .dd__col{display:flex;flex-direction:column;align-items:flex-start}
 .dd__col + .dd__col{padding-top:20px;border-top:1px solid var(--line)}
 .dd__label{margin-bottom:10px;font-size:14px;font-weight:500;color:var(--muted)}
-.dd__phone{display:block;padding:3px 0;font-family:var(--font-head);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums;transition:color .15s}
+.dd__phone{display:block;padding:5px 0;font-weight:600;font-size:16px;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums;transition:color .15s}
 .dd__phone:hover:where(.can-hover *){color:var(--accent-ink)}
 
 /* ---------- Соцсети с иконками ---------- */
@@ -272,7 +272,8 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .socials--menu span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* В панели контактов — иконка и название столбиком, как телефоны рядом */
 .socials--mega{flex-direction:column;gap:2px}
-.socials--mega a{padding:4px 0;font-weight:600;font-size:16px}
+.socials--mega a{padding:5px 0;font-weight:500;font-size:15px}
+.socials--mega svg{width:20px;height:20px}
 /* В подвале и на странице контактов — иконка и название столбиком */
 .socials--footer,.socials--info{flex-direction:column;gap:0}
 .burger{display:none;width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;position:relative}
