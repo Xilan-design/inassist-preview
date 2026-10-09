@@ -259,8 +259,10 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 /* ---------- Соцсети с иконками ---------- */
 .socials{display:flex;flex-wrap:wrap;gap:8px}
 .socials a{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;transition:color .15s}
-/* Иконки залитые: цвет берут у ссылки, поэтому наведение красит их вместе с подписью */
-.socials svg{width:22px;height:22px;flex:none;fill:currentColor}
+/* Иконки залитые, в тёплом сером палитры (как рамки полей и линии иллюстраций, 3:1 к фону) —
+   не спорят с подписями; при наведении иконка становится бирюзовой вместе с подписью */
+.socials svg{width:22px;height:22px;flex:none;fill:var(--field-line);transition:fill .15s}
+.socials a:hover:where(.can-hover *) svg,.socials a:focus-visible svg{fill:var(--accent)}
 .socials a:hover:where(.can-hover *){color:var(--accent-ink)}
 /* В мобильном меню — только иконки (сами квадратные, поэтому без рамок), по левому краю номеров; подпись — для чтения с экрана */
 .socials--menu{margin-top:10px}
