@@ -259,13 +259,14 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 /* ---------- Соцсети с иконками ---------- */
 .socials{display:flex;flex-wrap:wrap;gap:8px}
 .socials a{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;transition:color .15s}
-.socials svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
-.socials__dot{fill:currentColor;stroke:none}
+/* Иконки залитые: цвет берут у ссылки, поэтому наведение красит их вместе с подписью */
+.socials svg{width:22px;height:22px;flex:none;fill:currentColor}
 .socials a:hover:where(.can-hover *){color:var(--accent-ink)}
-/* В шапке и мобильном меню — квадратные кнопки-иконки на тонкой линии, подпись только для чтения с экрана */
+/* В мобильном меню — только иконки (сами квадратные, поэтому без рамок), по левому краю номеров; подпись — для чтения с экрана */
 .socials--menu{margin-top:10px}
-.socials--menu a{justify-content:center;width:44px;height:44px;border:1px solid var(--line);transition:color .15s,border-color .15s}
-.socials--menu a:hover:where(.can-hover *){border-color:var(--accent);color:var(--accent-ink)}
+.socials--menu{gap:8px}
+.socials--menu a{justify-content:flex-start;width:44px;height:44px}
+.socials--menu svg{width:32px;height:32px}
 .socials--menu span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* В панели контактов — иконка и название столбиком, как телефоны рядом */
 .socials--mega{flex-direction:column;gap:2px}
