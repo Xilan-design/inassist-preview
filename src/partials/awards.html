@@ -1,0 +1,41 @@
+<!-- Сертификаты и благодарности: лента листается сама, стрелками, свайпом и мышью; по нажатию документ открывается крупно.
+       TODO: заменить заглушки assets/img/awards/award-*.svg сканами (JPG/WebP, вертикальный A4) и подписи — реальными -->
+  <section class="section awards" aria-labelledby="awards-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 id="awards-title" data-reveal>Сертификаты и&nbsp;благодарности</h2>
+          <p class="section-head__text awards__lead" data-reveal style="--rd:.1s">Письма клиентов и документы партнёров — на бланках, с подписями и печатями.</p>
+        </div>
+        <div class="awards__arrows" data-reveal style="--rd:.2s">
+          <button class="awards__arrow awards__arrow--prev" type="button" data-awards-prev aria-label="Предыдущие документы"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
+          <button class="awards__arrow" type="button" data-awards-next aria-label="Следующие документы"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="awards__viewport" data-awards tabindex="0" role="region" aria-label="Сертификаты и благодарности, листаются по горизонтали">
+      <ul class="awards__track">
+        <li class="award"><button class="award__open" type="button" data-award><span class="award__sheet"><img src="assets/img/awards/award-1.svg" width="595" height="842" loading="lazy" alt="Благодарственное письмо"></span></button><h3 class="award__title">Благодарственное письмо</h3><p class="award__from">Название организации, 2025</p></li>
+        <li class="award"><button class="award__open" type="button" data-award><span class="award__sheet"><img src="assets/img/awards/award-2.svg" width="595" height="842" loading="lazy" alt="Партнёрский сертификат"></span></button><h3 class="award__title">Партнёрский сертификат</h3><p class="award__from">Название организации, 2025</p></li>
+        <li class="award"><button class="award__open" type="button" data-award><span class="award__sheet"><img src="assets/img/awards/award-3.svg" width="595" height="842" loading="lazy" alt="Благодарственное письмо"></span></button><h3 class="award__title">Благодарственное письмо</h3><p class="award__from">Название организации, 2025</p></li>
+        <li class="award"><button class="award__open" type="button" data-award><span class="award__sheet"><img src="assets/img/awards/award-4.svg" width="595" height="842" loading="lazy" alt="Диплом участника"></span></button><h3 class="award__title">Диплом участника</h3><p class="award__from">Название мероприятия, 2024</p></li>
+        <li class="award"><button class="award__open" type="button" data-award><span class="award__sheet"><img src="assets/img/awards/award-5.svg" width="595" height="842" loading="lazy" alt="Благодарственное письмо"></span></button><h3 class="award__title">Благодарственное письмо</h3><p class="award__from">Название организации, 2024</p></li>
+        <li class="award"><button class="award__open" type="button" data-award><span class="award__sheet"><img src="assets/img/awards/award-6.svg" width="595" height="842" loading="lazy" alt="Сертификат соответствия"></span></button><h3 class="award__title">Сертификат соответствия</h3><p class="award__from">Название организации, 2024</p></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="awards__progress" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <dialog class="modal modal--doc" id="award-dialog" aria-labelledby="award-dialog-title">
+    <div class="modal__inner doc">
+      <button class="modal__close" type="button" data-award-close aria-label="Закрыть"></button>
+      <img class="doc__img" src="" alt="">
+      <div class="doc__bar">
+        <button class="awards__arrow awards__arrow--prev" type="button" data-doc-prev aria-label="Предыдущий документ"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
+        <div class="doc__caption"><h2 id="award-dialog-title"></h2><p></p></div>
+        <button class="awards__arrow" type="button" data-doc-next aria-label="Следующий документ"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+      </div>
+    </div>
+  </dialog>

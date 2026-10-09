@@ -7,17 +7,47 @@
     </a>
     <nav class="nav" id="site-nav" aria-label="Основное меню">
       <ul class="nav__list">
-        <li><a href="services.html">Наши услуги</a></li>
+        <!-- Выпадающий список направлений: на компьютере по наведению или стрелке, в мобильном меню — всегда раскрыт -->
+        <li class="nav__sub" data-dd>
+          <a href="services.html">Наши услуги</a>
+          <button class="dd__btn nav__caret" type="button" aria-expanded="false" aria-controls="dd-services">
+            <span class="visually-hidden">Направления</span><svg class="dd__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+          </button>
+          <div class="dd__panel dd__panel--services" id="dd-services">
+            <ul class="dd__dirs">
+              <li><a href="service-business-planning.html"><b>Бизнес-планирование</b><span>Бизнес-планы и финансовые модели для инвестиций, кредитов и господдержки</span></a></li>
+              <li><a href="service-advertising.html"><b>Рекламное продвижение</b><span>Реклама в поиске и соцсетях, которая приводит заявки</span></a></li>
+              <li><a href="service-development.html"><b>Разработка и&nbsp;IT</b><span>Сайты, интеграции с CRM и автоматизация</span></a></li>
+            </ul>
+          </div>
+        </li>
         <li><a href="portfolio.html">Портфолио</a></li>
         <li><a href="contacts.html">Контакты</a></li>
         <li><a href="about.html">О нас</a></li>
         <li><a href="blog.html">Блог</a></li>
       </ul>
-      <a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+      <!-- Мобильное меню: оба номера и соцсети внизу -->
+      <div class="nav__contacts">
+        <a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+        <a class="nav__phone" href="tel:+375293675458">+375 29 367-54-58</a>
+        <!-- @include socials cls="socials--menu" -->
+      </div>
       <button class="btn nav__cta" type="button" data-open-contact>Связаться с нами</button>
     </nav>
     <div class="header__actions">
-      <a class="header__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+      <!-- Номер остаётся на виду, по нажатию — второй номер и соцсети -->
+      <div class="header__contacts" data-dd>
+        <button class="dd__btn header__phone" type="button" aria-expanded="false" aria-controls="dd-contacts">
+          +375 44 728-50-16<span class="visually-hidden">, все контакты</span><svg class="dd__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+        </button>
+        <div class="dd__panel dd__panel--contacts" id="dd-contacts">
+          <p class="dd__label">Телефоны</p>
+          <a class="dd__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+          <a class="dd__phone" href="tel:+375293675458">+375 29 367-54-58</a>
+          <p class="dd__label">Соцсети</p>
+          <!-- @include socials cls="socials--dd" -->
+        </div>
+      </div>
       <button class="btn btn--small btn--cut-left" type="button" data-open-contact>Связаться с нами</button>
       <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav">
         <span class="burger__lines" aria-hidden="true"></span>

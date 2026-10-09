@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842">
+<rect width="595" height="842" fill="#FFFFFF"/>
+<rect x="28" y="28" width="539" height="786" fill="none" stroke="#72CAC3" stroke-width="3"/>
+<rect x="40" y="40" width="515" height="762" fill="none" stroke="#E5E1D5" stroke-width="1.5"/>
+<g transform="translate(297.5 128)"><circle r="34" fill="none" stroke="#72CAC3" stroke-width="3"/><path d="M-14 8 L-14 -4 L0 -16 L14 -4 L14 8 Z" fill="#72CAC3" opacity=".85"/></g>
+<text x="297.5" y="232" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#5E5B54" letter-spacing="2">СООТВЕТСТВИЯ</text>
+<text x="297.5" y="282" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="700" fill="#0F0F0F" letter-spacing="6">СЕРТИФИКАТ</text>
+<rect x="257" y="306" width="81" height="3" fill="#72CAC3"/>
+<rect x="120" y="356" width="355" height="7" rx="3.5" fill="#E5E1D5"/><rect x="93.5" y="378" width="408" height="7" rx="3.5" fill="#E5E1D5"/><rect x="132" y="400" width="331" height="7" rx="3.5" fill="#E5E1D5"/>
+<rect x="129.5" y="450" width="336" height="7" rx="3.5" fill="#E5E1D5"/><rect x="103" y="472" width="389" height="7" rx="3.5" fill="#E5E1D5"/><rect x="141.5" y="494" width="312" height="7" rx="3.5" fill="#E5E1D5"/><rect x="115" y="516" width="365" height="7" rx="3.5" fill="#E5E1D5"/><rect x="88.5" y="538" width="418" height="7" rx="3.5" fill="#E5E1D5"/><rect x="127" y="560" width="341" height="7" rx="3.5" fill="#E5E1D5"/>
+<rect x="120.5" y="610" width="354" height="7" rx="3.5" fill="#E5E1D5"/><rect x="94" y="632" width="407" height="7" rx="3.5" fill="#E5E1D5"/>
+<path d="M110 726 c18 -30 34 -6 46 -18 s22 -28 34 2 s20 4 36 -10" fill="none" stroke="#2A2A2A" stroke-width="2" stroke-linecap="round"/>
+<rect x="100" y="742" width="150" height="2" fill="#B8E2DE"/>
+<g transform="translate(450 712)" opacity=".7"><circle r="52" fill="none" stroke="#72CAC3" stroke-width="3"/><circle r="40" fill="none" stroke="#72CAC3" stroke-width="1.5"/><circle r="10" fill="#72CAC3" opacity=".5"/></g>
+<text x="297.5" y="790" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#8C877B">Заглушка — заменить сканом документа</text>
+</svg>

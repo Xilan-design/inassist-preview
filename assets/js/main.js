@@ -48,6 +48,41 @@
     });
   }
 
+  /* ---------- Выпадающие списки в шапке: направления и контакты ----------
+     С мышью открываются ещё и наведением (это делает CSS); здесь — нажатие, Escape и клик мимо */
+  var dds = Array.prototype.slice.call(document.querySelectorAll('[data-dd]'));
+  function setDd(dd, open) {
+    dd.classList.toggle('is-open', open);
+    var btn = dd.querySelector('.dd__btn');
+    if (btn) btn.setAttribute('aria-expanded', String(open));
+  }
+  dds.forEach(function (dd) {
+    var btn = dd.querySelector('.dd__btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var open = !dd.classList.contains('is-open');
+      dds.forEach(function (other) { if (other !== dd) setDd(other, false); });
+      setDd(dd, open);
+    });
+    // Фокус ушёл из списка (Tab дальше) — закрываем
+    dd.addEventListener('focusout', function (e) {
+      if (!dd.contains(e.relatedTarget)) setDd(dd, false);
+    });
+  });
+  if (dds.length) {
+    document.addEventListener('click', function (e) {
+      dds.forEach(function (dd) { if (!dd.contains(e.target)) setDd(dd, false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      dds.forEach(function (dd) {
+        if (!dd.classList.contains('is-open')) return;
+        setDd(dd, false);
+        dd.querySelector('.dd__btn').focus();
+      });
+    });
+  }
+
   /* ---------- Шапка: прячется при прокрутке вниз, появляется при прокрутке вверх ---------- */
   var header = document.querySelector('.header');
   if (header) {
@@ -63,6 +98,7 @@
       var keepVisible =
         y < header.offsetHeight ||                                   // верх страницы
         (nav && nav.classList.contains('is-open')) ||                // открыто мобильное меню
+        header.querySelector('[data-dd].is-open') ||                 // открыт выпадающий список
         header.contains(document.activeElement);                     // фокус клавиатуры в шапке
       header.classList.toggle('is-hidden', delta > 0 && !keepVisible);
       lastY = y;
@@ -302,6 +338,158 @@
   if (dialog) {
     dialog.addEventListener('click', function (e) {
       if (e.target === dialog) dialog.close();
+    });
+  }
+
+  /* ---------- Сертификаты и благодарности ----------
+     Лента сама сдвигается на один документ раз в 3,5 с, пока она в экране. Наведение ставит на паузу,
+     любое действие человека (стрелки, свайп, колёсико, клавиатура) выключает автопрокрутку совсем —
+     дальше листает он сам. При «уменьшить движение» автопрокрутки нет. */
+  var awardsBox = document.querySelector('[data-awards]');
+  if (awardsBox) {
+    var awardsSection = awardsBox.closest('.awards');
+    var awardItems = Array.prototype.slice.call(awardsBox.querySelectorAll('.award'));
+    var prevBtn = awardsSection.querySelector('[data-awards-prev]');
+    var nextBtn = awardsSection.querySelector('[data-awards-next]');
+    var bar = awardsSection.querySelector('.awards__progress');
+    var stepSize = function () {
+      return awardItems.length > 1 ? awardItems[1].offsetLeft - awardItems[0].offsetLeft : awardsBox.clientWidth;
+    };
+    var maxScroll = function () { return awardsBox.scrollWidth - awardsBox.clientWidth; };
+
+    var updateAwards = function () {
+      var max = maxScroll();
+      var share = max > 0 ? awardsBox.clientWidth / awardsBox.scrollWidth : 1;
+      var pos = max > 0 ? awardsBox.scrollLeft / max : 0;
+      bar.style.setProperty('--w', (share * 100).toFixed(2) + '%');
+      bar.style.setProperty('--x', (pos * (1 / share - 1) * 100).toFixed(2) + '%');
+      prevBtn.disabled = awardsBox.scrollLeft <= 2;
+      nextBtn.disabled = awardsBox.scrollLeft >= max - 2;
+    };
+    awardsBox.addEventListener('scroll', function () { requestAnimationFrame(updateAwards); }, { passive: true });
+    window.addEventListener('resize', updateAwards);
+    updateAwards();
+
+    var go = function (dir) { awardsBox.scrollBy({ left: dir * stepSize(), behavior: 'smooth' }); };
+
+    // Автопрокрутка
+    var auto = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var paused = false, inView = false, timer = null;
+    var stopAuto = function () { auto = false; clearInterval(timer); timer = null; };
+    var tickAuto = function () {
+      if (!auto || paused || !inView || document.hidden) return;
+      if (awardsBox.scrollLeft >= maxScroll() - 2) awardsBox.scrollTo({ left: 0, behavior: 'smooth' });
+      else go(1);
+    };
+    if (auto) {
+      timer = setInterval(tickAuto, 3500);
+      new IntersectionObserver(function (entries) { inView = entries[0].isIntersecting; }, { threshold: 0.4 }).observe(awardsBox);
+      awardsBox.addEventListener('mouseenter', function () { paused = true; });
+      awardsBox.addEventListener('mouseleave', function () { paused = false; });
+      ['pointerdown', 'wheel', 'keydown', 'touchstart'].forEach(function (type) {
+        awardsBox.addEventListener(type, stopAuto, { passive: true });
+      });
+    }
+
+    prevBtn.addEventListener('click', function () { stopAuto(); go(-1); });
+    nextBtn.addEventListener('click', function () { stopAuto(); go(1); });
+    awardsBox.addEventListener('keydown', function (e) {
+      if (e.target !== awardsBox) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    });
+
+    // Мышью ленту можно тянуть; после перетаскивания клик по документу не открывает его
+    var drag = null, dragged = false;
+    awardsBox.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: awardsBox.scrollLeft };
+      dragged = false;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (!dragged && Math.abs(dx) > 5) { dragged = true; awardsBox.classList.add('is-drag'); }
+      if (dragged) awardsBox.scrollLeft = drag.left - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!drag) return;
+      drag = null;
+      if (!dragged) return;
+      // Отпустили — доводим до ближайшего документа
+      var step = stepSize();
+      var target = Math.round(awardsBox.scrollLeft / step) * step;
+      awardsBox.classList.remove('is-drag');
+      awardsBox.scrollTo({ left: target, behavior: 'smooth' });
+    });
+    awardsBox.addEventListener('click', function (e) {
+      if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+    }, true);
+    awardsBox.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    // Документ крупно
+    var docDialog = document.getElementById('award-dialog');
+    if (docDialog) {
+      var docImg = docDialog.querySelector('.doc__img');
+      var docTitle = docDialog.querySelector('.doc__caption h2');
+      var docFrom = docDialog.querySelector('.doc__caption p');
+      var current = 0;
+      var showDoc = function (i) {
+        current = (i + awardItems.length) % awardItems.length;
+        var item = awardItems[current];
+        var img = item.querySelector('img');
+        docImg.src = img.currentSrc || img.src;
+        docImg.alt = img.alt;
+        docTitle.textContent = item.querySelector('.award__title').textContent;
+        docFrom.textContent = item.querySelector('.award__from').textContent;
+      };
+      awardItems.forEach(function (item, i) {
+        item.querySelector('[data-award]').addEventListener('click', function () {
+          stopAuto();
+          showDoc(i);
+          docDialog.showModal();
+        });
+      });
+      docDialog.querySelector('[data-doc-prev]').addEventListener('click', function () { showDoc(current - 1); });
+      docDialog.querySelector('[data-doc-next]').addEventListener('click', function () { showDoc(current + 1); });
+      docDialog.querySelector('[data-award-close]').addEventListener('click', function () { docDialog.close(); });
+      docDialog.addEventListener('click', function (e) { if (e.target === docDialog) docDialog.close(); });
+      docDialog.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') showDoc(current + 1);
+        if (e.key === 'ArrowLeft') showDoc(current - 1);
+      });
+      // После закрытия лента показывает тот документ, на котором остановились
+      docDialog.addEventListener('close', function () {
+        awardsBox.scrollTo({ left: awardItems[current].offsetLeft - awardItems[0].offsetLeft, behavior: 'auto' });
+        awardItems[current].querySelector('[data-award]').focus({ preventScroll: true });
+      });
+    }
+  }
+
+  /* ---------- Согласие на cookie ----------
+     Плашка внизу экрана при первом заходе. Выбор хранится в localStorage; событие cookie-consent
+     сообщает его остальному коду (например, чтобы включить счётчики только после «Принять»). */
+  var cookieBar = document.querySelector('[data-cookie]');
+  if (cookieBar) {
+    var CONSENT_KEY = 'inassist-cookie-consent';
+    var saved = null;
+    try { saved = localStorage.getItem(CONSENT_KEY); } catch (err) {}
+    window.cookieConsent = saved;
+    if (!saved) {
+      cookieBar.hidden = false;
+      requestAnimationFrame(function () {
+        setTimeout(function () { cookieBar.classList.add('is-shown'); }, 600);
+      });
+    }
+    cookieBar.addEventListener('click', function (e) {
+      var choice = e.target.closest('[data-cookie-choice]');
+      if (!choice) return;
+      var value = choice.getAttribute('data-cookie-choice');
+      try { localStorage.setItem(CONSENT_KEY, value); } catch (err) {}
+      window.cookieConsent = value;
+      document.dispatchEvent(new CustomEvent('cookie-consent', { detail: value }));
+      cookieBar.classList.remove('is-shown');
+      setTimeout(function () { cookieBar.hidden = true; }, 350);
     });
   }
 

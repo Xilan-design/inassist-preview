@@ -26,7 +26,7 @@
         </div>
         <div class="footer__col">
           <h3>Соцсети</h3>
-          <a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener">Instagram</a>
+          <!-- @include socials cls="socials--footer" -->
         </div>
       </nav>
     </div>
@@ -72,3 +72,13 @@
     </div>
   </div>
 </dialog>
+
+<!-- Согласие на cookie: показывается при первом заходе, выбор запоминается (main.js) -->
+<div class="cookie" data-cookie hidden role="region" aria-label="Файлы cookie">
+  <p class="cookie__title">Мы используем cookie</p>
+  <p class="cookie__text">Они нужны, чтобы сайт работал корректно и мы понимали, какие страницы полезны посетителям. Подробнее — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+  <div class="cookie__actions">
+    <button class="btn btn--small" type="button" data-cookie-choice="all">Принять</button>
+    <button class="btn btn--small btn--outline" type="button" data-cookie-choice="necessary">Только необходимые</button>
+  </div>
+</div>

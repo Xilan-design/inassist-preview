@@ -6,6 +6,9 @@
      <!-- @include contact topic="Реклама" -->          блок «Обсудим вашу задачу»; topic — выбранный вариант
      <!-- @include head-assets -->                      шрифты, стили и скрипты в <head>
      <!-- @include defs -->                             фактура для иллюстраций
+     <!-- @include socials cls="socials--footer" -->    соцсети с иконками; cls — вариант оформления
+     <!-- @include awards -->                           слайдер сертификатов и благодарностей
+   Блоки можно вкладывать друг в друга; {{имя}} внутри блока заменяется параметром с тем же именем.
 
    Запуск:  node build.js           — собрать один раз
             node build.js --watch   — пересобирать при каждом сохранении файлов в src/
@@ -59,9 +62,9 @@ function compactHtml(html, assets) {
 const modifiers = {
   header(html, { active }) {
     if (!active) return html;
-    const link = `<li><a href="${active}">`;
+    const link = `<a href="${active}">`;   // первое вхождение — пункт верхнего уровня
     if (!html.includes(link)) throw new Error(`в меню нет пункта ${active}`);
-    return html.replace(link, `<li><a href="${active}" aria-current="page">`);
+    return html.replace(link, `<a href="${active}" aria-current="page">`);
   },
   contact(html, { topic }) {
     if (!topic) return html;
@@ -96,16 +99,20 @@ function build() {
   for (const page of pages) {
     const source = fs.readFileSync(path.join(SRC, page), 'utf8');
     const eol = source.includes('\r\n') ? '\r\n' : '\n';   // вставки получают те же переводы строк, что и страница
-    const html = source.replace(INCLUDE, (_, name, rawParams) => {
+    // Общие блоки могут включать друг друга (шапка → соцсети); {{имя}} в блоке заменяется параметром
+    const expand = (text, depth) => text.replace(INCLUDE, (_, name, rawParams) => {
+      if (depth > 4) throw new Error(`${page}: слишком глубокое вложение блоков`);
       if (!(name in parts)) throw new Error(`${page}: нет общего блока src/partials/${name}.html`);
       const params = parseParams(rawParams);
-      const part = parts[name].replace(/\r?\n/g, eol);
+      const part = expand(parts[name].replace(/\r?\n/g, eol), depth + 1)
+        .replace(/\{\{([\w-]+)\}\}/g, (m, key) => params[key] || '');
       try {
         return modifiers[name] ? modifiers[name](part, params) : part;
       } catch (err) {
         throw new Error(`${page}: ${err.message}`);
       }
     });
+    const html = expand(source, 0);
     fs.writeFileSync(path.join(ROOT, page), compactHtml(html, assets));
   }
   console.log(`Собрано страниц: ${pages.length} за ${Date.now() - started} мс`);
