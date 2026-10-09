@@ -247,14 +247,14 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
   [data-dd].is-open .dd__panel--contacts .dd__col,[data-dd]:hover:where(.can-hover *) .dd__panel--contacts .dd__col{opacity:1;transform:none;transition:opacity .35s ease var(--dl,0s),transform .45s cubic-bezier(.2,.8,.2,1) var(--dl,0s)}
   .dd__panel--contacts .dd__col + .dd__col{--dl:.06s}
 }
-/* Контакты: компактный список под номером, но в стилистике панели услуг — фон страницы, тонкая рамка без
-   верхней линии, та же мягкая тень; верхний край совпадает с нижней линией шапки.
-   Разделы стоят на тонкой линии слева, при наведении она темнеет — как колонки в панели услуг */
-.dd__panel--contacts{right:0;top:calc(100% + (var(--header-h) - 44px) / 2);width:290px;padding:24px 28px 26px;display:grid;gap:22px;
-  background:var(--bg);border:1px solid var(--line);border-top:0;box-shadow:0 32px 40px -32px rgba(15,15,15,.2)}
+/* Контакты: компактный список под номером, но в стилистике панели услуг — фон страницы, тонкая рамка
+   (верхняя линия отделяет список от шапки, как у панели услуг), та же мягкая тень.
+   Разделы разделены тонкой горизонтальной линией */
+.dd__panel--contacts{right:0;top:calc(100% + (var(--header-h) - 44px) / 2);width:290px;padding:24px 28px 26px;display:grid;gap:20px;
+  background:var(--bg);border:1px solid var(--line);box-shadow:0 32px 40px -32px rgba(15,15,15,.2)}
 .dd__panel--contacts::before{height:calc((var(--header-h) - 44px) / 2 + 4px)}
-.dd__col{display:flex;flex-direction:column;align-items:flex-start;padding:0 0 2px 20px;border-left:1px solid var(--line);transition:border-color .2s}
-.dd__col:hover:where(.can-hover *){border-left-color:var(--ink)}
+.dd__col{display:flex;flex-direction:column;align-items:flex-start}
+.dd__col + .dd__col{padding-top:20px;border-top:1px solid var(--line)}
 .dd__label{margin-bottom:10px;font-size:14px;font-weight:500;color:var(--muted)}
 .dd__phone{display:block;padding:3px 0;font-family:var(--font-head);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums;transition:color .15s}
 .dd__phone:hover:where(.can-hover *){color:var(--accent-ink)}
