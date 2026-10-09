@@ -167,9 +167,6 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .link:hover:where(.can-hover *){color:var(--accent-ink);text-decoration-thickness:2px}
 
 @media (max-width:760px){
-  /* Кнопка в шапке на узком планшете стоит у левого края меню-строки — срез справа, по ходу чтения */
-  .header__actions .btn--cut-left{padding:0 calc(28px + var(--h) * var(--slant) / 2) 0 28px}
-  .header__actions .btn--cut-left::before{clip-path:polygon(0 0,100% 0,calc(100% - var(--h) * var(--slant)) 100%,0 100%)}
   /* Остальные кнопки на телефоне — прямоугольные, во всю ширину, название по центру */
   .btn:not(.header__actions .btn){width:100%;justify-content:center;padding:0 24px;text-align:center}
   .btn:not(.header__actions .btn)::before,.btn:not(.header__actions .btn)::after{clip-path:none}
@@ -337,11 +334,11 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
     .nav.is-open .nav__contacts,.nav.is-open .nav__cta{animation-delay:.2s}
   }
 }
+/* Телефон: в шапке только логотип и бургер — номер и «Связаться с нами» есть в меню */
 @media (max-width:760px){
-  .header__contacts{display:none}
+  .header__contacts,.header__actions > .btn{display:none}
 }
 @media (max-width:520px){
-  .header__actions > .btn{display:none}
   .header__logo img{width:120px}
 }
 @media (prefers-reduced-motion:reduce){
