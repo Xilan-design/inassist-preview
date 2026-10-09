@@ -825,10 +825,11 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 .price.is-mid .price__btn::after{opacity:1}
 
 /* ---------- Сертификаты и благодарности ----------
-   Лента начинается от края контейнера и уходит за правый край экрана — видно, что её можно листать.
+   Лента без прокрутки: видны только целые документы одной ширины (4 / 3 / 2), листают стрелки,
+   автопрокрутка и свайп (main.js двигает ленту через --shift). Колёсико и тачпад ленту не двигают.
+   Превью — лёгкая картинка в карточке; по нажатию в окне открывается оригинал (data-full).
    Документ лежит на светлой подложке в тонкой рамке, как карточки: при наведении рамка темнеет, лист чуть поднимается.
    Снизу — тонкая линия прогресса с бирюзовым отрезком вместо точек-индикаторов */
-.awards{--edge:max(var(--gutter),calc((100vw - var(--max)) / 2));overflow:hidden}
 .awards .section-head{flex-wrap:nowrap}
 .awards__lead{margin-top:16px}
 .awards__arrows{display:flex;gap:8px;flex:none}
@@ -836,42 +837,59 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 .awards__arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .awards__arrow:hover:where(.can-hover *){background:var(--ink);border-color:var(--ink);color:#fff}
 .awards__arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
-.awards__viewport{overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);scrollbar-width:none;cursor:grab}
-.awards__viewport::-webkit-scrollbar{display:none}
-.awards__viewport.is-drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
-.awards__viewport:focus-visible{outline-offset:-3px}
-.awards__track{display:flex;gap:clamp(16px,2vw,28px);width:max-content;padding-inline:var(--edge);padding-block:8px 4px}
-.award{flex:none;width:clamp(230px,21vw,282px);scroll-snap-align:start}
+.awards__viewport{--per:4;--gap:clamp(16px,2vw,28px);overflow:hidden;touch-action:pan-y;padding-block:8px 4px;cursor:grab}
+.awards__viewport.is-drag{cursor:grabbing;user-select:none}
+.awards__viewport:focus-visible{outline-offset:4px}
+.awards__track{display:flex;gap:var(--gap);transform:translate3d(var(--shift,0px),0,0);transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.awards__viewport.is-drag .awards__track{transition:none}
+.award{flex:0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));min-width:0}
 .award__open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
-.award__sheet{display:block;padding:clamp(16px,1.6vw,22px);background:var(--bg);border:1px solid var(--line);transition:border-color .2s}
-.award__sheet img{width:100%;height:auto;aspect-ratio:595/842;object-fit:cover;box-shadow:0 1px 2px rgba(15,15,15,.06),0 10px 24px -14px rgba(15,15,15,.25);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.award__sheet{display:block;padding:clamp(12px,1.6vw,22px);background:var(--bg);border:1px solid var(--line);transition:border-color .2s}
+/* Рамка превью — вертикальный A4; горизонтальный документ вписывается целиком, без обрезки */
+.award__sheet img{display:block;width:100%;height:auto;aspect-ratio:595/842;object-fit:contain;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(15,15,15,.06)) drop-shadow(0 10px 12px rgba(15,15,15,.12));transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .35s}
 .award__open:hover:where(.can-hover *) .award__sheet,.award__open:focus-visible .award__sheet{border-color:var(--ink)}
-.award__open:hover:where(.can-hover *) img{transform:translateY(-6px);box-shadow:0 1px 2px rgba(15,15,15,.06),0 22px 36px -18px rgba(15,15,15,.35)}
+.award__open:hover:where(.can-hover *) img{transform:translateY(-6px);filter:drop-shadow(0 1px 1px rgba(15,15,15,.06)) drop-shadow(0 18px 16px rgba(15,15,15,.18))}
 .award__title{margin-top:18px;font-size:17px;line-height:1.3;transition:color .2s}
 .award__open:hover:where(.can-hover *) + .award__title{color:var(--accent-ink)}
 .award__from{margin-top:4px;font-size:14px;color:var(--muted)}
 .awards__progress{position:relative;height:1px;margin-top:40px;background:var(--line)}
-.awards__progress i{position:absolute;left:0;top:-1px;height:3px;width:var(--w,30%);background:var(--accent);transform:translateX(var(--x,0));transition:transform .15s linear}
+.awards__progress i{position:absolute;left:0;top:-1px;height:3px;width:var(--w,30%);background:var(--accent);transform:translateX(var(--x,0));transition:transform .55s cubic-bezier(.2,.8,.2,1)}
 
-/* Документ крупно: лист на всю высоту окна, подпись и стрелки под ним */
-.modal--doc{width:min(720px,calc(100% - 32px))}
-.doc{display:flex;flex-direction:column;align-items:center;padding:clamp(20px,3vw,32px)}
-.doc__img{width:auto;max-width:100%;max-height:calc(100dvh - 210px);aspect-ratio:595/842;object-fit:contain;background:var(--white);box-shadow:0 10px 30px -16px rgba(15,15,15,.35)}
+/* Оригинал документа крупно: окно подстраивается под пропорции фото и целиком помещается в экран — без прокрутки */
+.modal.modal--doc{width:fit-content;max-width:min(1100px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:hidden}
+.modal__inner.doc{display:flex;flex-direction:column;align-items:center;padding:clamp(20px,3vw,32px)}
+.doc__frame{position:relative;display:grid;place-items:center;min-width:min(320px,70vw);min-height:200px}
+.doc__img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 32px - 2 * clamp(20px,3vw,32px) - 92px);background:var(--white);box-shadow:0 10px 30px -16px rgba(15,15,15,.35);transition:opacity .2s}
+.doc.is-loading .doc__img{opacity:.25}
+/* Пока грузится оригинал — тонкая бирюзовая линия бежит под документом */
+.doc__frame::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent) 0 0 / 40% 100% no-repeat;opacity:0}
+.doc.is-loading .doc__frame::after{opacity:1;animation:doc-load 1s linear infinite}
+@keyframes doc-load{from{background-position:-40% 0}to{background-position:140% 0}}
 .doc__bar{display:flex;align-items:center;gap:16px;width:100%;margin-top:20px}
-.doc__caption{flex:1;text-align:center}
-.modal .doc__caption h2{font-size:20px;padding:0}
+.doc__caption{flex:1;min-width:0;text-align:center}
+.modal .doc__caption h2{max-width:none;font-size:18px;line-height:1.3;padding:0}
 .doc__caption p{margin-top:2px;font-size:14px;color:var(--muted)}
 .modal--doc .modal__close{top:8px;right:8px;z-index:1;background:var(--bg)}
 
+@media (max-width:1080px){
+  .awards__viewport{--per:3}
+}
 @media (max-width:760px){
   .awards .section-head{flex-wrap:wrap}
   .awards__arrows{display:none}   /* на телефоне листают пальцем */
-  .award{width:min(64vw,260px)}
+  .awards__viewport{--per:2;--gap:12px}
+  .award__title{margin-top:12px;font-size:15px}
+  .award__from{font-size:13px}
   .awards__progress{margin-top:28px}
-  .modal.modal--doc{width:calc(100% - 24px);max-height:calc(100dvh - 24px);margin:auto}
-  .modal--doc .modal__inner{padding:16px}
-  .doc__img{max-height:calc(100dvh - 190px)}
+  .modal.modal--doc{width:fit-content;max-width:calc(100% - 24px);max-height:calc(100dvh - 24px);margin:auto}
+  .modal--doc .modal__inner.doc{padding:16px}
+  .doc__img{max-height:calc(100dvh - 24px - 32px - 84px)}
+  .doc__bar{gap:10px;margin-top:14px}
+  .doc__bar .awards__arrow{width:44px;height:44px}
   @media (prefers-reduced-motion:no-preference){ .modal.modal--doc[open]{animation:modal-in .22s ease-out} }
+}
+@media (prefers-reduced-motion:reduce){
+  .awards__track,.awards__progress i{transition:none}
 }
 
 /* ---------- Обратная связь и формы ---------- */

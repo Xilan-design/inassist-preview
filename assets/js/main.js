@@ -342,106 +342,153 @@
   }
 
   /* ---------- Сертификаты и благодарности ----------
-     Лента сама сдвигается на один документ раз в 3,5 с, пока она в экране. Наведение ставит на паузу,
-     любое действие человека (стрелки, свайп, колёсико, клавиатура) выключает автопрокрутку совсем —
-     дальше листает он сам. При «уменьшить движение» автопрокрутки нет. */
+     Лента без прокрутки: показывает целые документы, сдвигается на один (--shift у .awards__track).
+     Листают стрелки, клавиши ←/→, свайп пальцем и перетаскивание мышью. Колёсико и тачпад ленту не двигают.
+     Автопрокрутка — шаг раз в 3,5 с, пока лента в экране; наведение ставит на паузу, любое действие
+     человека выключает её совсем. При «уменьшить движение» автопрокрутки нет.
+     По нажатию в окне открывается оригинал (data-full у превью), пока он грузится — видно превью. */
   var awardsBox = document.querySelector('[data-awards]');
   if (awardsBox) {
     var awardsSection = awardsBox.closest('.awards');
+    var awardsTrack = awardsBox.querySelector('.awards__track');
     var awardItems = Array.prototype.slice.call(awardsBox.querySelectorAll('.award'));
     var prevBtn = awardsSection.querySelector('[data-awards-prev]');
     var nextBtn = awardsSection.querySelector('[data-awards-next]');
     var bar = awardsSection.querySelector('.awards__progress');
-    var stepSize = function () {
-      return awardItems.length > 1 ? awardItems[1].offsetLeft - awardItems[0].offsetLeft : awardsBox.clientWidth;
-    };
-    var maxScroll = function () { return awardsBox.scrollWidth - awardsBox.clientWidth; };
+    var index = 0;
 
-    var updateAwards = function () {
-      var max = maxScroll();
-      var share = max > 0 ? awardsBox.clientWidth / awardsBox.scrollWidth : 1;
-      var pos = max > 0 ? awardsBox.scrollLeft / max : 0;
+    var perView = function () {
+      return parseInt(getComputedStyle(awardsBox).getPropertyValue('--per'), 10) || 1;
+    };
+    var lastIndex = function () { return Math.max(0, awardItems.length - perView()); };
+    var offsetOf = function (i) { return awardItems[i].offsetLeft - awardItems[0].offsetLeft; };
+
+    var render = function () {
+      var last = lastIndex();
+      index = Math.max(0, Math.min(index, last));
+      awardsTrack.style.setProperty('--shift', -offsetOf(index) + 'px');
+      var share = Math.min(1, perView() / awardItems.length);
       bar.style.setProperty('--w', (share * 100).toFixed(2) + '%');
-      bar.style.setProperty('--x', (pos * (1 / share - 1) * 100).toFixed(2) + '%');
-      prevBtn.disabled = awardsBox.scrollLeft <= 2;
-      nextBtn.disabled = awardsBox.scrollLeft >= max - 2;
+      bar.style.setProperty('--x', (last ? index / last * (1 / share - 1) * 100 : 0).toFixed(2) + '%');
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === last;
+      // Документы за краем ленты недоступны с клавиатуры и для чтения с экрана
+      awardItems.forEach(function (item, i) {
+        var hidden = i < index || i >= index + perView();
+        item.setAttribute('aria-hidden', String(hidden));
+        item.querySelector('[data-award]').tabIndex = hidden ? -1 : 0;
+      });
     };
-    awardsBox.addEventListener('scroll', function () { requestAnimationFrame(updateAwards); }, { passive: true });
-    window.addEventListener('resize', updateAwards);
-    updateAwards();
-
-    var go = function (dir) { awardsBox.scrollBy({ left: dir * stepSize(), behavior: 'smooth' }); };
+    var goTo = function (i) { index = i; render(); };
+    window.addEventListener('resize', render);
+    render();
 
     // Автопрокрутка
     var auto = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var paused = false, inView = false, timer = null;
-    var stopAuto = function () { auto = false; clearInterval(timer); timer = null; };
-    var tickAuto = function () {
-      if (!auto || paused || !inView || document.hidden) return;
-      if (awardsBox.scrollLeft >= maxScroll() - 2) awardsBox.scrollTo({ left: 0, behavior: 'smooth' });
-      else go(1);
-    };
+    var paused = false, inView = false;
+    var stopAuto = function () { auto = false; };
     if (auto) {
-      timer = setInterval(tickAuto, 3500);
+      setInterval(function () {
+        if (!auto || paused || !inView || document.hidden) return;
+        goTo(index >= lastIndex() ? 0 : index + 1);
+      }, 3500);
       new IntersectionObserver(function (entries) { inView = entries[0].isIntersecting; }, { threshold: 0.4 }).observe(awardsBox);
       awardsBox.addEventListener('mouseenter', function () { paused = true; });
       awardsBox.addEventListener('mouseleave', function () { paused = false; });
-      ['pointerdown', 'wheel', 'keydown', 'touchstart'].forEach(function (type) {
-        awardsBox.addEventListener(type, stopAuto, { passive: true });
-      });
+      awardsBox.addEventListener('focusin', function () { paused = true; });
+      awardsBox.addEventListener('focusout', function () { paused = false; });
     }
 
-    prevBtn.addEventListener('click', function () { stopAuto(); go(-1); });
-    nextBtn.addEventListener('click', function () { stopAuto(); go(1); });
+    prevBtn.addEventListener('click', function () { stopAuto(); goTo(index - 1); });
+    nextBtn.addEventListener('click', function () { stopAuto(); goTo(index + 1); });
     awardsBox.addEventListener('keydown', function (e) {
-      if (e.target !== awardsBox) return;
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); stopAuto(); goTo(index + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); stopAuto(); goTo(index - 1); }
     });
 
-    // Мышью ленту можно тянуть; после перетаскивания клик по документу не открывает его
+    // Свайп и перетаскивание: лента едет за пальцем, после отпускания встаёт на ближайший документ.
+    // Вертикальный жест браузер забирает себе (touch-action: pan-y) — страница прокручивается как обычно
     var drag = null, dragged = false;
     awardsBox.addEventListener('pointerdown', function (e) {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
-      drag = { x: e.clientX, left: awardsBox.scrollLeft };
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      drag = { id: e.pointerId, x: e.clientX, base: -offsetOf(index) };
       dragged = false;
     });
-    window.addEventListener('pointermove', function (e) {
-      if (!drag) return;
+    awardsBox.addEventListener('pointermove', function (e) {
+      if (!drag || e.pointerId !== drag.id) return;
       var dx = e.clientX - drag.x;
-      if (!dragged && Math.abs(dx) > 5) { dragged = true; awardsBox.classList.add('is-drag'); }
-      if (dragged) awardsBox.scrollLeft = drag.left - dx;
-    });
-    window.addEventListener('pointerup', function () {
-      if (!drag) return;
-      drag = null;
+      if (!dragged && Math.abs(dx) > 6) {
+        dragged = true;
+        stopAuto();
+        awardsBox.classList.add('is-drag');
+        try { awardsBox.setPointerCapture(e.pointerId); } catch (err) {}
+      }
       if (!dragged) return;
-      // Отпустили — доводим до ближайшего документа
-      var step = stepSize();
-      var target = Math.round(awardsBox.scrollLeft / step) * step;
-      awardsBox.classList.remove('is-drag');
-      awardsBox.scrollTo({ left: target, behavior: 'smooth' });
+      // У краёв лента тянется туго
+      var min = -offsetOf(lastIndex());
+      var pos = drag.base + dx;
+      if (pos > 0) pos = pos / 3;
+      if (pos < min) pos = min + (pos - min) / 3;
+      awardsTrack.style.setProperty('--shift', pos + 'px');
     });
+    var endDrag = function (e) {
+      if (!drag || (e && e.pointerId !== drag.id)) return;
+      var dx = e ? e.clientX - drag.x : 0;
+      drag = null;
+      awardsBox.classList.remove('is-drag');
+      if (!dragged) return;
+      var step = awardItems.length > 1 ? offsetOf(1) : 1;
+      var moved = Math.round(-dx / step);
+      if (moved === 0 && Math.abs(dx) > 40) moved = dx < 0 ? 1 : -1;   // короткий уверенный свайп — тоже шаг
+      goTo(index + moved);
+    };
+    awardsBox.addEventListener('pointerup', endDrag);
+    awardsBox.addEventListener('pointercancel', function (e) { if (drag && e.pointerId === drag.id) { drag = null; awardsBox.classList.remove('is-drag'); render(); } });
+    // После перетаскивания клик по документу не открывает его
     awardsBox.addEventListener('click', function (e) {
       if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
     }, true);
     awardsBox.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    // Браузер мог прокрутить скрытую область к сфокусированному элементу — возвращаем на место
+    awardsBox.addEventListener('scroll', function () { awardsBox.scrollLeft = 0; });
 
-    // Документ крупно
+    // Оригинал документа в окне
     var docDialog = document.getElementById('award-dialog');
     if (docDialog) {
+      var docBox = docDialog.querySelector('.doc');
       var docImg = docDialog.querySelector('.doc__img');
       var docTitle = docDialog.querySelector('.doc__caption h2');
       var docFrom = docDialog.querySelector('.doc__caption p');
-      var current = 0;
+      var current = 0, loadId = 0;
+      var fullOf = function (item) {
+        var img = item.querySelector('img');
+        return img.getAttribute('data-full') || img.currentSrc || img.src;
+      };
+      var preload = function (i) {
+        var item = awardItems[(i + awardItems.length) % awardItems.length];
+        new Image().src = fullOf(item);
+      };
       var showDoc = function (i) {
         current = (i + awardItems.length) % awardItems.length;
         var item = awardItems[current];
-        var img = item.querySelector('img');
-        docImg.src = img.currentSrc || img.src;
-        docImg.alt = img.alt;
+        var thumb = item.querySelector('img');
+        var full = fullOf(item);
+        var id = ++loadId;
+        docImg.alt = thumb.alt;
         docTitle.textContent = item.querySelector('.award__title').textContent;
         docFrom.textContent = item.querySelector('.award__from').textContent;
+        // Сразу показываем превью, оригинал подменяет его, когда загрузится
+        docImg.src = thumb.currentSrc || thumb.src;
+        if (full === docImg.src) { docBox.classList.remove('is-loading'); }
+        else {
+          docBox.classList.add('is-loading');
+          var big = new Image();
+          big.onload = function () { if (id !== loadId) return; docImg.src = full; docBox.classList.remove('is-loading'); };
+          big.onerror = function () { if (id === loadId) docBox.classList.remove('is-loading'); };
+          big.src = full;
+        }
+        preload(current + 1);
+        preload(current - 1);
       };
       awardItems.forEach(function (item, i) {
         item.querySelector('[data-award]').addEventListener('click', function () {
@@ -458,9 +505,18 @@
         if (e.key === 'ArrowRight') showDoc(current + 1);
         if (e.key === 'ArrowLeft') showDoc(current - 1);
       });
-      // После закрытия лента показывает тот документ, на котором остановились
+      // Свайп по документу в окне листает документы
+      var sx = null;
+      docImg.addEventListener('pointerdown', function (e) { sx = e.clientX; });
+      docImg.addEventListener('pointerup', function (e) {
+        if (sx === null) return;
+        var dx = e.clientX - sx; sx = null;
+        if (Math.abs(dx) > 50) showDoc(current + (dx < 0 ? 1 : -1));
+      });
+      docImg.addEventListener('dragstart', function (e) { e.preventDefault(); });
+      // После закрытия лента показывает документ, на котором остановились
       docDialog.addEventListener('close', function () {
-        awardsBox.scrollTo({ left: awardItems[current].offsetLeft - awardItems[0].offsetLeft, behavior: 'auto' });
+        if (current < index || current >= index + perView()) goTo(current);
         awardItems[current].querySelector('[data-award]').focus({ preventScroll: true });
       });
     }
