@@ -544,7 +544,7 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 /* ---------- Шапка внутренних страниц ---------- */
 .page-head{padding-block:clamp(32px,4vw,48px) var(--head-gap)}
 /* Список сразу под заголовком страницы — без второго отступа секции, как содержимое под заголовком блока */
-.page-head + :is(.services-list,.portfolio-list,.blog-list){padding-top:0}
+.page-head + :is(.services-list,.portfolio-list,.blog-list,.legal){padding-top:0}
 .crumbs ol{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14px;color:var(--muted)}
 .crumbs li + li::before{content:"";display:inline-block;width:1px;height:12px;margin-right:12px;background:var(--field-line);vertical-align:-1px}
 .crumbs a{color:var(--muted);text-decoration:none}
@@ -1043,6 +1043,7 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 .prose > * + *{margin-top:20px}
 .prose__lead{font-size:clamp(19px,1.6vw,22px)!important;line-height:1.5!important;color:var(--ink)}
 .prose h2{margin-top:56px;max-width:none;font-size:clamp(26px,2.4vw,32px);line-height:1.2}
+.prose > :first-child{margin-top:0}
 .prose h3{margin-top:36px;font-size:var(--fs-h3)}
 .prose h2 + p,.prose h3 + p{margin-top:12px}
 .prose p,.prose li{font-size:17px;line-height:1.7}
