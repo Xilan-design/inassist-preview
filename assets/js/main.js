@@ -334,6 +334,7 @@
     var opener = e.target.closest('[data-open-contact]');
     if (opener && dialog) {
       e.preventDefault();
+      dds.forEach(function (dd) { setDd(dd, false); });   // кнопка могла стоять в выпадающей панели
       resetForm(dialog);
       dialog.showModal();
       return;

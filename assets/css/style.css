@@ -212,14 +212,15 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 /* Направления — панель на всю ширину под шапкой, собранная из тех же карточек, что «Направления» на главной:
    слева подводка, справа три колонки на тонких линиях. Наведение: линии темнеют, заголовок бирюзовый,
    сцена собирается. Направление текущей страницы показано собранным (.is-open ставит main.js) */
-.nav__sub{position:static}
-.dd__panel--services{left:0;right:0;top:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);box-shadow:0 32px 40px -32px rgba(15,15,15,.2)}
-.dd__panel--services::before{height:26px}
+.dd__panel--mega{left:0;right:0;top:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);box-shadow:0 32px 40px -32px rgba(15,15,15,.2)}
+.dd__panel--mega::before{height:26px}
+/* Панель привязана к шапке, а не к пункту: пункты со списком не задают ей положение */
+.nav__sub,.header__contacts{position:static}
 .dd__mega{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:0 clamp(32px,4vw,64px);padding-block:28px 32px}
 .dd__intro{padding-top:6px}
 .dd__intro p{max-width:15em;font-size:17px;line-height:1.5;color:var(--muted)}
-.nav__list .dd__intro .link{margin-top:20px;padding:0;border:0;font-size:15px;font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
-.nav__list .dd__intro .link:hover:where(.can-hover *){color:var(--accent-ink);text-decoration-thickness:2px}
+.dd__intro .link,.nav__list .dd__intro .link{margin-top:20px;padding:0;border:0;font-size:15px;font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.dd__intro .link:hover:where(.can-hover *),.nav__list .dd__intro .link:hover:where(.can-hover *){color:var(--accent-ink);text-decoration-thickness:2px}
 .dd__dirs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .dd__dirs > li{display:flex}
 .nav__list .dd__dir{--pl:24px;--pr:28px;display:flex;flex-direction:column;width:100%;padding:0 var(--pr) 4px var(--pl);border:0;border-left:1px solid var(--line);font-size:inherit;font-weight:400;text-decoration:none;transition:border-color .2s}
@@ -241,14 +242,19 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion:no-preference){
   .dd__mega > *{opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .25s ease}
   [data-dd].is-open .dd__mega > *,[data-dd]:hover:where(.can-hover *) .dd__mega > *{opacity:1;transform:none;transition:opacity .35s ease var(--dl,0s),transform .45s cubic-bezier(.2,.8,.2,1) var(--dl,0s)}
-  .dd__mega > .dd__dirs{--dl:.06s}
+  .dd__mega > :is(.dd__dirs,.dd__cols){--dl:.06s}
 }
-.dd__panel--contacts{right:-20px;width:270px;padding:20px 24px 22px}
-.dd__label{font-size:13px;color:var(--muted)}
-.dd__label + .dd__phone{margin-top:6px}
-.dd__phone{display:block;padding:5px 0;font-weight:600;font-size:16px;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
-.dd__phone:hover:where(.can-hover *){color:var(--accent-ink)}
-.dd__phone + .dd__label{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+/* Контакты: те же колонки на тонких линиях; при наведении линии колонки темнеют */
+.dd__link{display:block;border:0;background:none;color:var(--ink);cursor:pointer}
+.dd__cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.dd__col{display:flex;flex-direction:column;align-items:flex-start;padding:2px 28px 6px 24px;border-left:1px solid var(--line);transition:border-color .2s}
+.dd__col:last-child{border-right:1px solid var(--line)}
+.dd__col:hover:where(.can-hover *),.dd__col:hover:where(.can-hover *) + .dd__col{border-left-color:var(--ink)}
+.dd__col:last-child:hover:where(.can-hover *){border-right-color:var(--ink)}
+.dd__label{margin-bottom:14px;font-size:14px;font-weight:500;color:var(--muted)}
+.dd__phone{display:block;padding:4px 0;font-family:var(--font-head);font-weight:700;font-size:21px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums;transition:color .15s}
+.dd__line{display:block;padding:5px 0;font-weight:600;font-size:16px;color:var(--ink);text-decoration:none;transition:color .15s}
+:is(.dd__phone,.dd__line):hover:where(.can-hover *){color:var(--accent-ink)}
 
 /* ---------- Соцсети с иконками ---------- */
 .socials{display:flex;flex-wrap:wrap;gap:8px}
@@ -257,10 +263,13 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .socials__dot{fill:currentColor;stroke:none}
 .socials a:hover:where(.can-hover *){color:var(--accent-ink)}
 /* В шапке и мобильном меню — квадратные кнопки-иконки на тонкой линии, подпись только для чтения с экрана */
-.socials--dd,.socials--menu{margin-top:10px}
-.socials--dd a,.socials--menu a{justify-content:center;width:44px;height:44px;border:1px solid var(--line);transition:color .15s,border-color .15s}
-.socials--dd a:hover:where(.can-hover *),.socials--menu a:hover:where(.can-hover *){border-color:var(--accent);color:var(--accent-ink)}
-.socials--dd span,.socials--menu span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.socials--menu{margin-top:10px}
+.socials--menu a{justify-content:center;width:44px;height:44px;border:1px solid var(--line);transition:color .15s,border-color .15s}
+.socials--menu a:hover:where(.can-hover *){border-color:var(--accent);color:var(--accent-ink)}
+.socials--menu span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* В панели контактов — иконка и название столбиком, как телефоны рядом */
+.socials--mega{flex-direction:column;gap:2px}
+.socials--mega a{padding:4px 0;font-weight:600;font-size:16px}
 /* В подвале и на странице контактов — иконка и название столбиком */
 .socials--footer,.socials--info{flex-direction:column;gap:0}
 .burger{display:none;width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;position:relative}
@@ -282,6 +291,9 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 @media (max-width:1080px){
   /* Размытие фона у шапки делает её «экраном» для вложенного fixed-меню —
      из-за этого меню сжималось до высоты шапки. Здесь фон сплошной */
+  /* Контакты на планшете: без подводки, три колонки на всю ширину */
+  .dd__panel--contacts .dd__mega{grid-template-columns:1fr}
+  .dd__panel--contacts .dd__intro{display:none}
   .header{position:fixed;top:0;left:0;right:0;background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none;transform:none!important}
   .header__actions{gap:16px}
   .burger{display:block}
