@@ -51,6 +51,13 @@
   /* ---------- Выпадающие списки в шапке: направления и контакты ----------
      С мышью открываются ещё и наведением (это делает CSS); здесь — нажатие, Escape и клик мимо */
   var dds = Array.prototype.slice.call(document.querySelectorAll('[data-dd]'));
+  // Направление текущей страницы в панели показано собранным
+  var page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.dd__dir').forEach(function (link) {
+    if (link.getAttribute('href') !== page) return;
+    link.classList.add('is-open');
+    link.setAttribute('aria-current', 'page');
+  });
   function setDd(dd, open) {
     dd.classList.toggle('is-open', open);
     var btn = dd.querySelector('.dd__btn');

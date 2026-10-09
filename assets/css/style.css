@@ -209,13 +209,40 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 [data-dd].is-open .dd__panel,[data-dd]:hover:where(.can-hover *) .dd__panel{visibility:visible;opacity:1;transform:none;transition:opacity .18s ease,transform .2s ease}
 .nav__sub{display:flex;align-items:center;gap:2px}
 .nav__caret{display:grid;place-items:center;width:28px;height:36px;padding:0;border:0;background:none;color:var(--ink);cursor:pointer}
-.dd__panel--services{left:-24px;width:400px;padding:10px 0}
-.dd__dirs a{display:block;padding:14px 24px;text-decoration:none;border-bottom:0!important}
-.dd__dirs b{display:block;font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--ink);transition:color .15s}
-.dd__dirs span{display:block;margin-top:4px;font-size:14px;font-weight:400;line-height:1.45;color:var(--muted)}
-.dd__dirs a:hover:where(.can-hover *) b,.dd__dirs a:focus-visible b{color:var(--accent-ink)}
-.dd__dirs li + li a{box-shadow:inset 0 1px 0 var(--line)}
-.dd__dirs a[aria-current="page"] b{color:var(--accent-ink)}
+/* Направления — панель на всю ширину под шапкой, собранная из тех же карточек, что «Направления» на главной:
+   слева подводка, справа три колонки на тонких линиях. Наведение: линии темнеют, заголовок бирюзовый,
+   сцена собирается. Направление текущей страницы показано собранным (.is-open ставит main.js) */
+.nav__sub{position:static}
+.dd__panel--services{left:0;right:0;top:100%;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg);box-shadow:0 32px 40px -32px rgba(15,15,15,.2)}
+.dd__panel--services::before{height:26px}
+.dd__mega{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:0 clamp(32px,4vw,64px);padding-block:28px 32px}
+.dd__intro{padding-top:6px}
+.dd__intro p{max-width:15em;font-size:17px;line-height:1.5;color:var(--muted)}
+.nav__list .dd__intro .link{margin-top:20px;padding:0;border:0;font-size:15px;font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.nav__list .dd__intro .link:hover:where(.can-hover *){color:var(--accent-ink);text-decoration-thickness:2px}
+.dd__dirs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.dd__dirs > li{display:flex}
+.nav__list .dd__dir{--pl:24px;--pr:28px;display:flex;flex-direction:column;width:100%;padding:0 var(--pr) 4px var(--pl);border:0;border-left:1px solid var(--line);font-size:inherit;font-weight:400;text-decoration:none;transition:border-color .2s}
+.dd__dirs > li:last-child .dd__dir{border-right:1px solid var(--line)}
+.dd__dir:hover:where(.can-hover *),.dd__dirs > li:hover:where(.can-hover *) + li .dd__dir{border-left-color:var(--ink)}
+.dd__dirs > li:last-child .dd__dir:hover:where(.can-hover *){border-right-color:var(--ink)}
+.dd__dir .scene{width:calc(100% + var(--pl) + var(--pr));height:118px;margin:0 calc(var(--pr) * -1) 14px calc(var(--pl) * -1);overflow:hidden;
+  -webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+.dd__dir b{font-family:var(--font-head);font-size:19px;font-weight:700;line-height:1.25;letter-spacing:-.01em;color:var(--ink);transition:color .25s}
+.dd__dir span{margin-top:6px;font-size:14px;line-height:1.5;color:var(--muted)}
+.dd__more{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:16px;font-style:normal;font-weight:600;font-size:14px;color:var(--ink);transition:color .15s}
+.dd__more svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.75;transition:transform .15s}
+:is(.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible) b{color:var(--accent)}
+.dd__dir:hover:where(.can-hover *) .dd__more{color:var(--accent-ink)}
+.dd__dir:hover:where(.can-hover *) .dd__more svg{transform:translateX(4px)}
+.dd__dir.is-open b{color:var(--accent-ink)}
+.nav__list .dd__dir[aria-current="page"]{border-bottom:0}
+/* Карточки проявляются по очереди вслед за панелью */
+@media (prefers-reduced-motion:no-preference){
+  .dd__mega > *{opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .25s ease}
+  [data-dd].is-open .dd__mega > *,[data-dd]:hover:where(.can-hover *) .dd__mega > *{opacity:1;transform:none;transition:opacity .35s ease var(--dl,0s),transform .45s cubic-bezier(.2,.8,.2,1) var(--dl,0s)}
+  .dd__mega > .dd__dirs{--dl:.06s}
+}
 .dd__panel--contacts{right:-20px;width:270px;padding:20px 24px 22px}
 .dd__label{font-size:13px;color:var(--muted)}
 .dd__label + .dd__phone{margin-top:6px}
@@ -275,11 +302,14 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
   .nav__sub .dd__panel{position:static;visibility:visible;opacity:1;transform:none;width:auto;padding:0 0 10px 16px;border:0;border-bottom:1px solid var(--line);box-shadow:none;background:none;transition:none}
   .nav__sub .dd__panel::before{display:none}
   .nav__sub > a{border-bottom:0!important}
-  .nav__list .dd__dirs a{display:block;padding:9px 0;font-size:inherit;border:0}
-  .nav__list .dd__dirs a::after{display:none}
-  .nav__list .dd__dirs li + li a{box-shadow:none}
-  .nav__list .dd__dirs b{font-size:17px;font-weight:600}
-  .nav__list .dd__dirs span{display:none}
+  .nav .dd__mega{display:block;max-width:none;padding:0;opacity:1;transform:none}
+  .nav .dd__mega > *{opacity:1;transform:none}
+  .nav .dd__intro,.nav .dd__dir .scene,.nav .dd__dir span,.nav .dd__more{display:none}
+  .nav .dd__dirs{display:block}
+  .nav__list .dd__dir{display:block;padding:9px 0;border:0!important;font-size:inherit}
+  .nav__list .dd__dir::after{display:none}
+  .nav__list .dd__dir b{font-family:var(--font-head);font-size:17px;font-weight:600;color:var(--ink)}
+  .nav__list .dd__dir.is-open b{color:var(--accent-ink)}
   .nav__contacts{display:block;margin-top:auto;padding-top:32px}
   .nav__phone{display:block;padding:2px 0;font-size:20px;font-weight:700;color:var(--ink);text-decoration:none;font-variant-numeric:tabular-nums}
   .socials--menu{margin-top:16px}
@@ -348,7 +378,7 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .sr-defs{position:absolute;width:0;height:0;overflow:hidden}
 .scene{display:block;max-width:none;height:auto;overflow:visible;fill:none;stroke:#A9A396;stroke-width:calc(1.2px * var(--u,1));stroke-linejoin:round;stroke-linecap:round}
 .scene .f{fill:var(--bg)}
-.scene .fd{fill:url(#scene-dots)}
+.scene .fd{fill:url(#scene-dots) var(--bg)}
 .scene .ft{fill:var(--navy-25);transition:fill .4s}
 .scene .ln{fill:none}
 .scene .dot{fill:var(--bg)}
@@ -370,15 +400,15 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .scene .draw{stroke-dasharray:1;stroke-dashoffset:1}
 
 /* Сцена открыта: элементы появляются по очереди, со своей задержкой --d */
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene :is(.gd,.ring,.rise,.drop,.slide,.pop,.lift,.draw){
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene :is(.gd,.ring,.rise,.drop,.slide,.pop,.lift,.draw){
   transition:transform .8s cubic-bezier(.2,.8,.25,1) var(--d,0s),opacity .5s ease var(--d,0s),stroke-dashoffset .7s cubic-bezier(.4,0,.2,1) var(--d,0s)}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene :is(.gd,.ring,.rise,.drop,.slide,.pop){transform:none;opacity:1}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .drop{transition-timing-function:cubic-bezier(.3,1.35,.55,1),ease}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .ring:nth-of-type(2){opacity:.6}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .ring:nth-of-type(3){opacity:.3}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .lift{transform:translateY(var(--lift))}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .draw{stroke-dashoffset:0}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene{stroke:#8C877B}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene :is(.gd,.ring,.rise,.drop,.slide,.pop){transform:none;opacity:1}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .drop{transition-timing-function:cubic-bezier(.3,1.35,.55,1),ease}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .ring:nth-of-type(2){opacity:.6}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .ring:nth-of-type(3){opacity:.3}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .lift{transform:translateY(var(--lift))}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .draw{stroke-dashoffset:0}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene{stroke:#8C877B}
 /* Новые элементы — объём в фирменном бирюзовом: верх акцентом, грани оттенками Navy */
 .scene .ac .ft{fill:var(--accent)}
 .scene .ac polygon:nth-child(3n+2){fill:var(--navy-50)}
@@ -386,8 +416,8 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .scene .ac .dot{fill:var(--accent)}
 .scene .draw{stroke-width:calc(1.8px * var(--u,1))}
 .scene .ring:first-of-type{stroke-width:calc(1.8px * var(--u,1))}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .ft{fill:var(--navy-50)}
-:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .ac .ft,:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .cta{fill:var(--accent)}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .ft{fill:var(--navy-50)}
+:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .ac .ft,:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .cta{fill:var(--accent)}
 /* Точечные акценты, подписи и разметка */
 .scene .hl{fill:var(--accent);stroke:var(--accent)}
 .scene .acl{stroke:var(--accent)}
@@ -398,7 +428,7 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .scene .mark{fill:var(--navy-25);stroke:none}
 /* Куб ИнАссист: правая грань со знаком — акцентный бирюзовый, верх — Navy, левая грань — Navy 50.
    Знак — самым светлым оттенком палитры (Navy 25), почти белым */
-.scene .ac.us polygon:nth-child(1),:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.is-open) .scene .ac.us polygon.ft{fill:var(--navy)}
+.scene .ac.us polygon:nth-child(1),:is(.dir:hover:where(.can-hover *),.dir:focus-visible,.dd__dir:hover:where(.can-hover *),.dd__dir:focus-visible,.is-open) .scene .ac.us polygon.ft{fill:var(--navy)}
 .scene .ac.us polygon:nth-child(2){fill:var(--navy-50)}
 .scene .ac.us polygon:nth-child(3){fill:var(--accent)}
 @media (prefers-reduced-motion:reduce){
