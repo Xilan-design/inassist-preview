@@ -7,7 +7,7 @@
 <meta name="description" content="Контакты ИнАссист: телефоны, почта и адрес офиса в Минске — ул. Короля, 2. Позвоните или оставьте заявку.">
 <link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/style.min.css?v=daac91a2">
+<link rel="stylesheet" href="assets/css/style.min.css?v=df424555">
 <script>
 // Наведение включаем только там, где есть мышь или тачпад (см. :where(.can-hover *) в style.css)
 (function (d) {
@@ -24,10 +24,25 @@ d.classList.add('js-reveal');
 setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'); }, 3000);
 })(document.documentElement);
 </script>
-<script src="assets/js/main.min.js?v=9f840ca4" defer></script>
+<script src="assets/js/main.min.js?v=9ada0e6c" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
 <script src="assets/js/contacts-map.min.js?v=fd94282a" defer></script>
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#FBFAF6">
+<link rel="canonical" href="https://inassist.by/contacts.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ИнАссист">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://inassist.by/contacts.html">
+<meta property="og:title" content="Контакты — ИнАссист">
+<meta property="og:description" content="Контакты ИнАссист: телефоны, почта и адрес офиса в Минске — ул. Короля, 2. Позвоните или оставьте заявку.">
+<meta property="og:image" content="https://inassist.by/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 <a class="skip" href="#main">Перейти к содержанию</a>
@@ -244,7 +259,8 @@ setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'
 <button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
 <h2 id="modal-title">Обсудим вашу задачу</h2>
 <p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
-<form class="form" data-form novalidate>
+<form class="form" action="send.php" method="post" data-form novalidate>
+<div class="hp" aria-hidden="true"><label>Не заполняйте это поле <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
 <div class="field">
 <label for="mf-name">Имя</label>
 <input id="mf-name" name="name" type="text" autocomplete="name" required>
@@ -260,6 +276,7 @@ setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'
 <label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
 <p class="field__error" id="mf-consent-err"></p>
 </div>
+<p class="form__status" role="alert" hidden></p>
 <button class="btn" type="submit">Отправить заявку</button>
 </form>
 <div class="form-done" hidden tabindex="-1">

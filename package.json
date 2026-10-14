@@ -5,6 +5,8 @@
   "scripts": {
     "build": "node build.js",
     "watch": "node build.js --watch",
+    "dist": "node build.js --dist",
+    "icons": "node tools/make-icons.js",
     "shots": "node tools/shots.js"
   },
   "devDependencies": {

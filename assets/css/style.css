@@ -557,6 +557,8 @@ a,button,summary,label{-webkit-tap-highlight-color:transparent}
 .page-head__grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:32px clamp(32px,5vw,80px);align-items:center}
 .page-head__visual .scene{width:100%;max-width:520px;margin-left:auto}
 .page-head__visual .scene--hero{max-width:620px}
+/* Страница 404: короткий текст по центру экрана по высоте */
+.page-head--404{padding-block:clamp(48px,10vw,160px)}
 
 @media (max-width:1080px){
   .page-head__grid{grid-template-columns:1fr}
@@ -977,6 +979,12 @@ a.info__item:hover:where(.can-hover *){color:var(--accent-ink)}
 .form-done p{margin-top:12px;color:var(--muted)}
 .form-done a{color:var(--ink);font-weight:700}
 .form-done:focus{outline:none}
+/* Ловушка для спам-ботов — поле убрано за пределы экрана; люди его не видят */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+/* Ошибка отправки — тем же цветом, что ошибки полей */
+.form__status{font-size:14px;color:#B3261E}
+.form__status[hidden]{display:none}
+.btn[aria-busy="true"]{opacity:.6;cursor:progress}
 
 @media (max-width:1080px){
   .contact__grid{grid-template-columns:1fr}

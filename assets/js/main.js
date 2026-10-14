@@ -530,6 +530,38 @@
     }
   }
 
+  /* ---------- Аналитика ----------
+     Счётчики подключаются только после «Принять» в плашке cookie (или если посетитель принял раньше).
+     Чтобы включить, впишите номер счётчика: Яндекс Метрика — число, Google Analytics — «G-…». */
+  var METRIKA_ID = '';
+  var GA_ID = '';
+  var analyticsLoaded = false;
+
+  function loadScript(src) {
+    var el = document.createElement('script');
+    el.async = true;
+    el.src = src;
+    document.head.appendChild(el);
+  }
+
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
+    analyticsLoaded = true;
+    if (METRIKA_ID) {
+      window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
+      window.ym.l = Date.now();
+      loadScript('https://mc.yandex.ru/metrika/tag.js');
+      window.ym(Number(METRIKA_ID), 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+    }
+    if (GA_ID) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID);
+      loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID);
+    }
+  }
+
   /* ---------- Согласие на cookie ----------
      Плашка внизу экрана при первом заходе. Выбор хранится в localStorage; событие cookie-consent
      сообщает его остальному коду (например, чтобы включить счётчики только после «Принять»). */
@@ -539,6 +571,7 @@
     var saved = null;
     try { saved = localStorage.getItem(CONSENT_KEY); } catch (err) {}
     window.cookieConsent = saved;
+    if (saved === 'all') loadAnalytics();
     if (!saved) {
       cookieBar.hidden = false;
       requestAnimationFrame(function () {
@@ -552,6 +585,7 @@
       try { localStorage.setItem(CONSENT_KEY, value); } catch (err) {}
       window.cookieConsent = value;
       document.dispatchEvent(new CustomEvent('cookie-consent', { detail: value }));
+      if (value === 'all') loadAnalytics();
       cookieBar.classList.remove('is-shown');
       setTimeout(function () { cookieBar.hidden = true; }, 350);
     });
@@ -607,18 +641,48 @@
     done.hidden = true;
   }
 
+  /* Заявка уходит в send.php (адрес — в action формы): он присылает её на почту и, если настроено,
+     в Telegram. На превью (GitHub Pages) и на локальном сервере PHP нет — там форма работает
+     как демонстрация: сразу показывает «Заявка отправлена», никуда не отправляя данные. */
+  var demoForms = /(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname) || location.protocol === 'file:';
+  var sendError = 'Не получилось отправить заявку. Попробуйте ещё раз или позвоните нам: +375 44 728-50-16';
+
+  function showDone(form) {
+    var done = form.parentElement.querySelector('.form-done');
+    form.hidden = true;
+    if (done) {
+      done.hidden = false;
+      done.focus();
+    }
+  }
+
   document.querySelectorAll('[data-form]').forEach(function (form) {
+    var status = form.querySelector('.form__status');
+    var submit = form.querySelector('[type="submit"]');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!validate(form)) return;
+      if (status) status.hidden = true;
+      if (demoForms || !window.fetch) { showDone(form); return; }
 
-      // TODO: отправка на сервер (CRM, почта или Telegram-бот) — подключим вместе с бэкендом.
-      var done = form.parentElement.querySelector('.form-done');
-      form.hidden = true;
-      if (done) {
-        done.hidden = false;
-        done.focus();
-      }
+      var data = new FormData(form);
+      data.append('page', document.title + ' — ' + location.href);   // с какой страницы пришла заявка
+      submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.error || 'send failed');
+          showDone(form);
+        })
+        .catch(function () {
+          if (status) { status.textContent = sendError; status.hidden = false; }
+        })
+        .then(function () {
+          submit.disabled = false;
+          submit.removeAttribute('aria-busy');
+        });
     });
 
     // Сообщение об ошибке исчезает, как только поле исправлено

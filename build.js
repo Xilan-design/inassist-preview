@@ -18,7 +18,14 @@
    Стили и скрипты правятся в assets/css/style.css и assets/js/*.js. Сборка сжимает их (esbuild)
    в соседние *.min.css / *.min.js и подставляет в страницы с меткой версии ?v=…: метка меняется
    вместе с содержимым, поэтому браузер сразу берёт свежий файл, а не старый из кэша.
-   Сами страницы тоже ужимаются: без комментариев и отступов. Перед первым запуском: npm install */
+   Сами страницы тоже ужимаются: без комментариев и отступов. Перед первым запуском: npm install
+
+   Ещё сборка добавляет в <head> каждой страницы иконки, адрес страницы для поисковиков (canonical)
+   и превью для мессенджеров (Open Graph) — из её <title> и description, — и обновляет sitemap.xml
+   и robots.txt. Адрес сайта — константа SITE_URL ниже.
+
+   node build.js --dist   — собрать и сложить в dist/ только то, что нужно на хостинге,
+                            плюс архив inassist-site.zip для загрузки */
 'use strict';
 
 const fs = require('fs');
@@ -34,6 +41,83 @@ const esbuild = require('esbuild');
 // Исходник → сжатый файл. Цели — браузеры не старше 2021 года: синтаксис не переписывается
 const ASSETS = ['assets/css/style.css', 'assets/js/main.js', 'assets/js/hero-pattern.js', 'assets/js/contacts-map.js'];
 const TARGET = ['chrome100', 'edge100', 'firefox100', 'safari15'];
+
+// Адрес боевого сайта: из него собираются canonical, превью ссылок, sitemap.xml и robots.txt
+const SITE_URL = 'https://inassist.by/';
+
+// Иконки, адрес страницы и превью ссылки. Страницы с noindex (404) в поиск и sitemap не попадают
+function headTags(page, html) {
+  const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+  const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '';
+  const url = SITE_URL + (page === 'index.html' ? '' : page);
+  const tags = [
+    '<link rel="icon" href="favicon.ico" sizes="32x32">',
+    '<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">',
+    '<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">',
+    '<meta name="theme-color" content="#FBFAF6">'
+  ];
+  if (!isNoindex(html)) {
+    tags.push(
+      `<link rel="canonical" href="${url}">`,
+      '<meta property="og:type" content="website">',
+      '<meta property="og:site_name" content="ИнАссист">',
+      '<meta property="og:locale" content="ru_RU">',
+      `<meta property="og:url" content="${url}">`,
+      `<meta property="og:title" content="${title}">`,
+      `<meta property="og:description" content="${desc}">`,
+      `<meta property="og:image" content="${SITE_URL}assets/img/og-image.png">`,
+      '<meta property="og:image:width" content="1200">',
+      '<meta property="og:image:height" content="630">',
+      '<meta name="twitter:card" content="summary_large_image">'
+    );
+  }
+  return html.replace('</head>', tags.join('\n') + '\n</head>');
+}
+
+const isNoindex = (html) => /<meta name="robots" content="noindex/.test(html);
+
+function writeSeoFiles(indexed) {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = indexed.map((page) => {
+    const loc = SITE_URL + (page === 'index.html' ? '' : page);
+    return `  <url><loc>${loc}</loc><lastmod>${today}</lastmod></url>`;
+  });
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
+    '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls.join('\n') + '\n</urlset>\n');
+  fs.writeFileSync(path.join(ROOT, 'robots.txt'),
+    `User-agent: *\nAllow: /\nDisallow: /send.php\n\nSitemap: ${SITE_URL}sitemap.xml\n`);
+}
+
+// Что нужно на хостинге: страницы, сжатые стили и скрипты, шрифты, картинки и служебные файлы
+const DIST_FILES = ['favicon.ico', 'robots.txt', 'sitemap.xml', 'send.php', '.htaccess'];
+
+function copyDir(from, to, skip) {
+  fs.mkdirSync(to, { recursive: true });
+  for (const entry of fs.readdirSync(from, { withFileTypes: true })) {
+    const src = path.join(from, entry.name);
+    const dst = path.join(to, entry.name);
+    if (entry.isDirectory()) copyDir(src, dst, skip);
+    else if (!skip(src)) fs.copyFileSync(src, dst);
+  }
+}
+
+function dist(pages) {
+  const DIST = path.join(ROOT, 'dist');
+  fs.rmSync(DIST, { recursive: true, force: true });
+  fs.mkdirSync(DIST);
+  for (const file of [...pages, ...DIST_FILES]) fs.copyFileSync(path.join(ROOT, file), path.join(DIST, file));
+  // Исходники стилей и скриптов не нужны — страницы подключают сжатые *.min.*
+  const sources = new Set(ASSETS.map((f) => path.join(ROOT, f)));
+  copyDir(path.join(ROOT, 'assets'), path.join(DIST, 'assets'), (f) => sources.has(f));
+  const zip = path.join(ROOT, 'inassist-site.zip');
+  fs.rmSync(zip, { force: true });
+  // Архив: в Windows и macOS — встроенный tar (умеет zip), в Linux — zip
+  const { execFileSync } = require('child_process');
+  if (process.platform === 'win32') execFileSync(path.join(process.env.SystemRoot || 'C:\Windows', 'System32', 'tar.exe'), ['-a', '-c', '-f', zip, '.'], { cwd: DIST });
+  else if (process.platform === 'darwin') execFileSync('tar', ['-a', '-c', '-f', zip, '.'], { cwd: DIST });
+  else execFileSync('zip', ['-r', '-q', zip, '.'], { cwd: DIST });
+  console.log('Готово к загрузке: папка dist/ и архив inassist-site.zip');
+}
 
 function buildAssets() {
   const map = {};
@@ -95,6 +179,7 @@ function build() {
   const parts = loadPartials();
   const assets = buildAssets();
   const pages = fs.readdirSync(SRC).filter((f) => f.endsWith('.html'));
+  const indexed = [];
 
   for (const page of pages) {
     const source = fs.readFileSync(path.join(SRC, page), 'utf8');
@@ -112,9 +197,12 @@ function build() {
         throw new Error(`${page}: ${err.message}`);
       }
     });
-    const html = expand(source, 0);
+    const html = headTags(page, expand(source, 0));
     fs.writeFileSync(path.join(ROOT, page), compactHtml(html, assets));
+    if (!isNoindex(html)) indexed.push(page);
   }
+  writeSeoFiles(indexed);
+  if (process.argv.includes('--dist')) dist(pages);
   console.log(`Собрано страниц: ${pages.length} за ${Date.now() - started} мс`);
 }
 

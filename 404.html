@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Страница не найдена — ИнАссист</title>
+<meta name="description" content="Такой страницы на сайте ИнАссист нет.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.min.css?v=df424555">
+<script>
+// Наведение включаем только там, где есть мышь или тачпад (см. :where(.can-hover *) в style.css)
+(function (d) {
+var mq = matchMedia('(hover: hover) and (pointer: fine)');
+var set = function () { d.classList.toggle('can-hover', mq.matches); };
+set();
+if (mq.addEventListener) mq.addEventListener('change', set);
+})(document.documentElement);
+// Прячем элементы для анимации появления до первой отрисовки, чтобы не было мигания.
+// Если main.js по какой-то причине не загрузится, через 3 с всё просто покажется.
+(function (d) {
+if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+d.classList.add('js-reveal');
+setTimeout(function () { if (!window.revealReady) d.classList.remove('js-reveal'); }, 3000);
+})(document.documentElement);
+</script>
+<script src="assets/js/main.min.js?v=9ada0e6c" defer></script>
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#FBFAF6">
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="header">
+<div class="container header__inner">
+<a class="header__logo" href="index.html" aria-label="ИнАссист — на главную">
+<img src="assets/img/logo.svg" width="139" height="40" alt="">
+</a>
+<nav class="nav" id="site-nav" aria-label="Основное меню">
+<ul class="nav__list">
+<li class="nav__sub" data-dd>
+<a href="services.html">Наши услуги</a>
+<button class="dd__btn nav__caret" type="button" aria-expanded="false" aria-controls="dd-services">
+<span class="visually-hidden">Направления</span><svg class="dd__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+</button>
+<div class="dd__panel dd__panel--mega dd__panel--services" id="dd-services">
+<div class="container dd__mega">
+<div class="dd__intro">
+<p>Бизнес-планы, реклама и&nbsp;сайты — по&nbsp;отдельности или одним проектом.</p>
+<a class="link" href="services.html">Все услуги</a>
+</div>
+<ul class="dd__dirs">
+<li><a class="dd__dir" href="service-business-planning.html">
+<svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><path class="gd" d="M-59.3 14.4L419.3 217.6"/><path class="gd" d="M419.3 14.4L-59.3 217.6"/><polygon class="f" points="161.6,75.4 275.7,123.8 198.4,156.6 84.3,108.2"/><polygon class="fd" points="84.3,116.2 198.4,164.6 198.4,156.6 84.3,108.2"/><polygon class="f" points="275.7,131.8 198.4,164.6 198.4,156.6 275.7,123.8"/><polygon class="ft" points="142.3,66.9 158.8,74 142.3,81 125.7,74"/><polygon class="fd" points="125.7,100 142.3,107 142.3,81 125.7,74"/><polygon class="f" points="158.8,100 142.3,107 142.3,81 158.8,74"/><polygon class="ft" points="166.2,59.1 182.8,66.1 166.2,73.2 149.6,66.1"/><polygon class="fd" points="149.6,110.1 166.2,117.2 166.2,73.2 149.6,66.1"/><polygon class="f" points="182.8,110.1 166.2,117.2 166.2,73.2 182.8,66.1"/><polygon class="ft" points="190.1,49.3 206.7,56.3 190.1,63.3 173.6,56.3"/><polygon class="fd" points="173.6,120.3 190.1,127.3 190.1,63.3 173.6,56.3"/><polygon class="f" points="206.7,120.3 190.1,127.3 190.1,63.3 206.7,56.3"/><g class="rise ac" style="--d:.15s"><polygon class="ft" points="214.1,31.4 230.6,38.5 214.1,45.5 197.5,38.5"/><polygon class="fd" points="197.5,130.5 214.1,137.5 214.1,45.5 197.5,38.5"/><polygon class="f" points="230.6,130.5 214.1,137.5 214.1,45.5 230.6,38.5"/></g><path class="draw ac" pathLength="1" style="--d:0.35s" d="M111.9 57.1 L142.3 58 L166.2 50.1 L190.1 40.3 L214.1 22.5 L235.2 3.4"/><g class="pop ac" style="--d:.8s"><path class="ln" d="M226.5 5.5L235.2 3.4L232.2 11.9"/><circle class="dot" cx="142.3" cy="58" r="2.5"/><circle class="dot" cx="166.2" cy="50.1" r="2.5"/><circle class="dot" cx="190.1" cy="40.3" r="2.5"/><circle class="dot" cx="214.1" cy="22.5" r="2.5"/></g></svg>
+<b>Бизнес-планирование</b><span>Бизнес-планы и финансовые модели для инвестиций, кредитов и господдержки</span><i class="dd__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i>
+</a></li>
+<li><a class="dd__dir" href="service-advertising.html">
+<svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><ellipse class="ring ac" style="--d:0.1s" cx="180" cy="124" rx="104.1" ry="44.2"/><ellipse class="ring ac" style="--d:0.22s" cx="180" cy="124" rx="135.4" ry="57.5"/><ellipse class="ring ac" style="--d:0.34s" cx="180" cy="124" rx="169.2" ry="71.8"/><path class="gd" d="M-59.3 22.4L419.3 225.6"/><path class="gd" d="M419.3 22.4L-59.3 225.6"/><path class="f" d="M96.7 116V124A83.3 35.4 0 0 0 263.3 124V116"/><ellipse class="f" cx="180" cy="116" rx="83.3" ry="35.4"/><g class="drop ac" style="--d:.6s"><polygon class="ft" points="229.7,106.9 243.5,112.7 229.7,118.6 215.9,112.7"/><polygon class="f" points="215.9,127.7 229.7,133.6 229.7,118.6 215.9,112.7"/><polygon class="f" points="243.5,127.7 229.7,133.6 229.7,118.6 243.5,112.7"/></g><polygon class="f" points="151.5,17.5 214.1,44.1 208.5,46.5 145.9,19.9"/><polygon class="f" points="145.9,103.9 208.5,130.5 208.5,46.5 145.9,19.9"/><polygon class="f" points="214.1,128.1 208.5,130.5 208.5,46.5 214.1,44.1"/><path class="ln" d="M153.3 37L184.6 50.3"/><path class="ln" d="M153.3 44L171.7 51.8"/><polygon class="fd" points="153.3,83 201.2,103.3 201.2,73.3 153.3,53"/><polygon class="ft cta" points="153.3,97 173.6,105.6 173.6,98.6 153.3,90"/><g class="drop ac" style="--d:.45s"><polygon class="ft" points="130.3,106.9 144.1,112.7 130.3,118.6 116.5,112.7"/><polygon class="f" points="116.5,127.7 130.3,133.6 130.3,118.6 116.5,112.7"/><polygon class="f" points="144.1,127.7 130.3,133.6 130.3,118.6 144.1,112.7"/></g><g class="drop ac" style="--d:.75s"><polygon class="ft" points="180,119.4 193.8,125.2 180,131.1 166.2,125.2"/><polygon class="f" points="166.2,140.2 180,146.1 180,131.1 166.2,125.2"/><polygon class="f" points="193.8,140.2 180,146.1 180,131.1 193.8,125.2"/></g></svg>
+<b>Рекламное продвижение</b><span>Реклама в поиске и соцсетях, которая приводит заявки</span><i class="dd__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i>
+</a></li>
+<li><a class="dd__dir" href="service-development.html">
+<svg class="scene" viewBox="0 0 360 196" aria-hidden="true"><path class="gd" d="M-59.3 14.4L419.3 217.6"/><path class="gd" d="M419.3 14.4L-59.3 217.6"/><g class="slide ac" style="--from:translate(-42.3px,18px);--d:.3s"><polygon class="ft" points="277.6,43.2 301.5,53.4 277.6,63.5 253.6,53.4"/><polygon class="f" points="253.6,75.4 277.6,85.5 277.6,63.5 253.6,53.4"/><polygon class="f" points="301.5,75.4 277.6,85.5 277.6,63.5 301.5,53.4"/></g><g class="slide ac" style="--from:translate(42.3px,18px);--d:.2s"><polygon class="ft" points="82.4,43.2 106.4,53.4 82.4,63.5 58.5,53.4"/><polygon class="f" points="58.5,75.4 82.4,85.5 82.4,63.5 58.5,53.4"/><polygon class="f" points="106.4,75.4 82.4,85.5 82.4,63.5 106.4,53.4"/></g><path class="draw ac" pathLength="1" style="--d:0.6s" d="M94.4 72.4L142.3 92.8"/><path class="draw ac" pathLength="1" style="--d:0.7s" d="M265.6 72.4L217.7 92.8"/><polygon class="f" points="180,73.8 279.4,116 180,158.2 80.6,116"/><polygon class="fd" points="80.6,122 180,164.2 180,158.2 80.6,116"/><polygon class="f" points="279.4,122 180,164.2 180,158.2 279.4,116"/><g class="base"><polygon class="f" points="180,73.9 246.3,102 180,130.1 113.7,102"/><polygon class="fd" points="113.7,116 180,144.1 180,130.1 113.7,102"/><polygon class="f" points="246.3,116 180,144.1 180,130.1 246.3,102"/><circle class="ln" cx="194.7" cy="130.9" r="1.6"/><circle class="ln" cx="188.3" cy="133.6" r="1.6"/></g><g class="lift" style="--lift:-14px;--d:0.05s"><polygon class="f" points="180,59.9 246.3,88 180,116.1 113.7,88"/><polygon class="fd" points="113.7,102 180,130.1 180,116.1 113.7,88"/><polygon class="f" points="246.3,102 180,130.1 180,116.1 246.3,88"/></g><g class="lift" style="--lift:-28px;--d:0.1s"><polygon class="f" points="180,45.9 246.3,74 180,102.1 113.7,74"/><polygon class="fd" points="113.7,88 180,116.1 180,102.1 113.7,74"/><polygon class="f" points="246.3,88 180,116.1 180,102.1 246.3,74"/><polygon class="ft" points="180,55.2 224.2,74 180,92.8 135.8,74"/><path class="ln" d="M172.6 66.2L194.7 75.6"/><path class="ln" d="M163.4 70.1L176.3 75.6"/></g><path class="draw ac" pathLength="1" style="--d:0.8s" d="M212.2 122.5L263.8 144.3"/><g class="slide ac" style="--from:translate(-42.3px,-18px);--d:.4s"><polygon class="ft" points="275.7,125.3 299.7,135.4 275.7,145.6 251.8,135.4"/><polygon class="f" points="251.8,157.4 275.7,167.6 275.7,145.6 251.8,135.4"/><polygon class="f" points="299.7,157.4 275.7,167.6 275.7,145.6 299.7,135.4"/></g></svg>
+<b>Разработка и&nbsp;IT</b><span>Сайты, интеграции с CRM и автоматизация</span><i class="dd__more">Подробнее<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></i>
+</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li><a href="portfolio.html">Портфолио</a></li>
+<li><a href="contacts.html">Контакты</a></li>
+<li><a href="about.html">О нас</a></li>
+<li><a href="blog.html">Блог</a></li>
+</ul>
+<div class="nav__contacts">
+<a class="nav__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+<a class="nav__phone" href="tel:+375293675458">+375 29 367-54-58</a>
+
+<ul class="socials socials--menu">
+<li><a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5ZM18.0468 4.41034C18.2514 4.20576 18.5289 4.09082 18.8182 4.09082H18.8226C19.1119 4.09082 19.3894 4.20576 19.594 4.41034C19.7986 4.61493 19.9135 4.8924 19.9135 5.18173V5.18609C19.9135 5.47542 19.7986 5.7529 19.594 5.95748C19.3894 6.16207 19.1119 6.277 18.8226 6.277H18.8182C18.5289 6.277 18.2514 6.16207 18.0468 5.95748C17.8423 5.7529 17.7273 5.47542 17.7273 5.18609V5.18173C17.7273 4.8924 17.8423 4.61493 18.0468 4.41034ZM7.37171 7.37158C8.59922 6.14407 10.2641 5.45446 12 5.45446C13.736 5.45446 15.4009 6.14407 16.6284 7.37158C17.8559 8.59909 18.5455 10.2639 18.5455 11.9999C18.5455 13.7359 17.8559 15.4007 16.6284 16.6282C15.4009 17.8558 13.736 18.5454 12 18.5454C10.2641 18.5454 8.59922 17.8558 7.37171 16.6282C6.1442 15.4007 5.45459 13.7359 5.45459 11.9999C5.45459 10.2639 6.1442 8.59909 7.37171 7.37158Z"/><path d="M8 12C8 10.9391 8.42143 9.92172 9.17157 9.17157C9.92172 8.42143 10.9391 8 12 8C13.0609 8 14.0783 8.42143 14.8284 9.17157C15.5786 9.92172 16 10.9391 16 12C16 13.0609 15.5786 14.0783 14.8284 14.8284C14.0783 15.5786 13.0609 16 12 16C10.9391 16 9.92172 15.5786 9.17157 14.8284C8.42143 14.0783 8 13.0609 8 12Z"/></svg><span>Instagram</span></a></li>
+<li><a href="#linkedin" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.7157 11.0278L12.7419 10.9863V11.0278H12.7157Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M24 4.5V19.5C24 20.7396 23.5599 21.7995 22.6797 22.6797C21.7995 23.5599 20.7396 24 19.5 24H4.5C3.26042 24 2.20052 23.5599 1.32031 22.6797C0.440104 21.7995 0 20.7396 0 19.5V4.5C0 3.26042 0.440104 2.20052 1.32031 1.32031C2.20052 0.440104 3.26042 0 4.5 0H19.5C20.7396 0 21.7995 0.440104 22.6797 1.32031C23.5599 2.20052 24 3.26042 24 4.5ZM8.05336 18.794H5.02808V9.70503H8.05336V18.794ZM7.77833 5.77609C8.08392 6.07294 8.24108 6.44838 8.24981 6.90239C8.24981 7.34767 8.09265 7.72092 7.77833 8.02213C7.46402 8.32335 7.0493 8.47396 6.53417 8.47396H6.52107C6.02341 8.47396 5.6196 8.32335 5.30965 8.02213C4.9997 7.72092 4.84473 7.34767 4.84473 6.90239C4.84473 6.44838 5.00407 6.07294 5.32275 5.77609C5.64143 5.47924 6.05397 5.33081 6.56036 5.33081C7.06676 5.33081 7.47275 5.47924 7.77833 5.77609ZM18.9365 18.794H15.9112V13.9352C15.9112 12.5644 15.4048 11.879 14.392 11.879C14.0079 11.879 13.6848 11.986 13.4229 12.1999C13.161 12.4138 12.9645 12.6736 12.8336 12.9791C12.7725 13.1363 12.7419 13.3808 12.7419 13.7125V18.794H9.71661C9.74281 13.3109 9.74281 10.2813 9.71661 9.70503H12.7419V10.9863C13.378 9.99243 14.2816 9.49549 15.4529 9.49549C16.5006 9.49549 17.3431 9.84036 17.9805 10.5301C18.6178 11.2199 18.9365 12.237 18.9365 13.5816V18.794Z"/></svg><span>LinkedIn</span></a></li>
+<li><a href="#telegram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5ZM18.1109 6.74807C17.9501 6.61737 17.7032 6.58944 17.5915 6.59167C17.0877 6.60061 16.3135 6.86983 12.5914 8.41811C11.2874 8.96027 8.6816 10.0826 4.77403 11.785C4.13878 12.0375 3.80627 12.2843 3.77648 12.5256C3.72538 12.9334 4.23514 13.094 4.93027 13.313C5.02546 13.343 5.12416 13.3741 5.22534 13.407C5.91011 13.6293 6.83059 13.8896 7.3087 13.8985C7.74213 13.9097 8.22695 13.731 8.76315 13.3623C12.4138 10.8988 14.2983 9.65323 14.4167 9.62568C14.5005 9.60669 14.6167 9.58323 14.6949 9.65249C14.7731 9.72175 14.7653 9.85356 14.7574 9.88931C14.7064 10.1045 12.5894 12.0732 11.5502 13.0395C11.2869 13.2844 11.1045 13.4546 11.0632 13.4975C10.9586 13.606 10.8519 13.7088 10.7494 13.8075C10.1131 14.4203 9.63502 14.8808 10.775 15.6311C11.2546 15.9474 11.6503 16.2157 12.035 16.4776L12.1995 16.5897C12.676 16.9143 13.1518 17.2384 13.7666 17.6419C13.924 17.745 14.0743 17.8521 14.2206 17.9564C14.7754 18.3518 15.2739 18.707 15.889 18.6495C16.2476 18.6171 16.6174 18.2809 16.8051 17.2755C17.2497 14.9017 18.1232 9.75861 18.3243 7.63838C18.3422 7.45295 18.3198 7.21501 18.302 7.11112C18.2866 6.97025 18.2184 6.84047 18.1109 6.74807Z"/></svg><span>Telegram</span></a></li>
+</ul>
+</div>
+<button class="btn nav__cta" type="button" data-open-contact>Связаться с нами</button>
+</nav>
+<div class="header__actions">
+<div class="header__contacts" data-dd>
+<button class="dd__btn header__phone" type="button" aria-expanded="false" aria-controls="dd-contacts">
++375 44 728-50-16<span class="visually-hidden">, все контакты</span><svg class="dd__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+</button>
+<div class="dd__panel dd__panel--contacts" id="dd-contacts">
+<div class="dd__col">
+<p class="dd__label">Телефоны</p>
+<a class="dd__phone" href="tel:+375447285016">+375 44 728-50-16</a>
+<a class="dd__phone" href="tel:+375293675458">+375 29 367-54-58</a>
+</div>
+<div class="dd__col">
+<p class="dd__label">Соцсети</p>
+
+<ul class="socials socials--mega">
+<li><a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5ZM18.0468 4.41034C18.2514 4.20576 18.5289 4.09082 18.8182 4.09082H18.8226C19.1119 4.09082 19.3894 4.20576 19.594 4.41034C19.7986 4.61493 19.9135 4.8924 19.9135 5.18173V5.18609C19.9135 5.47542 19.7986 5.7529 19.594 5.95748C19.3894 6.16207 19.1119 6.277 18.8226 6.277H18.8182C18.5289 6.277 18.2514 6.16207 18.0468 5.95748C17.8423 5.7529 17.7273 5.47542 17.7273 5.18609V5.18173C17.7273 4.8924 17.8423 4.61493 18.0468 4.41034ZM7.37171 7.37158C8.59922 6.14407 10.2641 5.45446 12 5.45446C13.736 5.45446 15.4009 6.14407 16.6284 7.37158C17.8559 8.59909 18.5455 10.2639 18.5455 11.9999C18.5455 13.7359 17.8559 15.4007 16.6284 16.6282C15.4009 17.8558 13.736 18.5454 12 18.5454C10.2641 18.5454 8.59922 17.8558 7.37171 16.6282C6.1442 15.4007 5.45459 13.7359 5.45459 11.9999C5.45459 10.2639 6.1442 8.59909 7.37171 7.37158Z"/><path d="M8 12C8 10.9391 8.42143 9.92172 9.17157 9.17157C9.92172 8.42143 10.9391 8 12 8C13.0609 8 14.0783 8.42143 14.8284 9.17157C15.5786 9.92172 16 10.9391 16 12C16 13.0609 15.5786 14.0783 14.8284 14.8284C14.0783 15.5786 13.0609 16 12 16C10.9391 16 9.92172 15.5786 9.17157 14.8284C8.42143 14.0783 8 13.0609 8 12Z"/></svg><span>Instagram</span></a></li>
+<li><a href="#linkedin" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.7157 11.0278L12.7419 10.9863V11.0278H12.7157Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M24 4.5V19.5C24 20.7396 23.5599 21.7995 22.6797 22.6797C21.7995 23.5599 20.7396 24 19.5 24H4.5C3.26042 24 2.20052 23.5599 1.32031 22.6797C0.440104 21.7995 0 20.7396 0 19.5V4.5C0 3.26042 0.440104 2.20052 1.32031 1.32031C2.20052 0.440104 3.26042 0 4.5 0H19.5C20.7396 0 21.7995 0.440104 22.6797 1.32031C23.5599 2.20052 24 3.26042 24 4.5ZM8.05336 18.794H5.02808V9.70503H8.05336V18.794ZM7.77833 5.77609C8.08392 6.07294 8.24108 6.44838 8.24981 6.90239C8.24981 7.34767 8.09265 7.72092 7.77833 8.02213C7.46402 8.32335 7.0493 8.47396 6.53417 8.47396H6.52107C6.02341 8.47396 5.6196 8.32335 5.30965 8.02213C4.9997 7.72092 4.84473 7.34767 4.84473 6.90239C4.84473 6.44838 5.00407 6.07294 5.32275 5.77609C5.64143 5.47924 6.05397 5.33081 6.56036 5.33081C7.06676 5.33081 7.47275 5.47924 7.77833 5.77609ZM18.9365 18.794H15.9112V13.9352C15.9112 12.5644 15.4048 11.879 14.392 11.879C14.0079 11.879 13.6848 11.986 13.4229 12.1999C13.161 12.4138 12.9645 12.6736 12.8336 12.9791C12.7725 13.1363 12.7419 13.3808 12.7419 13.7125V18.794H9.71661C9.74281 13.3109 9.74281 10.2813 9.71661 9.70503H12.7419V10.9863C13.378 9.99243 14.2816 9.49549 15.4529 9.49549C16.5006 9.49549 17.3431 9.84036 17.9805 10.5301C18.6178 11.2199 18.9365 12.237 18.9365 13.5816V18.794Z"/></svg><span>LinkedIn</span></a></li>
+<li><a href="#telegram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5ZM18.1109 6.74807C17.9501 6.61737 17.7032 6.58944 17.5915 6.59167C17.0877 6.60061 16.3135 6.86983 12.5914 8.41811C11.2874 8.96027 8.6816 10.0826 4.77403 11.785C4.13878 12.0375 3.80627 12.2843 3.77648 12.5256C3.72538 12.9334 4.23514 13.094 4.93027 13.313C5.02546 13.343 5.12416 13.3741 5.22534 13.407C5.91011 13.6293 6.83059 13.8896 7.3087 13.8985C7.74213 13.9097 8.22695 13.731 8.76315 13.3623C12.4138 10.8988 14.2983 9.65323 14.4167 9.62568C14.5005 9.60669 14.6167 9.58323 14.6949 9.65249C14.7731 9.72175 14.7653 9.85356 14.7574 9.88931C14.7064 10.1045 12.5894 12.0732 11.5502 13.0395C11.2869 13.2844 11.1045 13.4546 11.0632 13.4975C10.9586 13.606 10.8519 13.7088 10.7494 13.8075C10.1131 14.4203 9.63502 14.8808 10.775 15.6311C11.2546 15.9474 11.6503 16.2157 12.035 16.4776L12.1995 16.5897C12.676 16.9143 13.1518 17.2384 13.7666 17.6419C13.924 17.745 14.0743 17.8521 14.2206 17.9564C14.7754 18.3518 15.2739 18.707 15.889 18.6495C16.2476 18.6171 16.6174 18.2809 16.8051 17.2755C17.2497 14.9017 18.1232 9.75861 18.3243 7.63838C18.3422 7.45295 18.3198 7.21501 18.302 7.11112C18.2866 6.97025 18.2184 6.84047 18.1109 6.74807Z"/></svg><span>Telegram</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<button class="btn btn--small btn--cut-left" type="button" data-open-contact>Связаться с нами</button>
+<button class="burger" type="button" aria-expanded="false" aria-controls="site-nav">
+<span class="burger__lines" aria-hidden="true"></span>
+<span class="visually-hidden">Меню</span>
+</button>
+</div>
+</div>
+</header>
+
+
+<main id="main">
+<section class="page-head page-head--404">
+<div class="container">
+<h1 data-reveal>Такой страницы нет</h1>
+<p class="page-head__lead" data-reveal style="--rd:0.1s">Возможно, ссылка устарела или в адресе опечатка. Начните с главной или посмотрите, чем мы можем помочь.</p>
+<div class="page-head__actions" data-reveal style="--rd:0.2s"><a class="btn" href="index.html">На главную</a><a class="btn btn--outline" href="services.html">Наши услуги</a></div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<div class="footer__top">
+<a class="footer__logo" href="index.html" aria-label="ИнАссист — на главную"><img src="assets/img/logo.svg" width="174" height="50" alt=""></a>
+<nav class="footer__cols" aria-label="Меню в подвале">
+<div class="footer__col">
+<h3>Компания</h3>
+<a href="index.html#process">Этапы работы</a>
+<a href="portfolio.html">Портфолио</a>
+<a href="services.html">Услуги</a>
+<a href="blog.html">Блог</a>
+<a href="about.html">О нас</a>
+</div>
+<div class="footer__col">
+<h3>Услуги</h3>
+<a href="service-business-planning.html">Бизнес-планирование</a>
+<a href="service-advertising.html">Рекламное продвижение</a>
+<a href="service-development.html">Разработка и IT</a>
+</div>
+<div class="footer__col">
+<h3>Контакты</h3>
+<a href="contacts.html#map">г. Минск, ул. Короля, 2</a>
+<a href="tel:+375447285016">+375 44 728-50-16</a>
+<a href="tel:+375293675458">+375 29 367-54-58</a>
+<a href="mailto:info@inassist.by">info@inassist.by</a>
+</div>
+<div class="footer__col">
+<h3>Соцсети</h3>
+
+<ul class="socials socials--footer">
+<li><a href="https://www.instagram.com/inassist_by/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5ZM18.0468 4.41034C18.2514 4.20576 18.5289 4.09082 18.8182 4.09082H18.8226C19.1119 4.09082 19.3894 4.20576 19.594 4.41034C19.7986 4.61493 19.9135 4.8924 19.9135 5.18173V5.18609C19.9135 5.47542 19.7986 5.7529 19.594 5.95748C19.3894 6.16207 19.1119 6.277 18.8226 6.277H18.8182C18.5289 6.277 18.2514 6.16207 18.0468 5.95748C17.8423 5.7529 17.7273 5.47542 17.7273 5.18609V5.18173C17.7273 4.8924 17.8423 4.61493 18.0468 4.41034ZM7.37171 7.37158C8.59922 6.14407 10.2641 5.45446 12 5.45446C13.736 5.45446 15.4009 6.14407 16.6284 7.37158C17.8559 8.59909 18.5455 10.2639 18.5455 11.9999C18.5455 13.7359 17.8559 15.4007 16.6284 16.6282C15.4009 17.8558 13.736 18.5454 12 18.5454C10.2641 18.5454 8.59922 17.8558 7.37171 16.6282C6.1442 15.4007 5.45459 13.7359 5.45459 11.9999C5.45459 10.2639 6.1442 8.59909 7.37171 7.37158Z"/><path d="M8 12C8 10.9391 8.42143 9.92172 9.17157 9.17157C9.92172 8.42143 10.9391 8 12 8C13.0609 8 14.0783 8.42143 14.8284 9.17157C15.5786 9.92172 16 10.9391 16 12C16 13.0609 15.5786 14.0783 14.8284 14.8284C14.0783 15.5786 13.0609 16 12 16C10.9391 16 9.92172 15.5786 9.17157 14.8284C8.42143 14.0783 8 13.0609 8 12Z"/></svg><span>Instagram</span></a></li>
+<li><a href="#linkedin" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.7157 11.0278L12.7419 10.9863V11.0278H12.7157Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M24 4.5V19.5C24 20.7396 23.5599 21.7995 22.6797 22.6797C21.7995 23.5599 20.7396 24 19.5 24H4.5C3.26042 24 2.20052 23.5599 1.32031 22.6797C0.440104 21.7995 0 20.7396 0 19.5V4.5C0 3.26042 0.440104 2.20052 1.32031 1.32031C2.20052 0.440104 3.26042 0 4.5 0H19.5C20.7396 0 21.7995 0.440104 22.6797 1.32031C23.5599 2.20052 24 3.26042 24 4.5ZM8.05336 18.794H5.02808V9.70503H8.05336V18.794ZM7.77833 5.77609C8.08392 6.07294 8.24108 6.44838 8.24981 6.90239C8.24981 7.34767 8.09265 7.72092 7.77833 8.02213C7.46402 8.32335 7.0493 8.47396 6.53417 8.47396H6.52107C6.02341 8.47396 5.6196 8.32335 5.30965 8.02213C4.9997 7.72092 4.84473 7.34767 4.84473 6.90239C4.84473 6.44838 5.00407 6.07294 5.32275 5.77609C5.64143 5.47924 6.05397 5.33081 6.56036 5.33081C7.06676 5.33081 7.47275 5.47924 7.77833 5.77609ZM18.9365 18.794H15.9112V13.9352C15.9112 12.5644 15.4048 11.879 14.392 11.879C14.0079 11.879 13.6848 11.986 13.4229 12.1999C13.161 12.4138 12.9645 12.6736 12.8336 12.9791C12.7725 13.1363 12.7419 13.3808 12.7419 13.7125V18.794H9.71661C9.74281 13.3109 9.74281 10.2813 9.71661 9.70503H12.7419V10.9863C13.378 9.99243 14.2816 9.49549 15.4529 9.49549C16.5006 9.49549 17.3431 9.84036 17.9805 10.5301C18.6178 11.2199 18.9365 12.237 18.9365 13.5816V18.794Z"/></svg><span>LinkedIn</span></a></li>
+<li><a href="#telegram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5ZM18.1109 6.74807C17.9501 6.61737 17.7032 6.58944 17.5915 6.59167C17.0877 6.60061 16.3135 6.86983 12.5914 8.41811C11.2874 8.96027 8.6816 10.0826 4.77403 11.785C4.13878 12.0375 3.80627 12.2843 3.77648 12.5256C3.72538 12.9334 4.23514 13.094 4.93027 13.313C5.02546 13.343 5.12416 13.3741 5.22534 13.407C5.91011 13.6293 6.83059 13.8896 7.3087 13.8985C7.74213 13.9097 8.22695 13.731 8.76315 13.3623C12.4138 10.8988 14.2983 9.65323 14.4167 9.62568C14.5005 9.60669 14.6167 9.58323 14.6949 9.65249C14.7731 9.72175 14.7653 9.85356 14.7574 9.88931C14.7064 10.1045 12.5894 12.0732 11.5502 13.0395C11.2869 13.2844 11.1045 13.4546 11.0632 13.4975C10.9586 13.606 10.8519 13.7088 10.7494 13.8075C10.1131 14.4203 9.63502 14.8808 10.775 15.6311C11.2546 15.9474 11.6503 16.2157 12.035 16.4776L12.1995 16.5897C12.676 16.9143 13.1518 17.2384 13.7666 17.6419C13.924 17.745 14.0743 17.8521 14.2206 17.9564C14.7754 18.3518 15.2739 18.707 15.889 18.6495C16.2476 18.6171 16.6174 18.2809 16.8051 17.2755C17.2497 14.9017 18.1232 9.75861 18.3243 7.63838C18.3422 7.45295 18.3198 7.21501 18.302 7.11112C18.2866 6.97025 18.2184 6.84047 18.1109 6.74807Z"/></svg><span>Telegram</span></a></li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="footer__legal">
+<div>
+<p class="footer__company">ООО «ИнАссист», УНП: 692272725 © 2026</p>
+<p class="footer__note">Информация на сайте не является офертой и носит ознакомительный характер.*</p>
+</div>
+<div class="footer__links">
+<a class="footer__privacy" href="privacy.html">Политика конфиденциальности</a>
+<a class="footer__credit" href="https://www.behance.net/xilandesign" target="_blank" rel="noopener">Design by .Xilan.</a>
+</div>
+</div>
+</div>
+</footer>
+
+<dialog class="modal" id="contact-dialog" aria-labelledby="modal-title">
+<div class="modal__inner">
+<button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
+<h2 id="modal-title">Обсудим вашу задачу</h2>
+<p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
+<form class="form" action="send.php" method="post" data-form novalidate>
+<div class="hp" aria-hidden="true"><label>Не заполняйте это поле <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+<div class="field">
+<label for="mf-name">Имя</label>
+<input id="mf-name" name="name" type="text" autocomplete="name" required>
+<p class="field__error" id="mf-name-err"></p>
+</div>
+<div class="field">
+<label for="mf-phone">Телефон</label>
+<input id="mf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375" required>
+<p class="field__error" id="mf-phone-err"></p>
+</div>
+<div class="field field--check">
+<input id="mf-consent" name="consent" type="checkbox" required>
+<label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
+<p class="field__error" id="mf-consent-err"></p>
+</div>
+<p class="form__status" role="alert" hidden></p>
+<button class="btn" type="submit">Отправить заявку</button>
+</form>
+<div class="form-done" hidden tabindex="-1">
+<h3>Заявка отправлена</h3>
+<p>Перезвоним в течение рабочего дня. Если вопрос срочный, позвоните нам: <a href="tel:+375447285016">+375 44 728-50-16</a>.</p>
+</div>
+</div>
+</dialog>
+
+
+<div class="cookie" data-cookie hidden role="region" aria-label="Файлы cookie">
+<p class="cookie__title">Мы используем cookie</p>
+<p class="cookie__text">Они нужны, чтобы сайт работал корректно и мы понимали, какие страницы полезны посетителям. Подробнее — в <a href="privacy.html">политике конфиденциальности</a>.</p>
+<div class="cookie__actions">
+<button class="btn btn--small" type="button" data-cookie-choice="all">Принять</button>
+<button class="btn btn--small btn--outline" type="button" data-cookie-choice="declined">Отказаться</button>
+</div>
+</div>
+
+</body>
+</html>

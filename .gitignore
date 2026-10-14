@@ -5,3 +5,7 @@ zz-*.html
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Результат node build.js --dist
+dist/
+inassist-site.zip

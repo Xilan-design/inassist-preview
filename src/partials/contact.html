@@ -7,7 +7,9 @@
       </div>
 
       <div class="contact__form" data-reveal style="--rd:.15s">
-        <form class="form" data-form novalidate>
+        <form class="form" action="send.php" method="post" data-form novalidate>
+          <!-- Ловушка для спам-ботов: человек это поле не видит и не заполняет (send.php отбрасывает такие заявки) -->
+          <div class="hp" aria-hidden="true"><label>Не заполняйте это поле <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
           <fieldset class="field">
             <legend>Что нужно сделать?</legend>
             <div class="chips">
@@ -33,6 +35,7 @@
             <label for="cf-msg">Коротко о задаче <span class="field__opt">необязательно</span></label>
             <textarea id="cf-msg" name="message" rows="3" placeholder="Например: нужен бизнес-план для кредита на оборудование"></textarea>
           </div>
+          <p class="form__status" role="alert" hidden></p>
           <div class="form__foot">
             <div class="field field--check">
               <input id="cf-consent" name="consent" type="checkbox" required>

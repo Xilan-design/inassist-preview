@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE = 'http://127.0.0.1:8765/';
+const BASE = process.env.SHOTS_BASE || 'http://127.0.0.1:8765/';   // другой адрес — чтобы снять, например, прошлую версию
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const PAGES = fs.readdirSync(path.join(__dirname, '..', 'src')).filter((f) => f.endsWith('.html'));
 const PHONE = { isMobile: true, hasTouch: true, deviceScaleFactor: 1 };
@@ -45,7 +45,11 @@ async function shoot(dir) {
     for (const file of PAGES) {
       await page.goto(BASE + file, { waitUntil: 'networkidle0' });
       await page.addStyleTag({ content: FREEZE });
-      await page.evaluate(() => document.fonts.ready);
+      // Картинки с отложенной загрузкой (loading="lazy") грузим сразу, иначе снимки получаются разными
+      await page.evaluate(() => Promise.all([...document.images].map((img) => {
+        img.loading = 'eager';
+        return img.complete ? null : new Promise((r) => { img.onload = img.onerror = r; });
+      })).then(() => document.fonts.ready));
       await new Promise((r) => setTimeout(r, 300));
       await page.screenshot({ path: path.join(dir, `${name}-${file.replace('.html', '')}.png`), fullPage: true });
     }

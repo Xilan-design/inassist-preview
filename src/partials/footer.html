@@ -48,7 +48,9 @@
     <button class="modal__close" type="button" data-close-contact aria-label="Закрыть"></button>
     <h2 id="modal-title">Обсудим вашу задачу</h2>
     <p class="modal__lead">Оставьте имя и телефон — перезвоним в течение рабочего дня.</p>
-    <form class="form" data-form novalidate>
+    <form class="form" action="send.php" method="post" data-form novalidate>
+      <!-- Ловушка для спам-ботов: человек это поле не видит и не заполняет (send.php отбрасывает такие заявки) -->
+      <div class="hp" aria-hidden="true"><label>Не заполняйте это поле <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
       <div class="field">
         <label for="mf-name">Имя</label>
         <input id="mf-name" name="name" type="text" autocomplete="name" required>
@@ -64,6 +66,7 @@
         <label for="mf-consent">Согласен на обработку персональных данных по <a href="privacy.html">политике конфиденциальности</a></label>
         <p class="field__error" id="mf-consent-err"></p>
       </div>
+      <p class="form__status" role="alert" hidden></p>
       <button class="btn" type="submit">Отправить заявку</button>
     </form>
     <div class="form-done" hidden tabindex="-1">
